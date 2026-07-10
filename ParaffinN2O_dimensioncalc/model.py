@@ -24,11 +24,12 @@ PHYSICAL MODEL (1D, circular port)
 - Liquid/gaseous N2O oxidizer flows through the port at a constant mass flow
   rate m_dot_ox (set by injector / tank blowdown assumptions here).
 - Fuel regresses radially outward. The regression rate depends on the local
-  oxidizer mass flux:
+  oxidizer mass flux (Bertoldi 2007 pressure-swirl paraffin/N2O, SI form):
 
-      r_dot [mm/s] = 0.104 * G_ox ** 0.67
+      r_dot [mm/s] = 0.1531 * G_ox ** 0.67
 
   where G_ox = m_dot_ox / A_port  [kg/(s·m^2)].
+  Equivalent cgs form: r_dot = 0.7197 * G_ox**0.67 with G_ox in g/(cm^2·s).
 
 - As the port grows, A_port increases, so G_ox and r_dot fall over time.
 - Grain length does NOT affect port growth for a given m_dot_ox; it only
@@ -51,10 +52,13 @@ from ParaffinN2O_dimensioncalc.nozzle import NozzleAnalysis, analyze_nozzle
 
 # ---------------------------------------------------------------------------
 # Empirical regression correlation (plain paraffin + N2O)
-# Source: Table 3 comparison of N2O-based hybrid fuels.
-# Correlation returns r_dot in mm/s when G_ox is in kg/(s·m^2).
+# Source: Bertoldi (2007) UnB M.Sc. thesis, pressure-swirl injector, Eq. (4.1).
+#   cgs:  r_dot [mm/s] = 0.7197 * G_ox**0.67 ,  G_ox in g/(cm^2·s)
+#   SI:   r_dot [mm/s] = 0.1531 * G_ox**0.67 ,  G_ox in kg/(m^2·s)
+# See research/N2O_paraffin_burn_rate/REGRESSION_CONSTANT_CLARIFICATION.md
+# and EXPERIMENTAL_MEASUREMENT_OF_A_AND_N.md.
 # ---------------------------------------------------------------------------
-REGRESSION_A = 0.104
+REGRESSION_A = 0.1531
 REGRESSION_N = 0.67
 
 # Default solid paraffin density used for grain volume <-> mass conversion.

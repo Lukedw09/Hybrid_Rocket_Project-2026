@@ -1,0 +1,216 @@
+Numerical simulation of low-melting temperature solid fuel regression in hybrid rocket engines - ScienceDirect
+[Skip to main content](#screen-reader-main-content)[Skip to article](#screen-reader-main-title)
+[![Elsevier logo](https://sdfestaticassets-us-east-1.sciencedirectassets.com/shared-assets/24/images/elsevier-non-solus-new-grey.svg)ScienceDirect](https://www.sciencedirect.com/)
+[My account](https://www.sciencedirect.com/user/login?targetURL=/science/article/pii/S0094576520302861&from=globalheader)
+[Sign in](https://www.sciencedirect.com/user/institution/login?targetURL=/science/article/pii/S0094576520302861)
+* [Access through**your institution**](https://www.sciencedirect.com/user/institution/login?targetUrl=/science/article/pii/S0094576520302861)
+* [Purchase PDF](https://www.sciencedirect.com/getaccess/pii/S0094576520302861/purchase)
+Search ScienceDirect
+## Article preview
+* [Abstract](#preview-section-abstract)
+* [Introduction](#preview-section-introduction)
+* [Section snippets](#preview-section-snippets)
+* [References (29)](#preview-section-references)
+* [Cited by (23)](#preview-section-cited-by)
+[![Elsevier](https://sdfestaticassets-us-east-1.sciencedirectassets.com/prod/ce418678f6e7062b13650588d327886e61576933/image/elsevier-non-solus.png)](https://www.sciencedirect.com/journal/acta-astronautica)
+## [Acta Astronautica](https://www.sciencedirect.com/journal/acta-astronautica)
+[Volume 176](https://www.sciencedirect.com/journal/acta-astronautica/vol/176/suppl/C),November 2020, Pages 710-716
+[![Acta Astronautica](https://ars.els-cdn.com/content/image/1-s2.0-S0094576520X00099-cov150h.gif)](https://www.sciencedirect.com/journal/acta-astronautica/vol/176/suppl/C)
+# Numerical simulation of low-melting temperature solid fuel regression in hybrid rocket engines
+Author links open overlay panelS.A.Rashkovskiy,S.E.Yakush
+Show more
+Add to Mendeley
+Share
+Cite
+[https://doi.org/10.1016/j.actaastro.2020.05.002](https://doi.org/10.1016/j.actaastro.2020.05.002)[Get rights and content](https://s100.copyright.com/AppDispatchServlet?publisherName=ELS&contentID=S0094576520302861&orderBeanReset=true)
+## Highlights
+* •Numerical model for regression of liquefying fuel is developed.
+* •In hot gas flow liquid layer is formed on the fuel surface.
+* •Kelvin-Helmholtz instability development is demonstrated.
+* •Regression rate is shown to increase with gas flow temperature and velocity.
+* •Regression rate decreases with increase in the melt[viscosity](https://www.sciencedirect.com/topics/engineering/fluid-viscosity).
+## Abstract
+A computational model of low-melting solid fuel regression in the[combustion chamber](https://www.sciencedirect.com/topics/engineering/combustion-chamber)of[hybrid rocket engine](https://www.sciencedirect.com/topics/engineering/hybrid-rocket-engine)is presented. The numerical model is based on a system of governing equations with simple effective[viscosity](https://www.sciencedirect.com/topics/engineering/fluid-viscosity)model accounting for turbulence the gas phase. The numerical model takes into account heating of the solid fuel by the heat flux from hot[gas flow](https://www.sciencedirect.com/topics/engineering/gas-flow), melting of the fuel and formation of the molten layer on the grain surface. The molten layer of solid fuel considered as incompressible, high-viscosity liquid; its mechanical interaction with the[gas flow](https://www.sciencedirect.com/topics/engineering/gas-flow)leading under certain conditions to the development of instability, formation of surface waves and shedding of molten material by the flow. Equations are solved on a Cartesian mesh by the Volume Of Fluid (VOF) approach. Simulations are performed for a slab of solid fuel (wax) with[subsonic flow](https://www.sciencedirect.com/topics/engineering/subsonic-flow)of hot gas above it. It is shown that the molten layer loses its stability under certain condition, resulting in the formation of waves on the surface of liquid layer. The results of numerical simulations agree qualitatively with known experimental data.
+## Introduction
+Hybrid rocket engines are considered as an intermediate class between liquid-fuel rocket engines and solid-fuel rocket motors. In hybrid rocket motors, the fuel is stored in the form of solid grain in the combustion chamber, similar to the solid rocket motors, while a liquid or gaseous oxidizer is stored in a separate tank. Various polymers (hydroxyl-terminated polybutadiene (HTPB), polymethylmethacrylate (PMMA, Plexiglas), etc.), not capable of self-sustained combustion, are considered as prospective fuels for the hybrid rocket motors. Gaseous or liquid oxygen and nitrous oxide (N2O) are often considered as oxidizers. For example, nitrous oxide (N2O), being safe and non-flammable at room temperature, is the preferred oxidizer in hybrid rocket engines, e.g. for space tourism programs. N2O can be stored as a liquid at a pressure of 50–58atm, which provides self-pressurization of the oxidizer tank and supply of the oxidizer to the combustion chamber. In view of possible reduction of environmental impact, “green” oxidizers (such as hydrogen peroxide, H2O2) are also considered in some projects of the hybrid rocket motors.
+Hybrid rockets have various advantages: safety, simple design (compared to liquid rockets), lower ecological impact of combustion products (no HCl releases), possibility to control the thrust in a wide range, ability to shut down and restart the motor, and, typically, higher specific impulse than that of solid-fuel rocket motors. Higher safety of hybrid rockets, both during the development and operation, results from the separation of fuel and oxidizer. This feature is one of their main advantages, making hybrid propulsion a preferred alternative for the commercial launches and for the emerging field of space tourism [1].
+At the same time, the hybrid rocket engines have a number of disadvantages compared to solid and liquid rockets. One of the main disadvantages of hybrid motors is the low regression rate of conventional hybrid fuels (typically polymers), resulting in low thrust. Paraffin is considered as a good alternative, providing the increase in the regression rates by a factor of 3–5 in comparison to other polymeric fuels. In recent years, research has focused on paraffin (wax)–based fuels [[2], [3], [4], [5], [6], [7], [8], [9]]. It was found that the use of liquefying fuels increases the burning rate of hybrid systems significantly, as a result of mass transfer by the mechanical means due to droplet entrainment to the gas stream from the melt surface layer, in addition to the mass transfer by gasification of the fuel. For conventional solid fuels (i.e., cured polymers as HTPB), the combustion process is governed by condensed phase pyrolysis and fuel vapor diffusion in the boundary layer. In this case, combustion in hybrid rocket engines is driven by the convective heat transfer from the flame zone to the condensed-phase fuel grain. The mass blowing off the gasifying surface causes convective heat transfer blockage, which results in the reduction of solid fuel regression rate.
+Low-melting (liquefying) solid fuels overcome this intrinsic limitation of the conventional fuels due to droplet formation and burning in the gas stream. This type of the solid fuels is characterized by the formation of a liquid layer on the surface of the solid fuel grain. While some part of the molten fuel is vaporized by the heat transferred from the reaction zone to the condensed phase (as in the conventional formulations), a fraction of molten material leaves the surface in the form of liquid droplets that are captured and entrained by the oxidizer stream. Being in the condensed phase, these droplets are not subject to the convective heat transfer blockage, and the overall regression rate of low-melting solid fuels is 3–4 times higher than for conventional formulations. Experiments [[1], [2], [3], [4], [5], [6], [7], [8], [9], [10], [11], [12], [13], [14]] have shown that the viscosity of molten fuel not only significantly affects the regression rate, but can also change the mechanism of this process.
+Extensive analytical and numerical studies of combustion in solid-fuel ramjets and hybrid engines were conducted over the last two decades, complementing the experimental investigations (see, e.g. Ref. [[15], [16], [17], [18], [19], [20], [21]]). In particular, the Kelvin-Helmholtz instability on the interface of molten fuel was the focus of the studies [2,3,15,16]. In this work, numerical modeling of the coupled processes of solid fuel heating, melt layer formation and interaction with the flow, instability development and droplet shedding by the flow of hot gases is performed. The approach is novel because, unlike the previous numerical works in the field of ramjet and hybrid engine modeling [[15], [16], [17], [18], [19], [20], [21]], the presence of the molten fuel layer on the fuel surface is taken into account explicitly. The main attention is focused on the thermal and fluid dynamics aspects of hot flow-solid fuel interaction, rather than on the modeling of combustion and effects of flow turbulence, which will be the subject of future work.
+## Section snippets
+## Problem geometry
+The general scheme of the computational domain and main zones considered in the work are sketched in Fig. 1. A slab of solid fuel is considered, with the initial surface shown in Fig. 1 by the dashed line. A hot gas with a temperatureTgabove the melting temperature of the solid materialTm, is blown parallel to the surface of fuel (the flow direction is indicated by the arrow). Two-dimensional planar geometry is considered, with the Cartesian coordinate system associated with the lower
+## Parameters
+Numerical simulations were carried out for paraffin wax as the low-melting point fuel. Viscosity measurements [8] at different shear rates showed that all the paraffin-based samples have a Newtonian behavior. Therefore, the viscosity of the paraffin wax does not depend on the shear rate and the simple rheological model (12) can be applied. In our simulations we considered the pure paraffin wax PW-624 [28] as a fuel and gaseous nitrous oxide N2O as an oxidizer. The main geometry and property
+## Conclusions
+The numerical results presented in this work demonstrate the melting of the fuel material with formation of a liquid layer perturbed by the gas flow due to Kelvin-Helmholtz instability. Generally, the findings of the numerical simulations indicate that the regression rate increases with the flow velocity and temperature, and decreases with the melt viscosity. These results of numerical simulations, as well as the general development of fuel surface after the appearance of molten layer, agree
+## Declaration of competing interests
+The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
+## Acknowledgments
+This work was performed on Grant No.АААА-А20-120011690135-5by theRussian Ministry of Science and High Education. This research was also supported in part by theRussian Foundation for Basic Research, GrantRFFI 16-29-01084ofi\_m.
+## Nomenclature
+cspecific heat capacity
+Cseffective drag factor in Eq. (10)
+Hheight of the computational domain
+Hffuel thickness
+Hs(t)vertical coordinate of the solid layer boundary
+ΔHmheat of fusion
+hspecific enthalpy
+Llength of the computational domain
+Pprevailing pressure
+ppressure deviation from the prevailing pressureP
+PrPrandtl number
+Raverage regression rate
+Ttemperature
+Tginlet gas temperature
+Tbboiling point of the fuel
+Tlliquidus
+Tmmelting temperature of the solid material
+Tssolidus
+ΔTm=Tl−Tstemperature range in
+Special issue articlesRecommended articles
+## References(29)
+* A.Mazzetti*et al.*### [Paraffin-based hybrid rocket engines applications: a review and a market perspective](https://www.sciencedirect.com/science/article/pii/S0094576516302818)
+### Acta Astronaut.
+(2016)
+* A.Petrarolo*et al.*### [Optical analysis of the liquid layer combustion of paraffin-based hybrid rocket fuels](https://www.sciencedirect.com/science/article/pii/S0094576518301309)
+### Acta Astronaut.
+(2019)
+* V.B.Betelin*et al.*### [Numerical investigations of hybrid rocket engines](https://www.sciencedirect.com/science/article/pii/S0094576517319173)
+### Acta Astronaut.
+(2018)
+* V.V.Tyurenkova*et al.*### [Flame propagation in weightlessness above the burning surface of material](https://www.sciencedirect.com/science/article/pii/S0094576519302632)
+### Acta Astronaut.
+(2019)
+* R.I.Issa### [Solution of the implicitly discretised fluid flow equations by operator-splitting](https://www.sciencedirect.com/science/article/pii/0021999186900999)
+### J. Comput. Phys.
+(1986)
+* F.Xiao*et al.*### [Revisit to the THINC scheme: a simple algebraic VOF algorithm](https://www.sciencedirect.com/science/article/pii/S0021999111003615)
+### J. Comput. Phys.
+(2011)
+* M.A.Karabeyoglu*et al.*### Combustion of liquefying hybrid propellants: Part 1, General theory
+### J. Propul. Power
+(2002)
+* M.A.Karabeyoglu*et al.*### Combustion of liquefying hybrid propellants: Part 2, Stability of liquid films
+### J. Propul. Power
+(2002)
+* A.Karabeyoglu*et al.*### Scale-up tests of high regression rate paraffin-based hybrid rocket fuels
+### J. Propul. Power
+(2004)
+* I.Nakagawa*et al.*### Study on the regression rate of paraffin-based hybrid rocket fuels
+### J. Propul. Power
+(2011)
+* A.Weinstein*et al.*### Investigation of parafﬁn based fuels in hybrid combustors
+### Int. J. Energ. Mater. Chem. Propuls.
+(2011)
+* A.Weinstein*et al.*### Testing and modeling liquefying fuel combustion in hybrid propulsion
+### Prog. Propusion Phys.
+(2013)
+* M.Kobald*et al.*### Viscosity and regression rate of liquefying hybrid rocket fuels
+### J. Propul. Power
+(2017)
+* C.Paravan*et al.*### Combustion processes in hybrid rockets
+### Int. J. Energ. Mater. Chem. Propuls.
+(2019)
+View more references
+## Cited by (23)
+* ### [Effect of fuel type on spatial distribution characteristics for nozzle erosion in hybrid rocket motors](https://www.sciencedirect.com/science/article/pii/S0094576524002959)
+2024, Acta Astronautica
+Show abstract
+With the aim of enhance the designability of burning surface, star and wagon wheel fuel types are applied extensively in hybrid rocket motors. However, mechanism of nozzle ablation in hybrid rocket motors with these complex fuel types is unclear, and this increases the difficulty of predicting ablation laws and thrust. This paper intends to investigate spatial distribution characteristics of nozzle ablation in the hybrid rocket motor with various fuel types. According to the principle that the grain port area and grain length are equal, tube, star, single-port wagon wheel, and multi-port wagon wheel grains are designed. Numerical models for combustion flow and thermochemical erosion are established, and three-dimensional numerical simulations are conducted. A firing test for nozzle erosion is conducted, and hydroxyl-terminated polybutadiene and 95% hydrogen peroxide are employed. Errors of throat erosion rate and combustion chamber pressure among simulation results and experimental data are 4% and 4.25%, respectively. Calculation results demonstrate that the circumferential distributions of nozzle wall temperature and erosion rate show an obvious correlation with fuel types. The maximum throat erosion rates for star, single-port wagon wheel, and multi-port wagon wheel grains occur at the circumferential position of 0° (star slot, spoke slot, and midpoint of outer edge of wheel hole), while the minimum throat erosion rates locate at the circumferential position of 36° (star root, spoke root, and midline of adjacent wheel holes). The circumferential non-uniformity of throat erosion rate of multi-port wagon wheel grain is the highest. When the grain port area and oxidizer mass flow rate are the same, the throat erosion rate of multi-port wagon wheel grain is the highest, followed by the star grain, and the throat erosion rate of single-port wagon wheel grain is the lowest.
+* ### [Experimental and numerical investigation on thermochemical erosion and mechanical erosion of carbon-based nozzles in hybrid rocket motors](https://www.sciencedirect.com/science/article/pii/S127096382400230X)
+2024, Aerospace Science and Technology
+Show abstract
+In order to enhance energy characteristics of propellants in hybrid rocket motors, aluminum particles are added into the solid fuel. However, these particles may lead to nozzle mechanical erosion, which significantly affects the motor performance. This paper intends to study thermochemical and mechanical erosion mechanism of carbon-based nozzles in hybrid rocket motors with aluminum metallized fuel. A firing test is performed, and 95 % hydrogen peroxide and hydroxyl‑terminated polybutadiene based fuel with aluminum particles are utilized. Experimental results show that many metal particles are ejected from the nozzle, and aluminum oxide deposits heavily on the nozzle inner surface. A method of numerical calculation coupled with two-phase flow, combustion of aluminum metallized fuel, thermochemical ablation reactions, and mechanical erosion is established. The errors of combustion chamber pressure and throat erosion rate between numerical calculation and test results are 0.53 % and 7.76 %, respectively. Simulation results indicate that with the increase of aluminum content, nozzle wall pressure gradually increases, while the mass fraction of H2O, CO2, OH, and O declines. The nozzle wall temperature and thermochemical erosion rate raise first and then reduce as aluminum content increases. The mechanical erosion is mainly distributed in the convergent section, and it raises with the increase of aluminum content. When aluminum content is up to 38 %, the maximum mechanical and thermochemical erosion rates are 0.09185 mm/s and 0.0976 mm/s, respectively. This reveals that effects of mechanical erosion on hybrid rocket nozzles should be carefully considered and evaluated under conditions of high aluminum content.
+* ### [Studying the paraffin based mixtures regression under high speed hot air blowing](https://www.sciencedirect.com/science/article/pii/S0094576524000055)
+2024, Acta Astronautica
+Show abstract
+Hybrid and ramjet engines became now effective propulsion systems with great development potential in different fields. They require using proper high-energy components. At high-speed blowing conditions conventional polymer fuels exhibit relatively low regression rate. As an alternative, it is proposed to use paraffin and based on it compositions. Paraffin is high-energy hydrocarbon with a low melting point leading to a high regression rate in high-speed blowing conditions. The results of experimental study of regression behavior of paraffin mixtures with various additives under intensive hot air blowing at 1MPa pressure are presented. Stearic acid, nanoaluminum Alex, aluminum hydride AlH3, B and mechanoactivated aluminum boride AlB2were used as 10% by mass additives. Experiments were conducted on cylindrical perforated samples. Using original design microwave gauge the current diameter of a sample bore was measured during experiment with subsequent calculation of regression rate. Based on experimental data and the results of heat balance calculation, the temperature on the gasified surface of paraffin fuel was estimated.
+* ### [Droplet entrainment characteristics of HTPB/Paraffin blended fuels for hybrid rocket motors](https://www.sciencedirect.com/science/article/pii/S0094576523005507)
+2024, Acta Astronautica
+Show abstract
+Droplet entrainment contributes to excellent regression rates of HTPB/paraffin blended fuels in hybrid rocket motors, but also leads to more complicated mass transfer mechanisms in application. The liquid film dynamic behaviors and droplet entrainment mechanisms of the fuels in a windowed two-dimensional slab facility under hot gas stream were investigated using the backlight method, image processing technique and fast Fourier transform. The results showed that the liquid film with a thickness of less than 3mm could be formed on the fuel surface, and the gas-liquid interface experienced rolling and ripple waves before evolving into singlet disturbance-crests, bags and ligaments, the sources of entrained droplets. Moreover, interfacial waves propagated periodically at frequencies within 100Hz, which was stimulated by gas shear stress and inhibited by liquid film viscosity damping, thus the regression rate was positively correlated with the temperature and mass flux of hot gas stream, while negatively correlated with the chamber pressure and the HTPB concentration. Additionally, the burst of the main part and the rim of bag provided polarized droplet diameters among the three droplet entrainment mechanisms involving the ligament break-up and the shearing-off of crest. Therefore, the averaged droplet diameter and its coefficient of variation even reduced to 47.98μm and 0.48 with the disappearance of bag break-up, when the HTPB content increased to 40wt%.
+* ### [Experiments of ablation characteristics for different nozzle materials and transient simulations on thermochemical erosion in hybrid rocket motors](https://www.sciencedirect.com/science/article/pii/S0094576523004356)
+2023, Acta Astronautica
+Show abstract
+This paper focuses on investigating ablation characteristics of different nozzle materials in hybrid rocket motors by firing tests and numerical simulations. Hybrid rocket nozzles with different ablation materials are designed and manufactured. Four firing tests with working time of 40s are conducted, and 90% hydrogen peroxide and polyethylene are adopted. The test results indicate that erosion rates of T705 graphite, whole felt C/C composite, axial rod braided C/C composite, and carbon/ceramic composite are 0.045mm/s, 0.022mm/s, 0.03mm/s, and 0.01mm/s. Circumferentially uneven ablation is found in the nozzle throat of T705 graphite and C/C composite, and this is mainly due to asymmetric oxidizer injection, asymmetric combustion, and uneven material properties. Transient numerical simulations of 40s on nozzle thermochemical erosion are carried out, and the regression process of fuel wall and nozzle wall is solved by a dynamic grid technique. The error of average throat erosion rate between simulation results and test results is only 1.82%. The evolution process of nozzle profile and flow field structure are exhibited, and coupling effects between the erosion rate and nozzle profile are obtained. Simulation results show that as the working time increases, protrusions and pits appear on the nozzle inner wall and gradually extend. The temperature of nozzle wall and nozzle erosion rate on the windward side is higher, while they are lower on the leeward side. Nozzle throat erosion rate history is divided into four stages, and time nonlinear characteristics of the throat erosion rate are revealed.
+* ### [Numerical study on transient regression rate and combustion characteristics of segregated AP-based oxidizer/TAGN-based fuel](https://www.sciencedirect.com/science/article/pii/S0016236122037176)
+2023, Fuel
+Citation Excerpt :
+A new model was proposed to capture the regression rate of the burning surface. Rashkovskiy and Yakush [23] proposed a computational model to simulate the surface regression of low-melting solid fuels, using the fluid volume method, treating the molten fuel as an incompressible high-viscosity liquid. Currently, most regression rate models focus on C, H polymer fuels.
+Show abstract
+In the present study, a two-dimensional combustion model is established to simulate transient flow and combustion characteristics of a segregated oxidizer/fuel solid motor (SOFSM). A detailed gas-phase reaction kinetic mechanism with 35 species and 190-step reactions is developed to describe the gas-phase combustion process between AP-based oxidizer and TAGN-based fuel. The effects of mass flux and initial temperature of inflow oxidizer gas on the transient flow and combustion characteristics of the TAGN-based fuel are numerically investigated. With the mass flux of inflow oxidizer gas increasing from 249kg·m−2·s−1to 995kg·m−2·s−1, the maximum spatially averaged regression rate of the burning surface of TAGN-based fuel increases by almost 200% and the combustion efficiency first increases and then decreases with a maximum combustion efficiency of 94.3% at the mass flux of 442kg·m−2·s−1. With the initial temperature of inflow oxidizer gas increasing from 1000K to 1750K, the maximum average regression rate of the burning surface of TAGN-based fuel increases by around 10%. Meanwhile, the combustion efficiency increases from 88.38% to 95.8%. During the combustion process (almost 3s), the spatially averaged regression rate remains basically stable from 0.5s to 2s and increases slightly from 2.0s to 3.0s for given mass flux and initial temperature, indicating the combustion process is basically stable under the studied conditions. The results also show that during the transient combustion process, a large vortex first appears and then is split into a major vortex and a small one in the post-combustion chamber. With the increase of the mass flux and initial temperature of inflow oxidizer gas, the size of the vortex increases while the center position of the vortex moves towards the burning surface, which significantly enhances the mixing process and increases combustion efficiency.
+[View all citing articles on Scopus](http://www.scopus.com/scopus/inward/citedby.url?partnerID=10&rel=3.0.0&eid=2-s2.0-85084730779&md5=5956191fe120df7b39b58c1194482a5d)
+[View full text](https://www.sciencedirect.com/science/article/pii/S0094576520302861)
+©2020 IAA. Published by Elsevier Ltd. All rights reserved.
+## Part of special issue
+[Special Issue on 6th SFS 2019](https://www.sciencedirect.com/science/journal/00945765/vsi/10QHWVJ36M3)
+Edited by Nickolay Smirnov
+[View special issue](https://www.sciencedirect.com/science/journal/00945765/vsi/10QHWVJ36M3)
+## Recommended articles
+* ### [Ballistic and thermomechanical characterisation of paraffin-based hybrid rocket fuels loaded with light metal hydrides](https://www.sciencedirect.com/science/article/pii/S009457652030552X)
+Acta Astronautica, Volume 178, 2021, pp. 370-381
+M.Z.Akhter,M.A.Hassan
+* ### [Droplet entrainment and its role in the combustion of HTPB/paraffin fuels](https://www.sciencedirect.com/science/article/pii/S0094576522007238)
+Acta Astronautica, Volume 204, 2023, pp. 107-115
+YinWang, …,Lin-linLiu
+* ### [Numerical analysis of combustion characteristics of hybrid rocket motor with multi-section swirl injection](https://www.sciencedirect.com/science/article/pii/S0094576516301898)
+Acta Astronautica, Volume 123, 2016, pp. 26-36
+ChengenLi, …,HuiTian
+* ### [Combustion characteristics of hybrid rocket motor with segmented grain](https://www.sciencedirect.com/science/article/pii/S1270963815002539)
+Aerospace Science and Technology, Volume 46, 2015, pp. 537-547
+HuiTian, …,PengfeiWang
+* ### [Experimental and numerical investigation of swirling H2O2and polypropylene hybrid rocket motor with regenerative cooling](https://www.sciencedirect.com/science/article/pii/S0094576521005129)
+Acta Astronautica, Volume 190, 2022, pp. 283-298
+M.-C.Li, …,J.-S.Wu
+* ### [Preliminary investigation of paraffin-based fuel combustion in solid fuel scramjet](https://www.sciencedirect.com/science/article/pii/S0094576520302071)
+Acta Astronautica, Volume 173, 2020, pp. 119-130
+HaoZhang, …,ZhijunWei
+Show 3 more articles
+## Article Metrics
+![plumX logo](https://cdn.plu.mx/3ba727faf225e19d2c759f6ebffc511d/plumx-inverse-logo.png)
+Citations
+* Citation Indexes:22
+Captures
+* Readers:19
+Mentions
+* References:1
+![plumX logo](https://cdn.plu.mx/3ba727faf225e19d2c759f6ebffc511d/plumx-logo.png)
+[View details](https://plu.mx/plum/a/?doi=10.1016/j.actaastro.2020.05.002&theme=plum-sciencedirect-theme&hideUsage=true)
+We use cookies that are necessary to make our site work. We may also use additional cookies to analyze, improve, and personalize our content and your digital experience. For more information, see our[Cookie Policy](https://www.elsevier.com/legal/cookienotice)
+Cookie SettingsAccept all cookies
+![Company Logo](https://cdn.cookielaw.org/logos/static/ot_company_logo.png)
+## Cookie Preference Center
+We use cookies which are necessary to make our site work. We may also use additional cookies to analyse, improve and personalise our content and your digital experience. For more information, see our[Cookie Policy](https://www.elsevier.com/legal/cookienotice)and the list of[Google Ad-Tech Vendors](https://support.google.com/admanager/answer/9012903).
+You may choose not to allow some types of cookies. However, blocking some types may impact your experience of our site and the services we are able to offer. See the different category headings below to find out more or change your settings.
+You may also be able to exercise your privacy choices![Cookie Settings | Your Privacy Choices](https://risk.lexisnexis.com/-/media/images/privacyoptions29x14%20png.png)as described in our[Privacy Policy](https://www.elsevier.com/legal/privacy-policy)
+Allow all
+### Manage Consent Preferences
+#### Strictly Necessary Cookies
+Always active
+These cookies are necessary for the website to function and cannot be switched off in our systems. They are usually only set in response to actions made by you which amount to a request for services, such as setting your privacy preferences, logging in or filling in forms. You can set your browser to block or alert you about these cookies, but some parts of the site will not then work. These cookies do not store any personally identifiable information.
+Cookie Details List‎
+#### Functional Cookies
+Functional Cookies
+These cookies enable the website to provide enhanced functionality and personalisation. They may be set by us or by third party providers whose services we have added to our pages. If you do not allow these cookies then some or all of these services may not function properly.
+Cookie Details List‎
+#### Performance Cookies
+Performance Cookies
+These cookies allow us to count visits and traffic sources so we can measure and improve the performance of our site. They help us to know which pages are the most and least popular and see how visitors move around the site.
+Cookie Details List‎
+#### Targeting Cookies
+Targeting Cookies
+These cookies may be set through our site by our advertising partners. They may be used by those companies to build a profile of your interests and show you relevant adverts on other sites. If you do not allow these cookies, you will experience less targeted advertising.
+Cookie Details List‎
+Back Button### Cookie List
+Search Icon
+Filter Icon
+Clear
+checkbox labellabel
+ApplyCancel
+ConsentLeg.Interest
+checkbox labellabel
+checkbox labellabel
+checkbox labellabel
+Confirm my choices
+[![Powered by Onetrust](https://cdn.cookielaw.org/logos/static/powered_by_logo.svg "Powered by OneTrust Opens in a new Tab")](https://www.onetrust.com/products/cookie-consent/)
