@@ -133,6 +133,7 @@ Companion documents in this folder:
 - `RESEARCH_BRIEF.md` — technical synthesis with **inline citations**
 - `REGRESSION_CONSTANT_CLARIFICATION.md` — project uses Bertoldi pressure-swirl `a=0.1531`, `n=0.67` (SI); unit conversion
 - `EXPERIMENTAL_MEASUREMENT_OF_A_AND_N.md` — lab procedure to measure `a` and `n` from hot-fire data
+- `SAFETY_PROCEDURES_N2O_PARAFFIN.md` — N₂O/paraffin casting, oxidizer, and static-test safety procedures
 - `references.bib` — BibTeX entries for the sources above
 - `sources/citation_keys.md` — short key → full citation map
 

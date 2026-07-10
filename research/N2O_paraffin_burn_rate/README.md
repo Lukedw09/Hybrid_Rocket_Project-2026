@@ -8,8 +8,9 @@ This folder holds a curated literature set on **regression-rate (burn-rate) vari
 | [`RESEARCH_BRIEF.md`](RESEARCH_BRIEF.md) | Technical synthesis with inline citations |
 | [`REGRESSION_CONSTANT_CLARIFICATION.md`](REGRESSION_CONSTANT_CLARIFICATION.md) | Project `a=0.1531`, `n=0.67` (Bertoldi pressure-swirl) and unit conversion |
 | [`EXPERIMENTAL_MEASUREMENT_OF_A_AND_N.md`](EXPERIMENTAL_MEASUREMENT_OF_A_AND_N.md) | How to experimentally measure `a` and `n` from hot-fire data |
+| [`SAFETY_PROCEDURES_N2O_PARAFFIN.md`](SAFETY_PROCEDURES_N2O_PARAFFIN.md) | Safety procedures for N₂O/paraffin hybrids (casting, oxidizer, test ops) |
 | [`references.bib`](references.bib) | BibTeX bibliography |
 | [`sources/citation_keys.md`](sources/citation_keys.md) | Short cite-key map |
 | [`downloads/`](downloads/) | Local PDFs / HTML / TXT copies (~18 MB) |
 
-Start with **INDEX.md**, then **RESEARCH_BRIEF.md**. For constants and lab measurement, see **REGRESSION_CONSTANT_CLARIFICATION.md** and **EXPERIMENTAL_MEASUREMENT_OF_A_AND_N.md**.
+Start with **INDEX.md**, then **RESEARCH_BRIEF.md**. For constants and lab measurement, see **REGRESSION_CONSTANT_CLARIFICATION.md** and **EXPERIMENTAL_MEASUREMENT_OF_A_AND_N.md**. Read **SAFETY_PROCEDURES_N2O_PARAFFIN.md** before any propellant work.
