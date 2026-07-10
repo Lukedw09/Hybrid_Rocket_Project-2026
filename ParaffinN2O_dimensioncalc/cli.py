@@ -10,14 +10,16 @@ Or use the GUI instead (default when you run the package):
 
     python -m ParaffinN2O_dimensioncalc
 
-This module also exposes helpers (format_summary, save_csv, make_plots) that
-the GUI reuses so both front-ends print/save the same results.
+This module also exposes helpers (format_summary, save_csv,
+save_motor_export_json, make_plots) that the GUI reuses so both front-ends
+print/save the same results.
 """
 
 from __future__ import annotations
 
 import argparse
 import csv
+import json
 import sys
 from pathlib import Path
 
@@ -179,9 +181,37 @@ def print_summary(args: argparse.Namespace, result: MotorResult) -> None:
     print(format_summary(vals, result))
 
 
+def save_motor_export_json(path: Path, result: MotorResult) -> None:
+    """
+    Write motor_export.json for trajectory / altitude thrust correction.
+
+    CSV remains the source of truth for the full burn series; this file mirrors
+    the thrust and m_dot columns plus nozzle scalars needed downstream.
+    """
+    h = result.history
+    n = result.performance.nozzle
+    payload = {
+        "time_s": [float(x) for x in h.time_s],
+        "thrust_N": [float(x) for x in h.thrust_n],
+        "m_dot_total_kg_s": [float(x) for x in h.m_dot_total_kg_s],
+        "exit_area_m2": float(n.exit_area_m2),
+        "exit_pressure_pa": float(n.exit_pressure_pa),
+        "throat_area_m2": float(n.throat_area_m2),
+        "isp_sea_level_s": float(n.isp_sea_level_s),
+        "total_propellant_kg": float(result.performance.total_propellant_kg),
+        "burnout_reason": h.burnout_reason,
+    }
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", encoding="utf-8") as f:
+        json.dump(payload, f, indent=2)
+        f.write("\n")
+
+
 def save_csv(path: Path, result: MotorResult) -> None:
     """
     Write the burn time-history to CSV for Excel / MATLAB / further plotting.
+
+    Also writes motor_export.json in the same directory for trajectory handoff.
 
     Lengths and rates are converted to mm / mm/s in the file for readability;
     mass flows stay in kg/s; pressure is written in bar.
@@ -219,6 +249,7 @@ def save_csv(path: Path, result: MotorResult) -> None:
                     f"{h.fuel_consumed_kg[i]:.8f}",
                 ]
             )
+    save_motor_export_json(path.parent / "motor_export.json", result)
 
 
 def make_plots(result: MotorResult, out_dir: Path | None, show: bool) -> None:
@@ -292,6 +323,7 @@ def main(argv: list[str] | None = None) -> int:
         csv_path = out_dir / "burn_history.csv"
         save_csv(csv_path, result)
         print(f"Wrote {csv_path}")
+        print(f"Wrote {out_dir / 'motor_export.json'}")
 
     make_plots(result, out_dir=out_dir, show=not args.no_show)
     return 0
