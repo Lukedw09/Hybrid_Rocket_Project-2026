@@ -1,8 +1,32 @@
 """
-Full boost + coast trajectory integration (fixed-step RK4).
+Full boost + coast trajectory integration.
 
-Integrates until shortly after ground impact (y returns to ≤ 0) so the
-animation can show ascent and descent. Tracks max altitude, max Mach, boost time.
+================================================================================
+WHAT THIS MODULE DOES
+================================================================================
+simulate(inputs) is the high-level entry point for the physics:
+
+  1. Load MotorData (or accept one already loaded by the GUI).
+  2. Start at the origin, at rest, with the prescribed attitude at t = 0.
+  3. March fixed-step RK4 (dynamics.rk4_step) until the rocket has left the
+     pad and then returned to y ≤ 0 (impact). No parachute — ballistic fall.
+  4. Record time histories and summary metrics into TrajectoryResult.
+
+The animation layer (animate.py) only *reads* TrajectoryResult; it does not
+recompute forces.
+
+================================================================================
+BOOST VS COAST
+================================================================================
+A sample is "thrusting" when remaining propellant > 0 *and* t is still inside
+the motor burn table. The animation draws that segment red; after burnout the
+path is green.
+
+================================================================================
+OUTPUTS OF INTEREST
+================================================================================
+  max_altitude_m, max_mach, boost_time_s, apogee_index, impact_time_s
+  plus per-sample altitude_m[] and mach[] aligned with position_m[] for the HUD.
 """
 
 from __future__ import annotations
@@ -25,9 +49,19 @@ from dynamics import (
 from motor_import import MotorData, load_motor
 
 
+# =============================================================================
+# Input / output containers
+# =============================================================================
+
+
 @dataclass
 class SimInputs:
-    """User-facing simulation inputs (SI)."""
+    """
+    User-facing simulation inputs (SI).
+
+    The GUI converts mm → m before building this. altitude_goal_m and mach_goal
+    are comparison targets only — they do not change the physics.
+    """
 
     diameter_m: float
     length_m: float
@@ -42,10 +76,15 @@ class SimInputs:
 
 @dataclass
 class TrajectoryResult:
-    """Time histories and summary metrics from one flight."""
+    """
+    Time histories and summary metrics from one flight.
+
+    Array lengths all match time_s. position_m[i] is (x, y, z) at time_s[i]
+    with y vertical. thrusting[i] is True during boost (red path segment).
+    """
 
     time_s: np.ndarray
-    position_m: np.ndarray  # (N, 3) x,y,z
+    position_m: np.ndarray  # (N, 3) x, y, z
     velocity_m_s: np.ndarray  # (N, 3)
     attitude_rad: np.ndarray  # (N, 3) phi, theta, psi
     mass_prop_kg: np.ndarray
@@ -54,7 +93,7 @@ class TrajectoryResult:
     altitude_m: np.ndarray
     mach: np.ndarray
     thrusting: np.ndarray  # bool
-    # Summary
+    # Summary scalars
     max_altitude_m: float
     max_mach: float
     boost_time_s: float
@@ -67,14 +106,31 @@ class TrajectoryResult:
 
     @property
     def apogee_position_m(self) -> np.ndarray:
+        """World-frame (x,y,z) at maximum altitude — used for the apogee marker."""
         return self.position_m[self.apogee_index]
+
+
+# =============================================================================
+# Integrator
+# =============================================================================
 
 
 def simulate(inputs: SimInputs, motor: MotorData | None = None) -> TrajectoryResult:
     """
-    Integrate boost + coast from y=0 until impact.
+    Integrate boost + coast from y = 0 until ground impact.
 
-    If motor is None, loads from inputs.motor_folder (requires CSV+JSON pair).
+    Parameters
+    ----------
+    inputs :
+        Vehicle geometry, masses, Cd, goals, motor folder, time step.
+    motor :
+        Optional pre-loaded MotorData. If None, loads from inputs.motor_folder
+        (requires burn_history.csv + motor_export.json).
+
+    Returns
+    -------
+    TrajectoryResult
+        Full time history plus max altitude / Mach / boost time / apogee index.
     """
     if motor is None:
         motor = load_motor(inputs.motor_folder)
@@ -91,6 +147,7 @@ def simulate(inputs: SimInputs, motor: MotorData | None = None) -> TrajectoryRes
     if dt <= 0.0:
         raise ValueError("dt_s must be > 0")
 
+    # Initial state: on the pad, at rest, attitude from the hold law at t = 0
     phi0, theta0, psi0 = attitude_angles(0.0)
     state = pack_state(
         np.array([0.0, 0.0, 0.0]),
@@ -99,6 +156,8 @@ def simulate(inputs: SimInputs, motor: MotorData | None = None) -> TrajectoryRes
     )
     m_prop = float(max(inputs.mass_propellant_kg, 0.0))
 
+    # Grow Python lists during the loop, then convert to NumPy once at the end
+    # (cheaper than resizing arrays every step for unknown flight duration).
     times: list[float] = [0.0]
     positions: list[np.ndarray] = [state[0:3].copy()]
     velocities: list[np.ndarray] = [state[3:6].copy()]
@@ -111,19 +170,19 @@ def simulate(inputs: SimInputs, motor: MotorData | None = None) -> TrajectoryRes
 
     t = 0.0
     left_pad = False
-    max_steps = int(1e6)  # safety cap (~2.7 h at dt=0.01)
+    max_steps = int(1e6)  # safety cap (~2.7 h at dt = 0.01 s)
     boost_time = 0.0
 
     for _ in range(max_steps):
         thrusting_now = m_prop > 1e-9 and t <= motor.burn_time_s + 1e-12
         if thrusting_now:
-            boost_time = t + dt  # end of this step still in boost (refined below)
+            boost_time = t + dt
 
         state, m_prop = rk4_step(t, state, m_prop, dt, vehicle, motor)
         t += dt
 
         pos, vel, att = unpack_state(state)
-        # Keep attitude on the prescribed law
+        # Re-assert attitude law (rk4_step already snaps; this keeps lists honest)
         phi, theta, psi = attitude_angles(t)
         state[6:9] = (phi, theta, psi)
         att = state[6:9]
@@ -151,14 +210,16 @@ def simulate(inputs: SimInputs, motor: MotorData | None = None) -> TrajectoryRes
         machs.append(mach)
         thrusting_flags.append(still_thrusting)
 
+        # Impact detection: must climb off the pad first, then hit y ≤ 0
         if alt > 1.0:
             left_pad = True
-        # Stop shortly after impact (y returns to ≤ 0 after leaving the pad)
         if left_pad and alt <= 0.0:
             break
     else:
+        # for-else: loop finished without break → something went wrong
         raise RuntimeError("Trajectory integration exceeded max steps without impact.")
 
+    # --- Pack arrays and compute summary metrics ---
     time_arr = np.asarray(times, dtype=float)
     pos_arr = np.vstack(positions)
     vel_arr = np.vstack(velocities)
@@ -173,7 +234,7 @@ def simulate(inputs: SimInputs, motor: MotorData | None = None) -> TrajectoryRes
     max_alt = float(alt_arr[apogee_index])
     max_mach = float(np.max(mach_arr)) if len(mach_arr) else 0.0
 
-    # Refine boost_time: last time thrusting was true
+    # Last sample where the engine was still thrusting
     if np.any(thrust_flag):
         boost_time = float(time_arr[thrust_flag][-1])
     else:
@@ -202,7 +263,7 @@ def simulate(inputs: SimInputs, motor: MotorData | None = None) -> TrajectoryRes
     )
 
 
-# Re-export helpers useful to animation / HUD
+# Re-exports used by animation / HUD / callers that import from simulate
 __all__ = [
     "SimInputs",
     "TrajectoryResult",

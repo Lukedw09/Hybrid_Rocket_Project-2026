@@ -1,13 +1,21 @@
 """
 Entry point for the trajectory GUI.
 
-The folder name contains a space, so prefer:
+================================================================================
+HOW TO LAUNCH
+================================================================================
+The folder name contains a space, so prefer one of:
 
     python "Model Trajectory/gui.py"
-    or double-click "Run Trajectory GUI.bat"
+    double-click "Run Trajectory GUI.bat"
 
-This module still bootstraps sys.path so local imports (atmosphere, simulate, …)
-resolve when launched as a script from the project root.
+Running this file also works if the working directory can resolve local
+imports after the sys.path bootstrap below:
+
+    python "Model Trajectory/__main__.py"
+
+That bootstrap inserts this folder on sys.path so sibling modules
+(atmosphere, simulate, gui, …) import as top-level names.
 """
 
 from __future__ import annotations

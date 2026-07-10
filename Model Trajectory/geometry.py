@@ -1,8 +1,27 @@
 """
-Rudimentary rocket mesh: cylinder body + conical nose + simple fins.
+Rudimentary 3D rocket mesh for the animation.
 
-Mesh is built in a body frame with +y along the longitudinal (+nose) axis,
-then transformed into world coordinates using position and Euler attitude.
+================================================================================
+WHAT THIS MODULE DOES
+================================================================================
+Builds a simple visual model (cylinder body + cone nose + four fins) and
+places it in the world frame at the rocket's current position and attitude.
+
+This module is *display only* — it does not affect the flight physics.
+dynamics.py / simulate.py never import it.
+
+================================================================================
+BODY FRAME
+================================================================================
+Local construction uses +y toward the nose (same convention as the dynamics
+body axis). Origin is at mid-body (visual stand-in for CG).
+
+build_rocket_mesh(...) then:
+  1. Builds polygons in that body frame.
+  2. Builds a 3×3 rotation from Euler angles (same tip law as dynamics).
+  3. Transforms every vertex:  p_world = R @ p_body + position
+
+animate.py maps world (x, y_up, z) into matplotlib's plot axes afterward.
 """
 
 from __future__ import annotations
@@ -16,7 +35,12 @@ from dynamics import body_axis
 
 @dataclass
 class RocketMesh:
-    """Collections of 3D polygons (each an (M, 3) vertex array) in world frame."""
+    """
+    Collections of 3D polygons in the *world* frame.
+
+    Each polygon is an (M, 3) array of vertices (quads for body/fins,
+    triangles for the nose). all_polys() concatenates them for convenience.
+    """
 
     body_polys: list[np.ndarray]
     nose_polys: list[np.ndarray]
@@ -30,12 +54,15 @@ def _rotation_body_to_world(phi: float, theta: float, psi: float) -> np.ndarray:
     """
     3×3 matrix mapping body-frame vectors to world.
 
-    Body +y is the longitudinal (+nose) axis. Columns are world images of
-    body unit axes (ex, ey, ez).
+    Columns are the world-frame images of the body unit axes (e_x, e_y, e_z).
+    Body +y (column 1) is the longitudinal / +nose axis from body_axis().
+
+    We build a right-handed triad around that axis, then optionally roll by φ
+    about body y (φ is normally 0 in this sim).
     """
-    # Longitudinal (body +y) from attitude law
     ey = body_axis(phi, theta, psi)
-    # Build a right-handed frame; prefer world +z as a reference for "up" of fins
+
+    # Pick a reference that is not nearly parallel to ey, then Gram-Schmidt
     world_ref = np.array([0.0, 0.0, 1.0])
     if abs(float(np.dot(ey, world_ref))) > 0.95:
         world_ref = np.array([1.0, 0.0, 0.0])
@@ -43,7 +70,8 @@ def _rotation_body_to_world(phi: float, theta: float, psi: float) -> np.ndarray:
     ex /= np.linalg.norm(ex)
     ez = np.cross(ex, ey)
     ez /= np.linalg.norm(ez)
-    # Optional roll about body y
+
+    # Roll about body +y
     c, s = np.cos(phi), np.sin(phi)
     ex_r = c * ex + s * ez
     ez_r = -s * ex + c * ez
@@ -51,7 +79,7 @@ def _rotation_body_to_world(phi: float, theta: float, psi: float) -> np.ndarray:
 
 
 def _transform(points_body: np.ndarray, R: np.ndarray, origin: np.ndarray) -> np.ndarray:
-    """Map (N, 3) body-frame points to world."""
+    """Map (N, 3) body-frame points to world: P @ R.T + origin."""
     return points_body @ R.T + origin
 
 
@@ -68,6 +96,7 @@ def _cylinder_polys(
         th1 = thetas[(i + 1) % n_theta]
         c0, s0 = np.cos(th0), np.sin(th0)
         c1, s1 = np.cos(th1), np.sin(th1)
+        # One rectangular facet of the cylinder wall
         polys.append(
             np.array(
                 [
@@ -109,15 +138,14 @@ def _fin_polys(
     n_fins: int = 4,
 ) -> list[np.ndarray]:
     """
-    Simple trapezoidal fins in the body x–y / z–y planes.
+    Simple trapezoidal fins as single quads extending radially from the body.
 
-    Each fin is a single quad extending radially from the body.
+    Enough detail to read as a rocket in the nose-camera view; not a CFD mesh.
     """
     polys: list[np.ndarray] = []
     for k in range(n_fins):
         ang = 2.0 * np.pi * k / n_fins
         radial = np.array([np.cos(ang), 0.0, np.sin(ang)])
-        # Root (on body) and tip (outboard); slight forward sweep at tip
         root_aft = np.array([radius * radial[0], y_root_aft, radius * radial[2]])
         root_fwd = np.array([radius * radial[0], y_root_fwd, radius * radial[2]])
         tip_aft = root_aft + span * radial + np.array([0.0, -sweep, 0.0])
@@ -138,14 +166,20 @@ def build_rocket_mesh(
     """
     Build a world-frame rocket mesh at the given pose.
 
-    Body frame: +y toward nose, origin at geometric mid-body (approx CG visual).
-    length_m is overall tip-to-aft length; diameter_m is outer body diameter.
+    Parameters
+    ----------
+    diameter_m, length_m :
+        Outer body diameter and tip-to-aft length (from the GUI / SimInputs).
+    position_m :
+        World (x, y, z) of the visual CG (mid-body).
+    attitude_rad :
+        (phi, theta, psi) matching dynamics.attitude_angles.
     """
     radius = 0.5 * diameter_m
     nose_len = max(nose_fraction * length_m, 1.5 * radius)
     body_len = max(length_m - nose_len, 2.0 * radius)
 
-    # Place mid-body at origin: aft at -body_len/2, nose base at +body_len/2, tip beyond
+    # Mid-body at local origin: aft below, nose base above, tip further +y
     y_aft = -0.5 * body_len
     y_nose_base = 0.5 * body_len
     y_tip = y_nose_base + nose_len

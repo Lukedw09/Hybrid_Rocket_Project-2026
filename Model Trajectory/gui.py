@@ -1,11 +1,31 @@
 """
 Desktop GUI for the 9-state rocket trajectory simulator.
 
-Layout:
+================================================================================
+WHAT THIS MODULE DOES
+================================================================================
+Tkinter front-end that wires user inputs → physics → animation:
+
+  1. Collect vehicle / aero / goal fields from the form (mm and kg as typed).
+  2. Load MotorData from the motor output folder (CSV + JSON).
+  3. Call simulate.simulate(...) to integrate the flight.
+  4. Hand the TrajectoryResult to animate.attach_animation on an embedded
+     matplotlib FigureCanvasTkAgg.
+  5. Let camera radio buttons call set_camera_mode while the loop runs.
+
+================================================================================
+LAYOUT
+================================================================================
   Left  — ttk inputs, Run / Load motor folder, camera-mode radios
   Right — embedded matplotlib 3D canvas with looping animation
+  Title — window title "Rocket Trajectory Analysis"
 
-Requires motorsim_output/burn_history.csv + motor_export.json from the motor tool.
+================================================================================
+PATH BOOTSTRAP
+================================================================================
+The folder is named "Model Trajectory" (space), so it is not a normal
+importable package. We insert this directory on sys.path so sibling modules
+(atmosphere, dynamics, …) import as top-level names. Same pattern as __main__.py.
 
 Launch:
   double-click "Run Trajectory GUI.bat"
@@ -26,6 +46,7 @@ if str(_HERE) not in sys.path:
 
 import matplotlib
 
+# Must set the backend *before* importing pyplot / figure classes when embedding
 matplotlib.use("TkAgg")
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 from matplotlib.figure import Figure
@@ -34,7 +55,8 @@ from animate import CAMERA_LABELS, AnimationHandles, CameraMode, attach_animatio
 from motor_import import load_motor
 from simulate import SimInputs, TrajectoryResult, simulate
 
-# (key, label, default)
+# (internal key, label shown in UI, default text)
+# Keys are read in _collect_inputs; mm fields are converted to meters there.
 FIELDS: list[tuple[str, str, str]] = [
     ("diameter_mm", "Vehicle outer diameter [mm]", "152.4"),
     ("length_mm", "Vehicle length [mm]", "2000"),
@@ -54,7 +76,12 @@ _CAMERA_MODES: list[tuple[CameraMode, str]] = [
 
 
 class TrajectoryApp(tk.Tk):
-    """Main window: form + embedded 3D trajectory animation."""
+    """
+    Main window: form + embedded 3D trajectory animation.
+
+    Inherits from tk.Tk so `self` *is* the root window. mainloop() runs the
+    event loop (button clicks, redraws, animation timer via matplotlib).
+    """
 
     def __init__(self) -> None:
         super().__init__()
@@ -73,6 +100,7 @@ class TrajectoryApp(tk.Tk):
         self._build()
 
     def _build(self) -> None:
+        """Create and grid all widgets. Called once at startup."""
         root = ttk.Frame(self, padding=12)
         root.grid(row=0, column=0, sticky="nsew")
         self.columnconfigure(0, weight=1)
@@ -97,6 +125,7 @@ class TrajectoryApp(tk.Tk):
 
         btn_row = ttk.Frame(form)
         btn_row.grid(row=len(FIELDS), column=0, columnspan=2, pady=(12, 0), sticky="ew")
+        # command= takes the function object — do not write self._on_run()
         ttk.Button(btn_row, text="Run", command=self._on_run).pack(side="left")
         ttk.Button(btn_row, text="Load motor folder", command=self._on_load_motor).pack(
             side="left", padx=(8, 0)
@@ -132,6 +161,7 @@ class TrajectoryApp(tk.Tk):
         self._fig = Figure(figsize=(7.5, 6.2), dpi=100, facecolor="#1a1a1a")
         self._ax = self._fig.add_subplot(111, projection="3d", facecolor="#1a1a1a")
         self._style_axes(self._ax)
+        # Placeholder labels until the first Run remaps axes in attach_animation
         self._ax.set_xlabel("x [m]")
         self._ax.set_ylabel("y [m] (up)")
         self._ax.set_zlabel("z [m]")
@@ -156,16 +186,24 @@ class TrajectoryApp(tk.Tk):
 
     @staticmethod
     def _style_axes(ax) -> None:
+        """Light tick/label colors on the dark figure background."""
         ax.tick_params(colors="#cccccc")
         ax.xaxis.label.set_color("#cccccc")
         ax.yaxis.label.set_color("#cccccc")
         ax.zaxis.label.set_color("#cccccc")
 
     def _read_float(self, key: str) -> float:
+        """Parse one Entry as float; allow thousand-separators as commas."""
         raw = self._entries[key].get().strip().replace(",", "")
         return float(raw)
 
     def _collect_inputs(self) -> SimInputs:
+        """
+        Read the form, validate, convert mm → m, return SimInputs.
+
+        Raises ValueError on bad numbers or non-physical values (shown in a
+        message box by _on_run).
+        """
         diameter_mm = self._read_float("diameter_mm")
         length_mm = self._read_float("length_mm")
         propellant_kg = self._read_float("propellant_kg")
@@ -196,6 +234,7 @@ class TrajectoryApp(tk.Tk):
         )
 
     def _on_load_motor(self) -> None:
+        """Browse for a motorsim_output-style folder and sanity-check the files."""
         initial = self._entries["motor_folder"].get().strip() or "."
         path = filedialog.askdirectory(
             title="Select motor output folder",
@@ -219,6 +258,7 @@ class TrajectoryApp(tk.Tk):
         )
 
     def _on_camera_change(self) -> None:
+        """Radio button callback — switches camera without re-running the sim."""
         if self._anim_handles is None:
             return
         mode = self._camera_var.get()
@@ -226,6 +266,7 @@ class TrajectoryApp(tk.Tk):
             self._anim_handles.set_camera_mode(mode)  # type: ignore[arg-type]
 
     def _stop_animation(self) -> None:
+        """Stop the previous FuncAnimation timer before starting a new Run."""
         if self._anim_handles is not None:
             try:
                 self._anim_handles.anim.event_source.stop()
@@ -234,6 +275,12 @@ class TrajectoryApp(tk.Tk):
             self._anim_handles = None
 
     def _on_run(self) -> None:
+        """
+        Main button: validate → load motor → integrate → start animation.
+
+        Errors are shown in message boxes so the user is not dumped to a
+        console traceback when launching from the .bat file.
+        """
         try:
             inputs = self._collect_inputs()
         except ValueError as exc:
@@ -259,13 +306,14 @@ class TrajectoryApp(tk.Tk):
         self._start_animation(result)
 
     def _start_animation(self, result: TrajectoryResult) -> None:
+        """Clear the axes, attach a new looping animation, keep a strong ref."""
         assert self._fig is not None and self._ax is not None and self._canvas is not None
 
         self._stop_animation()
         self._ax.cla()
         self._style_axes(self._ax)
 
-        # Remove previous HUD texts from the figure
+        # Remove previous HUD fig.text artists (attach_animation adds new ones)
         for txt in list(self._fig.texts):
             try:
                 txt.remove()
@@ -282,14 +330,19 @@ class TrajectoryApp(tk.Tk):
             result,
             camera_mode=mode,  # type: ignore[arg-type]
         )
-        # Keep a strong reference so GC does not kill the animation
+        # Keep strong references so GC does not kill the FuncAnimation
         self._canvas.mpl_connect("draw_event", lambda _evt: None)
         self._fig._trajectory_anim = self._anim_handles.anim  # type: ignore[attr-defined]
         self._canvas.draw_idle()
 
 
 def main() -> int:
-    # Prefer project root as CWD so relative motorsim_output/ resolves like the bat launcher.
+    """
+    Entry used by __main__.py and `python gui.py`.
+
+    Changes CWD to the project root so a relative motorsim_output/ path
+    resolves the same way as when launching from Run Trajectory GUI.bat.
+    """
     project_root = _HERE.parent
     try:
         import os

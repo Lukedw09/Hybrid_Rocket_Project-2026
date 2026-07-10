@@ -1,9 +1,37 @@
 """
-Looping 3D trajectory animation with boost/coast path, apogee marker, HUD,
-and three camera modes.
+Looping 3D trajectory animation (matplotlib).
 
-Plot mapping: world (x, y_up, z) → matplotlib (x, z, y_up) so the xz plane is
-the ground under view_init, and altitude is the vertical axis.
+================================================================================
+WHAT THIS MODULE DOES
+================================================================================
+Takes a finished TrajectoryResult and draws:
+
+  - Red polyline  = boost (engine on)
+  - Green polyline = coast (engine off)
+  - Yellow/gold dot at apogee
+  - A moving rocket marker (black dot in orbit/follow; full mesh in nose cam)
+  - Top-left HUD: inputs + max alt/Mach vs goals
+  - Live HUD: t, phase, altitude, Mach at the current animation frame
+
+FuncAnimation loops forever (repeat=True). Camera mode can change live via
+AnimationHandles.set_camera_mode(...).
+
+================================================================================
+WORLD FRAME VS MATPLOTLIB FRAME
+================================================================================
+Physics uses y-up. Matplotlib's Axes3D treats the plot XY plane as "ground"
+and plot Z as "up". So we remap:
+
+    world (x, y_up, z)  →  plot (x, z, y_up)
+
+Axis labels in the figure therefore read: X=x, Y=z, Z=y (up).
+
+================================================================================
+CAMERA MODES
+================================================================================
+  (a) orbit  — fixed framing of the whole path; azimuth spins slowly
+  (b) follow — limits centered on the rocket; azimuth spins slowly
+  (c) nose   — framing looks along body +nose; draws the mesh instead of a dot
 """
 
 from __future__ import annotations
@@ -30,29 +58,36 @@ CAMERA_LABELS = {
     "nose": "(c) Nose camera",
 }
 
-# Visual length of ground axes (plot x & y = world x & z) relative to altitude
-# (plot z). Applied via set_box_aspect only — data limits stay tight so the
-# camera does not pull back from the trajectory.
+# Stretch ground axes on screen without changing data limits (avoids zoom-out)
 _HORIZ_VISUAL_SCALE = 1.22
 
 
 @dataclass
 class AnimationHandles:
-    """Live artists updated each frame."""
+    """
+    Live artists / controls returned to the GUI.
+
+    Keep a reference to `anim` (and usually to this whole object) so Python's
+    garbage collector does not stop the FuncAnimation.
+    """
 
     anim: FuncAnimation
     ax: Axes
-    hud: object  # matplotlib text
+    hud: object  # matplotlib Text
     live_hud: object
     set_camera_mode: Callable[[CameraMode], None]
+
+
+# =============================================================================
+# Coordinate helpers
+# =============================================================================
 
 
 def _world_to_plot(xyz: np.ndarray) -> np.ndarray:
     """
     Map world (x, y_up, z) → plot (x, z, y_up).
 
-    Matplotlib treats plot-XY as the ground plane and plot-Z as up, so this
-    makes the physical xz plane the ground relative to the camera.
+    Works for a single (3,) point or an (N, 3) array of points.
     """
     xyz = np.asarray(xyz, dtype=float)
     if xyz.ndim == 1:
@@ -61,15 +96,16 @@ def _world_to_plot(xyz: np.ndarray) -> np.ndarray:
 
 
 def _polys_to_plot(polys: list[np.ndarray]) -> list[np.ndarray]:
+    """Remap every polygon vertex list into the matplotlib plot frame."""
     return [_world_to_plot(p) for p in polys]
 
 
 def _path_segments(result: TrajectoryResult) -> tuple[np.ndarray, np.ndarray]:
     """
-    Split trajectory into boost (red) and coast (green) polylines (world frame).
+    Split the trajectory into boost (red) and coast (green) polylines.
 
-    Returns (boost_xyz (N,3), coast_xyz (M,3)). Coast starts at the last
-    boost sample so the path is continuous.
+    Coast starts at the last boost sample so the two segments share a vertex
+    and the drawn path looks continuous.
     """
     pos = result.position_m
     thrusting = result.thrusting
@@ -87,7 +123,7 @@ def _path_segments(result: TrajectoryResult) -> tuple[np.ndarray, np.ndarray]:
 
 
 def _hud_static_text(result: TrajectoryResult) -> str:
-    """Top-left HUD: inputs summary + goals vs achieved."""
+    """Top-left black-transparent box: inputs + goals vs achieved."""
     v = result.vehicle
     lines = [
         "Rocket Trajectory Analysis",
@@ -107,14 +143,14 @@ def _axis_limits_plot(
     pad_frac: float = 0.55,
 ) -> tuple[list[float], list[float], list[float]]:
     """
-    Tight plot-axis limits (x, world-z, altitude) framed on the trajectory.
+    Tight plot-axis limits framed on the trajectory (with padding).
 
-    Horizontal limits follow path extent only (not altitude), so expanding the
-    visual x/z axes via box_aspect does not zoom the camera out.
+    Returns (xlim, ylim, zlim) already in *plot* coordinates:
+      xlim → world x,  ylim → world z,  zlim → world y (altitude).
     """
     pos = result.position_m
     x = pos[:, 0]
-    y = pos[:, 1]  # altitude
+    y = pos[:, 1]  # altitude (world y)
     z = pos[:, 2]
 
     x_c = 0.5 * (float(x.min()) + float(x.max()))
@@ -124,12 +160,11 @@ def _axis_limits_plot(
     x_half = 0.5 * max(float(x.max() - x.min()), 1.0) * (1.0 + pad_frac)
     y_half = 0.5 * max(float(y.max() - y.min()), 1.0) * (1.0 + pad_frac)
     z_half = 0.5 * max(float(z.max() - z.min()), 1.0) * (1.0 + pad_frac)
-    # Square ground footprint large enough for both horizontal drifts
     horiz_half = max(x_half, z_half, 1.0)
 
     xlim = [x_c - horiz_half, x_c + horiz_half]
-    ylim = [z_c - horiz_half, z_c + horiz_half]
-    zlim = [min(0.0, y_c - y_half), y_c + y_half]
+    ylim = [z_c - horiz_half, z_c + horiz_half]  # plot Y = world z
+    zlim = [min(0.0, y_c - y_half), y_c + y_half]  # plot Z = altitude
     return xlim, ylim, zlim
 
 
@@ -137,20 +172,22 @@ def _apply_box_aspect(ax: Axes, xlim: list[float], ylim: list[float], zlim: list
     """
     Stretch ground axes visually without changing data limits / camera distance.
 
-    box_aspect sets on-screen axis lengths; limits alone control framing zoom.
+    set_box_aspect controls on-screen axis lengths; set_xlim/ylim/zlim control
+    what data range is visible (zoom).
     """
-    # Normalize by altitude span so aspect is stable, then stretch x/z visually
     sz = max(zlim[1] - zlim[0], 1e-6)
     sx = _HORIZ_VISUAL_SCALE * sz
     sy = _HORIZ_VISUAL_SCALE * sz
-    _ = xlim, ylim  # framing only; visual scale is independent of horiz limits
+    _ = xlim, ylim
     try:
         ax.set_box_aspect((sx, sy, sz))
     except AttributeError:
+        # Older matplotlib without set_box_aspect — skip gracefully
         pass
 
 
 def _clear_rocket_artists(artists: list) -> None:
+    """Remove previous-frame rocket artists so we can redraw at the new pose."""
     for a in artists:
         try:
             a.remove()
@@ -160,7 +197,7 @@ def _clear_rocket_artists(artists: list) -> None:
 
 
 def _draw_rocket_mesh(ax: Axes, result: TrajectoryResult, index: int, artists: list) -> None:
-    """Draw full rocket mesh in plot frame (nose-camera scale only)."""
+    """Draw the full mesh (nose-camera mode — trajectory scale would hide it)."""
     mesh = build_rocket_mesh(
         result.vehicle.diameter_m,
         result.vehicle.length_m,
@@ -195,7 +232,7 @@ def _draw_rocket_mesh(ax: Axes, result: TrajectoryResult, index: int, artists: l
 
 
 def _draw_rocket_dot(ax: Axes, result: TrajectoryResult, index: int, artists: list) -> None:
-    """Black marker for orbit/follow — mesh is invisible at trajectory scale."""
+    """Black marker for orbit/follow — mesh is invisible at full-path scale."""
     p = _world_to_plot(result.position_m[index])
     (dot,) = ax.plot(
         [p[0]],
@@ -213,7 +250,13 @@ def _draw_rocket_dot(ax: Axes, result: TrajectoryResult, index: int, artists: li
 
 
 def _set_nose_camera(ax: Axes, result: TrajectoryResult, index: int) -> None:
-    """Place camera at rocket CG looking along body +nose (plot frame)."""
+    """
+    Frame the view as if looking along body +nose from near the CG.
+
+    Matplotlib does not give a true first-person camera, so we approximate by
+    centering limits on a point ahead of the rocket and setting elev/azim from
+    the body axis direction in plot coordinates.
+    """
     pos_w = result.position_m[index]
     att = result.attitude_rad[index]
     axis_w = body_axis(float(att[0]), float(att[1]), float(att[2]))
@@ -233,11 +276,16 @@ def _set_nose_camera(ax: Axes, result: TrajectoryResult, index: int) -> None:
         [focus[2] - half, focus[2] + half],
     )
 
-    # plot-Z is up; elev from ground (plot XY = world xz), azim in that plane
-    vx, vy, vz = axis  # plot components
+    # elev above the plot-XY ground plane; azim in that plane
+    vx, vy, vz = axis
     elev = float(np.degrees(np.arctan2(vz, np.hypot(vx, vy))))
     azim = float(np.degrees(np.arctan2(vy, vx)))
     ax.view_init(elev=elev, azim=azim)
+
+
+# =============================================================================
+# Public API
+# =============================================================================
 
 
 def attach_animation(
@@ -250,18 +298,15 @@ def attach_animation(
     frame_stride: int = 2,
 ) -> AnimationHandles:
     """
-    Draw static path + apogee, then start a looping FuncAnimation on `ax`.
+    Draw the static path + apogee, then start a looping FuncAnimation on `ax`.
 
-    Camera modes:
-      (a) orbit  — fixed framing of full trajectory; continuous azimuth orbit
-      (b) follow — limits centered on rocket; continuous azimuth orbit
-      (c) nose   — camera at CG looking along +nose (mesh); others use a black dot
-
-    Plot axes: X=world x, Y=world z, Z=world y (up). Ground plane = xz.
+    frame_stride skips samples so a long flight still animates at a readable
+    speed (every 2nd sample by default).
     """
     boost, coast = _path_segments(result)
     xlim0, ylim0, zlim0 = _axis_limits_plot(result)
 
+    # Static path (drawn once; rocket marker moves on top)
     if len(boost) > 1:
         bp = _world_to_plot(boost)
         ax.plot(bp[:, 0], bp[:, 1], bp[:, 2], color="red", lw=1.8, label="Boost")
@@ -289,6 +334,7 @@ def attach_animation(
     ax.set_zlim(*zlim0)
     _apply_box_aspect(ax, xlim0, ylim0, zlim0)
 
+    # Semi-transparent black HUD boxes (figure coordinates, not data)
     hud = fig.text(
         0.02,
         0.98,
@@ -320,15 +366,19 @@ def attach_animation(
         indices.append(n - 1)
 
     rocket_artists: list = []
+    # Mutable holders so nested update() / set_camera_mode() can share state
+    # without `nonlocal` on many names
     mode_holder: dict[str, CameraMode] = {"mode": camera_mode}
     tick = {"i": 0}
     azim0 = -60.0
     deg_per_frame = 360.0 / max(int(12.0 * 1000.0 / max(interval_ms, 1)), 1)
 
     def set_camera_mode(mode: CameraMode) -> None:
+        """Called by the GUI radio buttons while the animation is running."""
         mode_holder["mode"] = mode
 
     def update(frame_i: int):
+        """One animation frame: move marker, refresh live HUD, update camera."""
         idx = indices[frame_i % len(indices)]
         mode = mode_holder["mode"]
 
@@ -352,12 +402,10 @@ def attach_animation(
             ax.set_ylim(*ylim0)
             ax.set_zlim(*zlim0)
             _apply_box_aspect(ax, xlim0, ylim0, zlim0)
-            # elev above xz ground plane
             ax.view_init(elev=22.0, azim=azim)
         elif mode == "follow":
             p = _world_to_plot(result.position_m[idx])
             half_alt = max(0.28 * (zlim0[1] - zlim0[0]), 8.0 * result.vehicle.length_m, 120.0)
-            # Keep follow framing tight (same zoom); visual x/z stretch is box_aspect only
             half_horiz = max(
                 0.28 * (xlim0[1] - xlim0[0]),
                 8.0 * result.vehicle.length_m,
@@ -382,10 +430,10 @@ def attach_animation(
         frames=len(indices),
         interval=interval_ms,
         blit=False,
-        repeat=True,
+        repeat=True,  # loop the flight continuously
     )
 
-    update(0)
+    update(0)  # draw frame 0 immediately (don't wait for the timer)
     return AnimationHandles(
         anim=anim,
         ax=ax,
@@ -400,7 +448,13 @@ def run_standalone_preview(
     *,
     camera_mode: CameraMode = "orbit",
 ) -> None:
-    """Open a matplotlib window with a looping animation (for smoke tests)."""
+    """
+    Open a matplotlib window with a looping animation (smoke-test helper).
+
+    Useful when debugging without the tkinter GUI:
+        result = simulate(inputs)
+        run_standalone_preview(result)
+    """
     import matplotlib.pyplot as plt
 
     fig = plt.figure(figsize=(10, 7), facecolor="#1a1a1a")
@@ -410,6 +464,6 @@ def run_standalone_preview(
     ax.yaxis.label.set_color("#cccccc")
     ax.zaxis.label.set_color("#cccccc")
     handles = attach_animation(fig, ax, result, camera_mode=camera_mode)
-    _ = handles
+    _ = handles  # keep reference until plt.show() returns
     plt.tight_layout()
     plt.show()
