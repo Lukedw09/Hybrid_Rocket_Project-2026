@@ -11,8 +11,8 @@ Or use the GUI instead (default when you run the package):
     python -m ParaffinN2O_dimensioncalc
 
 This module also exposes helpers (format_summary, save_csv,
-save_motor_export_json, make_plots) that the GUI reuses so both front-ends
-print/save the same results.
+save_motor_export_json, make_plots, make_motor_drawing via drawing.py)
+that the GUI reuses so both front-ends print/save the same results.
 """
 
 from __future__ import annotations
@@ -25,6 +25,7 @@ from pathlib import Path
 
 import matplotlib.pyplot as plt
 
+from ParaffinN2O_dimensioncalc.drawing import make_motor_drawing
 from ParaffinN2O_dimensioncalc.model import MotorInputs, MotorResult, run_motor
 
 
@@ -257,7 +258,9 @@ def make_plots(result: MotorResult, out_dir: Path | None, show: bool) -> None:
     Three stacked plots vs time: port diameter, thrust, and regression rate.
 
     If out_dir is given, also save burn_history.png there.
-    If show is True, open an interactive matplotlib window (blocks until closed).
+    If show is True, leave the figure open for a later plt.show() (so the
+    motor section drawing can be created first and both windows open together).
+    If show is False, close the figure after saving.
     """
     h = result.history
     t = h.time_s
@@ -295,11 +298,14 @@ def make_plots(result: MotorResult, out_dir: Path | None, show: bool) -> None:
         fig.savefig(fig_path, dpi=150)
         print(f"Wrote {fig_path}")
 
-    if show:
-        plt.show()
-    else:
+    if not show:
         # Important when batch-running: free the figure so memory does not grow.
         plt.close(fig)
+
+
+def show_figures() -> None:
+    """Open all currently open matplotlib figures (blocks until closed)."""
+    plt.show()
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -325,7 +331,16 @@ def main(argv: list[str] | None = None) -> int:
         print(f"Wrote {csv_path}")
         print(f"Wrote {out_dir / 'motor_export.json'}")
 
-    make_plots(result, out_dir=out_dir, show=not args.no_show)
+    want_show = not args.no_show
+    make_plots(result, out_dir=out_dir, show=want_show)
+    make_motor_drawing(
+        inputs_from_args(args),
+        result,
+        out_dir=out_dir,
+        show=want_show,
+    )
+    if want_show:
+        show_figures()
     return 0
 
 

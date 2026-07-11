@@ -25,7 +25,8 @@ from pathlib import Path
 from tkinter import messagebox, scrolledtext, ttk
 
 # Reuse CLI helpers so GUI and command-line stay consistent.
-from ParaffinN2O_dimensioncalc.cli import format_summary, make_plots, save_csv
+from ParaffinN2O_dimensioncalc.cli import format_summary, make_plots, save_csv, show_figures
+from ParaffinN2O_dimensioncalc.drawing import make_motor_drawing
 from ParaffinN2O_dimensioncalc.model import MotorInputs, run_motor
 
 # ---------------------------------------------------------------------------
@@ -117,7 +118,7 @@ class MotorApp(tk.Tk):
 
         hint = ttk.Label(
             root,
-            text="Plots open in a separate window. CSV/PNG also saved to the motorsim_output/ folder.",
+            text="Burn plots + motor section drawing open in separate windows. Saved under motorsim_output/.",
             foreground="#444444",
         )
         hint.grid(row=1, column=0, sticky="sw", pady=(8, 0))
@@ -188,7 +189,11 @@ class MotorApp(tk.Tk):
         out_dir = Path("motorsim_output")
         try:
             save_csv(out_dir / "burn_history.csv", result)
+            # Build both figures first, then show together (a mid-stream
+            # plt.show() would block and leave the section drawing uncreated).
             make_plots(result, out_dir=out_dir, show=True)
+            make_motor_drawing(inp, result, out_dir=out_dir, show=True)
+            show_figures()
         except Exception as exc:  # noqa: BLE001
             messagebox.showwarning(
                 "Results computed",

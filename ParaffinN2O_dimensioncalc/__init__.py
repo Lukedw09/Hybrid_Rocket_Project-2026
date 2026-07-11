@@ -19,6 +19,7 @@ from .model import (
     size_motor,
     simulate_burn,
 )
+from .drawing import make_motor_drawing
 from .nozzle import NozzleAnalysis, analyze_nozzle
 
 # Names re-exported when someone does: from ParaffinN2O_dimensioncalc import *
@@ -31,4 +32,5 @@ __all__ = [
     "size_motor",
     "simulate_burn",
     "analyze_nozzle",
+    "make_motor_drawing",
 ]
