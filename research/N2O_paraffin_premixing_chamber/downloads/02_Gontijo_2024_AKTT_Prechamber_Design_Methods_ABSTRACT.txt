@@ -1,0 +1,17 @@
+Gontijo, M. S.
+Investigation of the existing methods for designing pre-combustion chambers in hybrid rocket engines.
+Aerospace Technic and Technology (AKTT), No. 4sup1, 2024.
+DOI: https://doi.org/10.32620/aktt.2024.4sup1.07
+OA page: http://nti.khai.edu/ojs/index.php/aktt/article/view/aktt.2024.4sup1.07
+(PDF download intermittently unavailable from publisher; content captured from HTML/DOI landing page.)
+
+KEY FINDINGS:
+- Survey of seven PC design methods: experiments, empirical Lpc/Dpc relations, CFD, droplet vaporization models, combustion instability models, droplet collision prediction, molecular dynamics.
+- Rule of thumb Lpc/Dpc = 0.5 (Humble et al., Space Propulsion Analysis and Design).
+- Vaporization models (Gontijo AIAA 2023-2183) gave mean ~0.53 and proposed range 0.26 <= Lpc/Dpc <= 0.66 for complete vaporization.
+- PC diameter usually set from final grain OD; length then from chosen Lpc/Dpc.
+- N2O/paraffin initial oxidizer mass flux limit ~650 kg/m^2/s cited (above -> blowoff / instability risk).
+- Too-long PC: heavier, costlier engine; too-short: lower performance and instability risk.
+- Gaseous oxidizer may allow shorter PC (no atomization/vaporization).
+- PC should be long enough for flow reattachment before solid grain (Angeloni / optical-access thesis cited).
+- Proposed workflow: collision outcomes -> empirical preliminary size -> vaporization + instability models -> CFD -> cold/hot tests.

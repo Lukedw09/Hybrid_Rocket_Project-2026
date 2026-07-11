@@ -1,0 +1,11 @@
+Humble, R. W.; Henry, G. N.; Larson, W. J. Space Propulsion Analysis and Design. McGraw-Hill, 1995.
+Sutton, G. P.; Biblarz, O. Rocket Propulsion Elements, 8th ed. Wiley, 2010.
+
+Cited in hybrid design literature (Gontijo 2024/2025; ULB EUCASS) for typical injector pressure-drop practice:
+  DeltaP / P_c  ~  0.20 – 0.30   (often stated as ~20–30% of chamber pressure)
+
+ULB N2O/paraffin work also cites >=20% injector pressure drop relative to chamber pressure
+to limit hot-gas backflow into the feed system.
+
+Local full textbooks not archived (copyrighted). Obtain via library.
+See also: research/N2O_paraffin_premixing_chamber/downloads/06_Humble_1995_Lpc_Dpc_rule_of_thumb_NOTE.txt

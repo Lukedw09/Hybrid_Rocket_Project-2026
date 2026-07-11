@@ -1,0 +1,9 @@
+Gontijo, M. S.; Filho, R. B. N.; Domingos, C. H. F. L.
+Design of Pre-Combustion Chambers for Hybrid Propellant Rocket Motors and Related Aspects.
+AIAA SciTech 2023 Forum, AIAA 2023-2183.
+DOI: https://doi.org/10.2514/6.2023-2183
+(Conference paper; paywalled on AIAA. Extended/archival open version is Energies 2025, 18, 3123 — see downloads/01_.)
+
+KEY FINDINGS (from publisher abstract / Energies extension):
+- Low-cost algorithm: Priem-adapted droplet vaporization + feed-system coupled instability model to predict minimum prechamber length.
+- Comparison with real hybrid motors proposed Lpc/Dpc range 0.26–0.66 for complete vaporization (later Energies paper updates/expands to 0.24–0.81).

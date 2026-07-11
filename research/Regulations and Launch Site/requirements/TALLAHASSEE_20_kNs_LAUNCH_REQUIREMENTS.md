@@ -7,7 +7,8 @@
 
 **Companion docs.**  
 - `../../N2O_paraffin_burn_rate/SAFETY_PROCEDURES_N2O_PARAFFIN.md`  
-- `../../N2O_paraffin_burn_rate/EXPERIMENTAL_MEASUREMENT_OF_A_AND_N.md`
+- `../../N2O_paraffin_burn_rate/EXPERIMENTAL_MEASUREMENT_OF_A_AND_N.md`  
+- `../../Igniter Sourcing/IGNITER_SOURCING.md` — order vs develop ignition for the 20 kN·s motor
 
 ---
 

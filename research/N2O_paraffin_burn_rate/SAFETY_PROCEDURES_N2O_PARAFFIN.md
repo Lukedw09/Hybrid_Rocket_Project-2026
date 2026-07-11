@@ -165,6 +165,8 @@ During firing, defects can cause **sloughing** (chunks of fuel detach), which ca
 
 Paraffin is brittle when cold and weak when warm. Aggressive ignition (large pyrotechnic charges, hard oxidizer slam) can crack the grain before steady burn. Use a qualified ignition method, soft-start oxidizer flow if your hardware allows, and inspect grains after any aborted ignition attempt.
 
+**Sourcing / development procedure:** see [`../Igniter Sourcing/IGNITER_SOURCING.md`](../Igniter%20Sourcing/IGNITER_SOURCING.md) for explicit steps to order commercial hybrid igniters or develop and qualify a custom preheater for the ~20 kN·s motor.
+
 ---
 
 ## 7. N₂O system design and materials safety

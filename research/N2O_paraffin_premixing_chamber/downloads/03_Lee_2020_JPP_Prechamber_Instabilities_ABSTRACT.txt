@@ -1,0 +1,15 @@
+Lee, J.; Bertoldi, A. E. M.; Andrianov, A.; Borges, R. A.; Veras, C. A. G.; Battistini, S.; Morita, T.; Hendrick, P.
+Role of Precombustion Chamber Design in Feed-System Coupled Instabilities of Hybrid Rockets.
+Journal of Propulsion and Power, 36(6), 796-805, 2020.
+DOI: https://doi.org/10.2514/1.B37706
+Author-accepted manuscript (OA): https://shura.shu.ac.uk/27601/
+
+KEY FINDINGS (from abstract + AAM excerpts):
+- Feed-system coupled (low-frequency) instabilities studied theoretically and experimentally for N2O hybrids (paraffin and HDPE).
+- UnB motor: exchangeable pre-combustion chamber lengths Lpre = 56.6, 76.6, 157.6, 177.6 mm; Dpre = 120 mm; fuels paraffin/HDPE; injectors SH, axial, etc.
+- ULB motor: Lpre = 102.5 mm; Dpre = 99 & 130 mm.
+- Prechamber configuration strongly affects pressure oscillation nature; correlation proposed linking fundamental frequency to oxidizer prechamber residence time tau_pre.
+- Lpre and oxidizer injection velocity are key parameters controlling oscillation period.
+- Example: Test #9 (Lpre=56.6 mm, SH) vs Test #14 (Lpre=157.6 mm, SH): longer prechamber associated with much more stable chamber pressure.
+- Caveat: lengthening Lpre also increases bulk gas residence time theta_g, which itself enlarges the stability locus—effects are coupled.
+- Stability model includes injector DeltaP, tau_pre, gas residence time, and combustion time lag (Summerfield/L*-type adaptation for hybrids).
