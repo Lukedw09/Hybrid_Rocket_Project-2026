@@ -208,7 +208,7 @@ def _build_motor_polygons(
     n = result.performance.nozzle
 
     case_od = _mm(inp.case_od_m)
-    wall = _mm(inp.wall_thickness_m)
+    wall = _mm(g.wall_thickness_m)
     grain_od = _mm(g.grain_od_m)
     port = _mm(g.port_diameter_m)
     L_grain = _mm(g.grain_length_m)

@@ -4,7 +4,8 @@ Command-line interface for the N2O / paraffin hybrid motor model.
 
 Run from the project root:
 
-    python -m ParaffinN2O_dimensioncalc.cli --case-od-mm 100 --wall-mm 3 ...
+    python -m ParaffinN2O_dimensioncalc.cli --case-od-mm 152.4 --fuel-mass 1.13 \
+        --burn-time 10 --pc-bar 30 --of 6 --total-impulse-kn-s 15
 
 Or use the GUI instead (default when you run the package):
 
@@ -40,18 +41,22 @@ def build_parser() -> argparse.ArgumentParser:
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
     p.add_argument("--case-od-mm", type=float, required=True, help="Motor case outer diameter [mm]")
-    p.add_argument("--wall-mm", type=float, required=True, help="Case wall + liner thickness [mm]")
     p.add_argument("--fuel-mass", type=float, required=True, help="Fuel mass [kg]")
     p.add_argument("--burn-time", type=float, required=True, help="Target burn time [s]")
-    p.add_argument("--pc-bar", type=float, required=True, help="Target chamber pressure [bar]")
+    p.add_argument(
+        "--pc-bar",
+        type=float,
+        required=True,
+        help="Max chamber pressure [bar] (also sizes Al case wall via Sutton 15-3)",
+    )
     p.add_argument("--of", type=float, required=True, dest="of_ratio", help="Oxidizer-to-fuel mass ratio [-]")
     p.add_argument(
         "--total-impulse-kn-s",
         type=float,
-        default=20.0,
+        default=15.0,
         help=(
             "Design total impulse [kN·s]. Sets F_avg = I_total / t_burn for throat sizing. "
-            "Default 20 kN·s (= 20,000 N·s)."
+            "Default 15 kN·s for the locked Catalina NO15 (~6.8 kg N2O) / ~1.13 kg fuel class."
         ),
     )
     p.add_argument("--density", type=float, default=834.0, help="Paraffin fuel density [kg/m^3]")
@@ -78,7 +83,6 @@ def inputs_from_args(args: argparse.Namespace) -> MotorInputs:
     """
     return MotorInputs(
         case_od_m=args.case_od_mm * 1e-3,
-        wall_thickness_m=args.wall_mm * 1e-3,
         fuel_mass_kg=args.fuel_mass,
         burn_time_s=args.burn_time,
         chamber_pressure_pa=args.pc_bar * 1e5,
@@ -116,7 +120,6 @@ def format_summary(vals: dict[str, float], result: MotorResult) -> str:
         "=" * 60,
         "Inputs",
         f"  Case OD              : {vals['case_od_mm']:.2f} mm",
-        f"  Wall / liner         : {vals['wall_mm']:.2f} mm",
         f"  Fuel mass            : {fuel_mass:.4f} kg",
         f"  Target burn time     : {burn_time:.3f} s",
         f"  Chamber pressure     : {vals['pc_bar']:.2f} bar",
@@ -124,8 +127,12 @@ def format_summary(vals: dict[str, float], result: MotorResult) -> str:
         f"  Total impulse        : {total_impulse_kn_s:.3f} kN*s",
         f"  Fuel density         : {vals['density']:.1f} kg/m^3",
         "",
-        # Geometry section: port and G_ox are *solved*, not user inputs.
+        # Geometry: Al from Sutton 15-3; design stack = 1.50×Al + liner.
         "Geometry (solved)",
+        f"  Al wall (Sutton 15-3): {g.wall_thickness_min_m*1e3:.2f} mm  [hoop stress]",
+        f"  Thermal liner        : {g.liner_thickness_m*1e3:.2f} mm",
+        f"  Design wall stack    : {g.wall_thickness_m*1e3:.2f} mm  "
+        f"[1.50*Al + liner]",
         f"  Grain OD             : {g.grain_od_m*1e3:.2f} mm",
         f"  Initial port ID      : {g.port_diameter_m*1e3:.2f} mm",
         f"  Grain length         : {g.grain_length_m*1e3:.2f} mm",
@@ -171,7 +178,6 @@ def print_summary(args: argparse.Namespace, result: MotorResult) -> None:
     """CLI wrapper: map argparse fields into the shared format_summary dict."""
     vals = {
         "case_od_mm": args.case_od_mm,
-        "wall_mm": args.wall_mm,
         "fuel_mass": args.fuel_mass,
         "burn_time": args.burn_time,
         "pc_bar": args.pc_bar,

@@ -7,14 +7,17 @@ WHAT THIS MODULE DOES
 Given motor design targets (case size, fuel mass, burn time, O/F, chamber
 pressure, total impulse), this module:
 
-  1. Sizes the fuel grain (outer diameter, initial port, length).
-  2. Solves for the initial port diameter so the fuel "web" burns through in
+  1. Sizes the aluminum case wall from max chamber pressure (Sutton Eq. 15-3),
+     then builds the design radial stack as 1.50× that metal thickness plus a
+     fixed thermal liner.
+  2. Sizes the fuel grain (outer diameter, initial port, length).
+  3. Solves for the initial port diameter so the fuel "web" burns through in
      exactly the target burn time.
-  3. Reports oxidizer mass flux G_ox as an *output* (not an input).
-  4. Runs a frozen-equilibrium nozzle analysis (gamma = 1.25, P_e = 1 atm)
+  4. Reports oxidizer mass flux G_ox as an *output* (not an input).
+  5. Runs a frozen-equilibrium nozzle analysis (gamma = 1.25, P_e = 1 atm)
      to size the throat, compute theoretical c*, and report chamber and
      sea-level specific impulse (see nozzle.py).
-  5. Integrates a simple time-dependent burn to produce thrust, port growth,
+  6. Integrates a simple time-dependent burn to produce thrust, port growth,
      and regression-rate histories.
 
 ================================================================================
@@ -67,6 +70,18 @@ PARAFFIN_DENSITY = 834.0  # kg/m^3
 # Standard gravity — used when converting thrust <-> I_sp in seconds.
 G0 = 9.80665  # m/s^2
 
+# Aluminum motor-case material (6061-T6) for Sutton thin-wall sizing.
+# Eq. (15-3) equates diameter growth forms and implies hoop stress
+#   σ_θ = p D / (2 d)  =>  d = p D / (2 σ_allow)
+# Working stress = yield / safety factor (never exceed material working stress).
+ALUMINUM_YOUNGS_MODULUS_PA = 69.0e9  # Pa  (~10e6 psi)
+ALUMINUM_POISSON_RATIO = 0.33  # [-]  (Sutton quotes 0.3 for steel)
+ALUMINUM_YIELD_STRENGTH_PA = 276.0e6  # Pa  (6061-T6 typical)
+CASE_WALL_SAFETY_FACTOR = 1.5  # on yield → working / allowable stress
+# Design stack: Al metal = 1.50 × Sutton hoop-stress minimum, plus fixed liner.
+CASE_WALL_DESIGN_MARGIN = 1.50
+THERMAL_LINER_THICKNESS_M = 3.0e-3  # m  (3.0 mm non-structural liner)
+
 # Lower bound on port diameter when searching for a burn-time match.
 # Prevents division by zero / infinite G_ox in the integral.
 _MIN_PORT_M = 1e-4  # 0.1 mm
@@ -85,12 +100,11 @@ class MotorInputs:
     Design targets supplied by the user (all SI).
 
     case_od_m            : Outer diameter of the motor case [m]
-    wall_thickness_m     : Case wall + thermal liner thickness [m]
-                           Grain OD = case_od - 2 * wall_thickness
     fuel_mass_kg         : Mass of solid paraffin to load [kg]
     burn_time_s          : Desired burn duration [s]
                            Also used to set m_dot_ox = m_ox / burn_time
-    chamber_pressure_pa  : Design chamber pressure [Pa]
+    chamber_pressure_pa  : Design (max) chamber pressure [Pa]
+                           Also sizes aluminum case wall via Sutton (15-3)
     of_ratio             : Oxidizer-to-fuel mass ratio m_ox / m_fuel [-]
     total_impulse_n_s    : Design total impulse I_total [N·s]
                            Sets average thrust F_avg = I_total / t_burn
@@ -98,12 +112,14 @@ class MotorInputs:
     dt_s                 : Integration time step for the burn simulation [s]
     fuel_density_kg_m3   : Solid fuel density [kg/m^3]
 
+    Note: wall thickness is NOT an input. Aluminum metal thickness comes from
+    chamber pressure via Sutton Eq. 15-3 (hoop stress only on the Al); the
+    design radial stack is 1.50 × that metal thickness plus a fixed liner.
     Note: c* is NOT an input. It is computed in the nozzle analysis from
     P_c, A_t, and m_dot (see nozzle.analyze_nozzle).
     """
 
     case_od_m: float
-    wall_thickness_m: float
     fuel_mass_kg: float
     burn_time_s: float
     chamber_pressure_pa: float
@@ -116,9 +132,14 @@ class MotorInputs:
 @dataclass
 class MotorGeometry:
     """
-    Sized grain / oxidizer quantities (outputs of size_motor).
+    Sized grain / case / oxidizer quantities (outputs of size_motor).
 
+    wall_thickness_min_m   : Theoretical Al wall from Sutton (15-3) hoop [m]
+    liner_thickness_m      : Fixed thermal liner thickness [m]
+    wall_thickness_m       : Design radial stack used in geometry [m]
+                             = 1.50 × wall_thickness_min + liner
     grain_od_m             : Fuel grain outer diameter [m]
+                             = case_od - 2 * wall_thickness (design)
     port_diameter_m        : Initial circular port diameter [m] (solved)
     grain_length_m         : Grain length needed to hold fuel_mass [m]
     web_thickness_m        : Radial fuel thickness = (OD - port) / 2 [m]
@@ -128,6 +149,9 @@ class MotorGeometry:
     gox_initial_kg_s_m2    : Initial oxidizer mass flux [kg/(s·m^2)] (output)
     """
 
+    wall_thickness_min_m: float
+    liner_thickness_m: float
+    wall_thickness_m: float
     grain_od_m: float
     port_diameter_m: float
     grain_length_m: float
@@ -320,6 +344,46 @@ def solve_initial_port_diameter(
 
 
 # =============================================================================
+# Case wall (Sutton Eq. 15-3 → thin-wall hoop stress)
+# =============================================================================
+
+
+def aluminum_case_wall_thickness_m(
+    chamber_pressure_pa: float,
+    case_od_m: float,
+    *,
+    yield_strength_pa: float = ALUMINUM_YIELD_STRENGTH_PA,
+    safety_factor: float = CASE_WALL_SAFETY_FACTOR,
+) -> float:
+    """
+    Minimum aluminum cylinder wall thickness from max chamber pressure.
+
+    Sutton *Rocket Propulsion Elements* Eq. (15-3) for pressurized cylindrical
+    cases relates diameter growth to hoop stress:
+
+        ΔD = (p D² / (4 E d)) (1 - ν/2) = (σ_θ D / (2 E)) (1 - ν/2)
+
+    Equating the two forms yields the thin-wall hoop-stress identity
+
+        σ_θ = p D / (2 d)   ⇒   d = p D / (2 σ_θ)
+
+    with working stress σ_θ = σ_yield / safety_factor for 6061-T6 aluminum.
+    D is taken as the case outer diameter (thin-wall approximation).
+    """
+    if chamber_pressure_pa <= 0:
+        raise ValueError("chamber_pressure_pa must be > 0")
+    if case_od_m <= 0:
+        raise ValueError("case_od_m must be > 0")
+    if safety_factor <= 0:
+        raise ValueError("safety_factor must be > 0")
+    if yield_strength_pa <= 0:
+        raise ValueError("yield_strength_pa must be > 0")
+
+    sigma_allow = yield_strength_pa / safety_factor
+    return chamber_pressure_pa * case_od_m / (2.0 * sigma_allow)
+
+
+# =============================================================================
 # Sizing
 # =============================================================================
 
@@ -329,17 +393,17 @@ def size_motor(inp: MotorInputs) -> tuple[MotorGeometry, DesignPerformance]:
     Compute grain geometry and nozzle design point from MotorInputs.
 
     Steps:
-      1. Grain OD from case OD and wall/liner thickness.
-      2. Oxidizer mass from O/F; constant m_dot_ox = m_ox / t_burn.
-      3. Solve initial port so web burns through in t_burn.
-      4. Grain length from fuel volume and annular cross-section.
-      5. Frozen nozzle analysis (P_e = 1 atm): throat, c*, chamber & SL Isp.
+      1. Al metal min from chamber pressure (Sutton 15-3); design stack =
+         1.50×min + fixed liner.
+      2. Grain OD from case OD and design wall stack.
+      3. Oxidizer mass from O/F; constant m_dot_ox = m_ox / t_burn.
+      4. Solve initial port so web burns through in t_burn.
+      5. Grain length from fuel volume and annular cross-section.
+      6. Frozen nozzle analysis (P_e = 1 atm): throat, c*, chamber & SL Isp.
     """
     # --- Input validation (fail early with clear messages) ---
-    if inp.wall_thickness_m <= 0:
-        raise ValueError("wall_thickness_m must be > 0")
-    if inp.case_od_m <= 2 * inp.wall_thickness_m:
-        raise ValueError("case_od_m must be larger than 2 * wall_thickness_m")
+    if inp.case_od_m <= 0:
+        raise ValueError("case_od_m must be > 0")
     if inp.fuel_mass_kg <= 0 or inp.burn_time_s <= 0:
         raise ValueError("fuel_mass_kg and burn_time_s must be > 0")
     if inp.of_ratio <= 0:
@@ -349,8 +413,24 @@ def size_motor(inp: MotorInputs) -> tuple[MotorGeometry, DesignPerformance]:
     if inp.total_impulse_n_s <= 0:
         raise ValueError("total_impulse_n_s must be > 0")
 
-    # Fuel grain sits inside the case; subtract wall+liner on both sides of diameter.
-    grain_od = inp.case_od_m - 2.0 * inp.wall_thickness_m
+    # Aluminum metal from Sutton Eq. 15-3 (hoop stress on Al only). Design
+    # radial stack for grain OD is 1.50 × that metal thickness + fixed liner.
+    wall_min = aluminum_case_wall_thickness_m(
+        inp.chamber_pressure_pa, inp.case_od_m
+    )
+    liner = THERMAL_LINER_THICKNESS_M
+    wall_thickness = wall_min * CASE_WALL_DESIGN_MARGIN + liner
+    if inp.case_od_m <= 2.0 * wall_thickness:
+        raise ValueError(
+            "Computed design wall stack leaves no room for a fuel grain: "
+            f"case OD {inp.case_od_m*1e3:.2f} mm, "
+            f"design wall {wall_thickness*1e3:.2f} mm "
+            f"(Al min {wall_min*1e3:.2f} mm + liner {liner*1e3:.2f} mm). "
+            "Reduce chamber pressure or increase case OD."
+        )
+
+    # Fuel grain sits inside the case; subtract design stack on both sides.
+    grain_od = inp.case_od_m - 2.0 * wall_thickness
 
     # Design O/F defines how much oxidizer accompanies the fuel load.
     oxidizer_mass = inp.of_ratio * inp.fuel_mass_kg
@@ -386,6 +466,9 @@ def size_motor(inp: MotorInputs) -> tuple[MotorGeometry, DesignPerformance]:
     )
 
     geometry = MotorGeometry(
+        wall_thickness_min_m=float(wall_min),
+        liner_thickness_m=float(liner),
+        wall_thickness_m=float(wall_thickness),
         grain_od_m=float(grain_od),
         port_diameter_m=float(port_diameter),
         grain_length_m=float(grain_length),

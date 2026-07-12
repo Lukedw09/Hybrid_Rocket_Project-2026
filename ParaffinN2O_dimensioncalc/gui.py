@@ -32,16 +32,18 @@ from ParaffinN2O_dimensioncalc.model import MotorInputs, run_motor
 # ---------------------------------------------------------------------------
 # Field definitions: (internal key, label shown in UI, default text)
 # Keys must match what format_summary expects and what _collect_inputs uses.
-# G_ox is intentionally absent — the solver computes it.
+# Defaults match Mach 1 Hybrid Rocket Project.md locked targets:
+#   152.4 mm case, Catalina NO15 (~6.8 kg N2O) at O/F 6 → ~1.13 kg fuel,
+#   3 MPa (30 bar), ~15 kN·s impulse class (Isp ≈ 194 s budget).
+# Wall thickness and G_ox are intentionally absent — the solver computes them.
 # ---------------------------------------------------------------------------
 FIELDS: list[tuple[str, str, str]] = [
     ("case_od_mm", "Case outer diameter [mm]", "152.4"),
-    ("wall_mm", "Wall / liner thickness [mm]", "3"),
-    ("fuel_mass", "Fuel mass [kg]", "1.5"),
+    ("fuel_mass", "Fuel mass [kg]", "1.13"),
     ("burn_time", "Burn time [s]", "10"),
     ("pc_bar", "Chamber pressure [bar]", "30"),
     ("of_ratio", "O/F ratio [-]", "6"),
-    ("total_impulse_kn_s", "Total impulse [kN·s]", "20"),
+    ("total_impulse_kn_s", "Total impulse [kN·s]", "15"),
     ("density", "Fuel density [kg/m³]", "834"),
     ("dt", "Time step [s]", "0.01"),
 ]
@@ -136,7 +138,6 @@ class MotorApp(tk.Tk):
         vals = {key: self._read_float(key) for key, _, _ in FIELDS}
         inp = MotorInputs(
             case_od_m=vals["case_od_mm"] * 1e-3,
-            wall_thickness_m=vals["wall_mm"] * 1e-3,
             fuel_mass_kg=vals["fuel_mass"],
             burn_time_s=vals["burn_time"],
             chamber_pressure_pa=vals["pc_bar"] * 1e5,

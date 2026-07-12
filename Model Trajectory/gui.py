@@ -58,12 +58,12 @@ from simulate import SimInputs, TrajectoryResult, simulate
 # (internal key, label shown in UI, default text)
 # Keys are read in _collect_inputs; mm fields are converted to meters there.
 FIELDS: list[tuple[str, str, str]] = [
-    ("diameter_mm", "Vehicle outer diameter [mm]", "152.4"),
-    ("length_mm", "Vehicle length [mm]", "2000"),
-    ("propellant_kg", "Propellant mass [kg]", "10"),
-    ("mass_dry_kg", "Vehicle mass (dry) [kg]", "25"),
+    ("diameter_mm", "Vehicle outer diameter [mm]", "203.2"),
+    ("length_mm", "Vehicle length [mm]", "2500"),
+    ("propellant_kg", "Propellant mass [kg]", "7.9"),
+    ("mass_dry_kg", "Vehicle mass (dry) [kg]", "28"),
     ("cd", "Cd (AoA = 0) [-]", "0.45"),
-    ("altitude_goal_m", "Altitude goal [m]", "3000"),
+    ("altitude_goal_m", "Altitude goal [m]", "5000"),
     ("mach_goal", "Max Mach goal [-]", "1.0"),
     ("motor_folder", "Motor output folder", "motorsim_output"),
 ]
