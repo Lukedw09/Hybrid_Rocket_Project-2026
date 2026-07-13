@@ -1,0 +1,19 @@
+# Contrail 152 mm bolted chamber — commercial bolt-count anchor
+
+**Accessed.** 2026-07-13
+
+## Vendor statements
+
+| Item | Claim | URL |
+|------|-------|-----|
+| 152 mm × 26″ combustion chamber | **6 bolt holes on each end** to secure injector baffle and aluminum nozzle carrier; OD = true 6″; wall class is Contrail’s certified thick-wall chamber (project backup lists **0.25″ wall / 5.5″ ID**) | https://contrailrockets.com/product/152mm-26-inch-combustion-chamber |
+| 152 mm combustion chamber bolts | **12-pack** = bolts for **both** ends (6 + 6) securing chamber to injector baffle and nozzle | https://contrailrockets.com/product/152mm-combustion-chamber-bolts |
+| 152 mm nozzle bolts | Separate **6-pack** for graphite/thrust washer to nozzle **carrier** (not the case radial set) | https://contrailrockets.com/product/152mm-nozzle-bolts-6-pack |
+
+## Design takeaway
+
+Contrail’s **6 radial fasteners per end** is a certified commercial pattern on a **~0.25″ (6.35 mm)** aluminum wall — about **2×** the wall thickness of this project’s preferred OnlineMetals **6.0″ × 0.125″** tube.
+
+Per HalfCat bearing/tear-out formulas, shear area and bearing area scale with wall thickness `t`. Copying “6 bolts like Contrail” onto a **0.125″** custom tube is **not** structurally equivalent and under-predicts required `N` at 45 bar hydroproof.
+
+Use Contrail only as a **same-OD interface reference**, not as a bolt-count recipe for the thin custom chamber.

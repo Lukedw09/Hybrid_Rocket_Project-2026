@@ -8,5 +8,6 @@ Topic folders under `research/` (open each folder’s `README.md`):
 | **N₂O–Paraffin premixing chamber** | [`N2O_paraffin_premixing_chamber/`](N2O_paraffin_premixing_chamber/) | Pre-mixing / pre-combustion chamber **length** selection |
 | **Axial showerhead injector** | [`Axial_Showerhead_Injector/`](Axial_Showerhead_Injector/) | Axial showerhead oxidizer **injector plate** design |
 | **Igniter Sourcing** | [`Igniter Sourcing/`](Igniter%20Sourcing/) | How to **order** or **develop** igniters for the full-scale paraffin/N₂O static motor |
+| **Chamber stress / radial bolts** | [`Chamber_Stress_Radial_Bolts/`](Chamber_Stress_Radial_Bolts/) | Barrel hoop + **radial bolt count** for bulkhead/nozzle at **45 bar** hydroproof |
 
 **Project execution (static fire):** [`../STATIC_FIRE_WEEKLY_CHECKLIST.md`](../STATIC_FIRE_WEEKLY_CHECKLIST.md) · component list [`../Mach 1 Hybrid Rocket Project.md`](../Mach%201%20Hybrid%20Rocket%20Project.md)

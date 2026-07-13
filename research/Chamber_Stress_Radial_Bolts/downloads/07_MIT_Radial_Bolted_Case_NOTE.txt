@@ -1,0 +1,35 @@
+# MIT Rocket Team — Radial Bolted Case Design (citation note)
+
+**Source.** MIT Rocket Team wiki: “Radial Bolted Case Design”  
+**URL.** https://wikis.mit.edu/confluence/display/RocketTeam/Radial+Bolted+Case+Design  
+**Accessed.** 2026-07-13  
+**Local full HTML not archived** (wiki auth/timeout); key equations captured here for offline use.
+
+## Equations captured
+
+Thin-wall hoop and longitudinal stress:
+
+```text
+  sigma_H  =  P * d / (2 * t)
+  sigma_L  =  P * d / (4 * t)
+```
+
+Bolt-hole tear-out (conservative; shear area from hole edge to case end):
+
+```text
+  tau_shear  =  P * (pi * (d/2)^2)  /  ( N_bolts * 2 * A_shear )
+
+  A_shear  =  t * (edge distance from hole to case end)
+```
+
+Practical spacing: ≥ **1.0–2.0×** bolt diameter from edge and between bolts (AISC J3.4 cited).
+
+## Phoenix example (wiki)
+
+- P = 826 psi, d = 4 in, N = 24 bolts, wall t = 0.25 in  
+- Averaged edge distances → A_shear ≈ 0.28 in²  
+- Resulting tear-out shear ≈ 772 psi (well below Al shear capacity)
+
+## Relevance to this project
+
+Confirms that for **radially bolted** aluminum cases, **tear-out and ligament tension between holes** often govern before bare-barrel hoop stress — especially on thin walls. Supports analyzing closures separately from Sutton hoop sizing.

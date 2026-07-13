@@ -1,0 +1,18 @@
+# 6061-T6 strength values used in project bolt FS tables
+
+**Primary source for bolted-closure FS.** Half Cat Rocketry, *How to Design Pressure Vessels, Propellant Tanks, and Rocket Motor Casings* (Appendix A / § Bolted Closure Design) — local `01_HalfCat_Pressure_Vessels_Motor_Casings.pdf`.
+
+HalfCat evaluates 6061-T6 near **~200 °F** (hot-motor derating):
+
+| Property | Value used | Role |
+|----------|------------|------|
+| Yield tensile strength (YTS) | 38 ksi (262 MPa) | Net-section tension FS |
+| Ultimate tensile strength (UTS) | 42 ksi (290 MPa) | Ultimate checks |
+| Shear strength | 30 ksi (207 MPa) | Tear-out FS |
+| Bearing yield strength (BYS) | 56 ksi (386 MPa) | Bearing FS |
+
+Room-temperature handbook values are higher (YTS ≈ 40 ksi / 276 MPa, UTS ≈ 45 ksi). Using HalfCat’s elevated set is **conservative** for hydroproof (cold water) and appropriate for hot-fire margin.
+
+**Fastener assumption in project calc.** Alloy steel **1/4-28 UNF**, Grade 8 class: UTS = 150 ksi; shear capacity = **0.75 × UTS** (HalfCat steel rule). Minor diameter = 0.2052 in (HalfCat Appendix A).
+
+**Edge distance.** `E = 2.0 × d_major` unless noted (HalfCat highly recommended; IOP paper uses 2.5×d conservative).
