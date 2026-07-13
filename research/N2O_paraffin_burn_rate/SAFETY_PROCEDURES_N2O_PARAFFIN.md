@@ -135,7 +135,7 @@ During firing, defects can cause **sloughing** (chunks of fuel detach), which ca
 | Demolding | Broken grain; sharp tools | Soft release agents compatible with later bonding; no prying that cracks the web |
 | Machining port | Melting from friction; dust; dimensional error | Sharp tools, low speed, support the grain; vacuum dust |
 
-### 6.3 Casting mistakes that create flight/test hazards
+### 6.3 Casting mistakes that create test hazards
 
 **Do not:**
 
@@ -143,7 +143,7 @@ During firing, defects can cause **sloughing** (chunks of fuel detach), which ca
 2. **Assume “it looks solid” means it is solid.** Section a process-qualification grain (or use NDT) before trusting a new mold process.
 3. **Use random candle wax** of unknown melt point/viscosity without characterization—mechanical strength and regression change with grade.
 4. **Trap air** by pouring too fast down a narrow annulus.
-5. **Bond a cracked grain** with tape or wax “patches” and call it flightworthy.
+5. **Bond a cracked grain** with tape or wax “patches” and call it hot-fire ready.
 6. **Omit a structural strategy** for soft paraffin (liner, casing support, polymer blend, or reinforcement) on grains that will see high shear or long burns.
 7. **Machine a port off-center** so the web burns through on one side first (case burn-through risk).
 8. **Leave release agents, oils, or shop grease** on surfaces that later contact N₂O or the injector face.

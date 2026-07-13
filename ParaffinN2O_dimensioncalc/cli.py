@@ -4,8 +4,8 @@ Command-line interface for the N2O / paraffin hybrid motor model.
 
 Run from the project root:
 
-    python -m ParaffinN2O_dimensioncalc.cli --case-od-mm 152.4 --fuel-mass 1.13 \
-        --burn-time 10 --pc-bar 30 --of 6 --total-impulse-kn-s 15
+    python -m ParaffinN2O_dimensioncalc.cli --case-od-mm 152.4 --fuel-mass 1.5 \
+        --burn-time 10 --pc-bar 40 --of 6 --total-impulse-kn-s 20
 
 Or use the GUI instead (default when you run the package):
 
@@ -53,10 +53,10 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument(
         "--total-impulse-kn-s",
         type=float,
-        default=15.0,
+        default=20.0,
         help=(
             "Design total impulse [kN·s]. Sets F_avg = I_total / t_burn for throat sizing. "
-            "Default 15 kN·s for the locked Catalina NO15 (~6.8 kg N2O) / ~1.13 kg fuel class."
+            "Default 20 kN·s for the locked Amazon/GCS 20 lb (~9.1 kg N2O) / ~1.5 kg fuel class."
         ),
     )
     p.add_argument("--density", type=float, default=834.0, help="Paraffin fuel density [kg/m^3]")

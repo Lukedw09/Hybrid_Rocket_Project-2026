@@ -33,17 +33,17 @@ from ParaffinN2O_dimensioncalc.model import MotorInputs, run_motor
 # Field definitions: (internal key, label shown in UI, default text)
 # Keys must match what format_summary expects and what _collect_inputs uses.
 # Defaults match Mach 1 Hybrid Rocket Project.md locked targets:
-#   152.4 mm case, Catalina NO15 (~6.8 kg N2O) at O/F 6 → ~1.13 kg fuel,
-#   3 MPa (30 bar), ~15 kN·s impulse class (Isp ≈ 194 s budget).
+#   152.4 mm case, Amazon/GCS 20 lb (~9.1 kg N2O) at O/F 6 → ~1.5 kg fuel,
+#   4 MPa (40 bar), ~20 kN·s impulse class (Isp ≈ 194 s budget).
 # Wall thickness and G_ox are intentionally absent — the solver computes them.
 # ---------------------------------------------------------------------------
 FIELDS: list[tuple[str, str, str]] = [
     ("case_od_mm", "Case outer diameter [mm]", "152.4"),
-    ("fuel_mass", "Fuel mass [kg]", "1.13"),
+    ("fuel_mass", "Fuel mass [kg]", "1.5"),
     ("burn_time", "Burn time [s]", "10"),
-    ("pc_bar", "Chamber pressure [bar]", "30"),
+    ("pc_bar", "Chamber pressure [bar]", "40"),
     ("of_ratio", "O/F ratio [-]", "6"),
-    ("total_impulse_kn_s", "Total impulse [kN·s]", "15"),
+    ("total_impulse_kn_s", "Total impulse [kN·s]", "20"),
     ("density", "Fuel density [kg/m³]", "834"),
     ("dt", "Time step [s]", "0.01"),
 ]

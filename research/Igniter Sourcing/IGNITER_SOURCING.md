@@ -1,12 +1,13 @@
 # Igniter Sourcing for a 20 kN·s Paraffin / N₂O Hybrid
 
-**Purpose.** Explicit steps to **order** or **develop** an ignition system for this project’s ~**20 kN·s** (20,000 N·s, N-class-equivalent) experimental paraffin + N₂O motor.  
-**Audience.** Builder / mentor / Flier of Record planning static-fire qualification before flight.  
+**Purpose.** Explicit steps to **order** or **develop** an ignition system for this project’s ~**20 kN·s** (20,000 N·s) experimental paraffin + N₂O motor on the **static test stand**.  
+**Audience.** Builder / adult mentor planning a **full-scale static fire** (campaign end goal — not flight).  
 **Companion docs.**  
 - [`../N2O_paraffin_burn_rate/SAFETY_PROCEDURES_N2O_PARAFFIN.md`](../N2O_paraffin_burn_rate/SAFETY_PROCEDURES_N2O_PARAFFIN.md)  
-- [`../Regulations and Launch Site/requirements/TALLAHASSEE_20_kNs_LAUNCH_REQUIREMENTS.md`](../Regulations%20and%20Launch%20Site/requirements/TALLAHASSEE_20_kNs_LAUNCH_REQUIREMENTS.md)
+- [`../../STATIC_FIRE_WEEKLY_CHECKLIST.md`](../../STATIC_FIRE_WEEKLY_CHECKLIST.md)  
+- [`../../Mach 1 Hybrid Rocket Project.md`](../../Mach%201%20Hybrid%20Rocket%20Project.md)
 
-**Disclaimer.** Guidance for research planning—not legal advice, not a certified motor procedure, and not a substitute for your range SOP / adult mentor / AHJ rules. Pyrotechnic work by a minor must be adult-supervised; custody of N₂O and research-motor flying have age and certification gates (see Tallahassee requirements doc).
+**Disclaimer.** Guidance for research planning—not legal advice, not a certified motor procedure, and not a substitute for your site SOP / adult mentor / AHJ rules. Pyrotechnic work by a minor must be adult-supervised; custody of N₂O has age and account gates (adult/parent as custodian).
 
 ---
 
@@ -25,7 +26,7 @@ A paraffin/N₂O hybrid does **not** light like an APCP solid. You need:
 - **Order** commercial hybrid ignition hardware (Contrail / HyperTEK class) and **prove** it on *your* grain and injector on a static stand, or  
 - **Develop** a custom pyrogen/preheater and qualify it through a staged test campaign.
 
-Both paths end with the same gate: **repeatable ignition on the stand at the same fill/fire sequence you will use for flight.**
+Both paths end with the same gate: **repeatable ignition on the stand at the fill/fire sequence you will use for the full-scale static fire.**
 
 ---
 
@@ -152,7 +153,7 @@ Use this when commercial pellets/heaters cannot establish a stable flame before 
 | D5 | Open-air / atmospheric burn of puck alone | Both initiators light puck; burn time ≥ target preheat window |
 | D6 | Motor dry-fire (no N₂O): puck in chamber | No chamber damage; leads clear nozzle; debris acceptable |
 | D7 | Subscale N₂O hot-fire | Ignition delay within window; no hard start; grain intact |
-| D8 | Full-scale static at flight sequence | ≥3 consecutive successes before flight attempt |
+| D8 | Full-scale static at campaign sequence | ≥1 (prefer ≥3) consecutive successes at full or planned load |
 
 ### 4.2 Exact steps to **develop** (Path B)
 
@@ -227,14 +228,14 @@ Build references:
 
 - Read and follow [`SAFETY_PROCEDURES_N2O_PARAFFIN.md`](../N2O_paraffin_burn_rate/SAFETY_PROCEDURES_N2O_PARAFFIN.md) §6.5 (ignition shock) and oxidizer cleanliness.  
 - Confirm with mentor whether your pyrogen is allowed at your **static site** (FAR, RRS, university, private land + AHJ).  
-- Age 17: adult Flier of Record / custodian for N₂O and research ops (Tallahassee requirements doc).  
+- Age 17: adult/parent as **N₂O custodian** and final go/no-go for static ops (see weekly checklist).  
 - Never approach a motor with N₂O aboard to “fix” an igniter.
 
 ---
 
 ## 5. Validation ladder (required for both Path A and Path B)
 
-Do **not** jump to a 20 kN·s flight article.
+Do **not** jump straight to a full 20 lb / ~20 kN·s static without the early stages.
 
 | Stage | Configuration | N₂O? | Success = |
 |-------|---------------|------|-----------|
@@ -242,9 +243,8 @@ Do **not** jump to a 20 kN·s flight article.
 | **V1** | Preheater in open air / sand pit | No | Full puck/pellets consumed; burn time logged |
 | **V2** | Igniter installed in **inert** chamber (or empty case) | No | Lead routing OK; no mechanical interference |
 | **V3** | Subscale paraffin motor or shortened grain | Yes, remote | Soft start; \(P_c\) rise without spike; grain post-inspect OK |
-| **V4** | Full-diameter grain, reduced N₂O load | Yes, remote | Same as V3 at flight-like injector |
-| **V5** | Full 20 kN·s propellant load static | Yes, remote | ≥3 consecutive nominal ignitions |
-| **V6** | Flight | Yes, remote | Only after V5 + range approval |
+| **V4** | Full-diameter grain, reduced N₂O load | Yes, remote | Same as V3 at stand injector |
+| **V5** | Full 20 kN·s / 20 lb-class propellant load static | Yes, remote | Nominal ignition; campaign complete when data archived |
 
 Instrument every N₂O stage: chamber pressure, fire-command time stamp, valve-open time stamp, video of plume/vent.
 
@@ -272,7 +272,8 @@ Instrument every N₂O stage: chamber pressure, fire-command time stamp, valve-o
 - [ ] Holder / bonding method drawn  
 - [ ] Dual-init wiring diagram + arm/fire SOP  
 - [ ] V0–V2 complete before any N₂O  
-- [ ] V3–V5 complete before flight  
+- [ ] V3–V5 complete before declaring the static campaign done  
+ 
 
 ---
 
@@ -282,7 +283,7 @@ Instrument every N₂O stage: chamber pressure, fire-command time stamp, valve-o
 2. **Week 1–2:** V0–V2 on the bench; measure heater current and pellet burn time.  
 3. **Week 2–4:** V3 on a subscale paraffin/N₂O motor or shortened grain (same injector family if possible).  
 4. **Decision gate:** If ignition is marginal → design Lane 2/3 puck (Path B Steps 3–5) under mentor; do **not** only “add more pellets” without pressure/grain inspection data.  
-5. **Week 4+:** V4–V5 on the 20 kN·s article at a research-capable site; freeze the flight ignition kit lot.
+5. **Week 4+:** V4–V5 on the 20 kN·s article at an approved static site; freeze the ignition kit lot used for the successful full-scale fire. Follow [`STATIC_FIRE_WEEKLY_CHECKLIST.md`](../../STATIC_FIRE_WEEKLY_CHECKLIST.md) for the calendar.
 
 ---
 

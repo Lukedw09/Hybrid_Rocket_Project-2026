@@ -1,52 +1,52 @@
 # **Hybrid Motor Component List**
 
-*Flight-Size Paraffin \+ N₂O Hybrid (152 mm) \+ Instrumented Static Test Stand*
+*Full-Scale Paraffin + N₂O Hybrid (152 mm) · Instrumented Static Fire Stand*
 
 Luke de Wet  •  Phase 0 – July 2026  •  Experimental Hybrid Rocket Project
 
 ## **Locked Targets**
 
-* **Motor / chamber OD:** 152.4 mm (6″) nominal — **not** the tank diameter. Do **not** shrink below ~6″ for packaging.  
-* **Chamber path (preferred):** Custom **6061-T6** tube sized by `ParaffinN2O_dimensioncalc` (Sutton hoop \+ margins below). Contrail 152 mm is a heavy backup / reference only.  
-* **Airframe:** **Madcow 8″ G12** (**ID 7.825″ / OD 8.000″**) — fits the **≤7″ OD** flight bottle. Motor mounts via centering rings \+ thrust bulkhead \+ aft retention (Section 2.2).  
-* **Flight Motor Target:** \~**15 kN·s** class from locked oxidizer budget (Isp ≈ 194 s); **~20 kN·s** remains a stretch only if delivered Isp / usable fill are better than budget. **4 MPa** chamber pressure. Oxidizer from locked **Catalina NO15** ≈ **6.8 kg N₂O** (calculator at O/F ~6 → **~1.13 kg** paraffin; total propellant ≈ **7.9 kg**).  
-* **First Static Test Motor:** Same ~152 mm OD, \~10–12 kN·s impulse, shorter grain (easier/safer early testing)  
-* **Primary Goal:** Get the rocket flying by December 2026 (performance targets are secondary on first flight). Mach 1 / 5 km still needs more oxidizer or a later motor class — NO15 is the max that fits Madcow 8″ without a 9″ airframe.
+* **Motor / chamber OD:** 152.4 mm (6″) nominal. Do **not** shrink below ~6″.  
+* **Chamber path (preferred):** Custom **6061-T6** tube sized by `ParaffinN2O_dimensioncalc` (Sutton hoop + margins below). Contrail 152 mm is a heavy backup / reference only.  
+* **Oxidizer tank (locked):** **Amazon / GCS 20 lb Al + CGA-326** (~**9.1 kg** N₂O, **~8″ OD**). Tank lives **outside the motor**, fixed to the **static test stand**, and feeds the chamber through the CGA-326 plumbing in Section 1.  
+* **Full-scale static motor:** **4 MPa** chamber pressure. Oxidizer from locked **20 lb** fill ≈ **9.1 kg N₂O** (calculator at O/F ~6 → **~1.5 kg** paraffin; total propellant ≈ **10.6 kg**). Impulse class ≈ **~20 kN·s** if delivered Isp ≈ 194 s (stretch depends on usable fill and delivered Isp).  
+* **Early / reduced-load statics (optional):** Same ~152 mm OD hardware with a **partial fill** or shorter grain for first hot fires before a full 20 lb burn.  
+* **Primary Goal:** Complete a **safe, instrumented full-scale static fire** of this motor. There is **no flight / airframe goal** in this repository phase. Trajectory tools (`Run Trajectory GUI.bat`) remain available for analysis only.
 
 ## **Prioritized Ordering & Research Sequence**
 
-1. **Now – July 15:** **RFQ Catalina NO15** (Section 1) via GCS special-order, Catalina sales, and local Airgas fill path; do **not** lock a 10 lb bottle as flight ox. Price **≥500 kg** load cell (not 150–200 kg), pressure transducer. **Source custom 6061-T6 chamber tube** (material certs); keep Contrail only if custom lead time slips. Start safety plan draft.  
-2. **By July 20:** Finalize injector concept and lathe drawings for injector plate \+ closures. **RFQ/order short cuts of 6″ 6061 round bar** (Section 2.1). Order long-lead items (load cell, transducer). Order oxidizer feed-system kit (Section 1) as one batch (plumbing unchanged — still CGA-326).  
-3. **By July 25:** Design nozzle, **centering rings, thrust bulkhead, and aft motor retention** in SolidWorks. Order **8″ 6061 round** (or G10 via SendCutSend) for airframe discs; graphite nozzle blank for the nozzle carrier. Plan chamber hydro-proof. Size tank bay for **~23.1″** NO15 length (+ valve/handle).  
-4. **Late July – August:** Order igniter materials; cold-flow / leak-check oxidizer plumbing before any hot fire. Begin casting test grains. Confirm local **fill** account for customer-owned CGA-326 cylinder (parent/adult).
+1. **Now – July 15:** **Order Amazon/GCS 20 lb Al + CGA-326** (Section 1). Price **≥500 kg** load cell (not 150–200 kg), pressure transducer. **Source custom 6061-T6 chamber tube** (material certs); keep Contrail only if custom lead time slips. Start safety plan draft. Confirm local **fill** account for customer-owned CGA-326 cylinder (parent/adult).  
+2. **By July 20:** Finalize injector concept and lathe drawings for injector plate + closures. **RFQ/order short cuts of 6″ 6061 round bar** (Section 2.1). Order long-lead items (load cell, transducer). Order oxidizer feed-system kit (Section 1) as one batch (plumbing unchanged — still CGA-326). Design **stand tank cradle** for the 8″ × ~27″ bottle.  
+3. **By July 25:** Design nozzle and **stand motor cradle / thrust path** in SolidWorks. Order graphite nozzle blank for the nozzle carrier. Plan chamber hydro-proof.  
+4. **Late July – August:** Order igniter materials; cold-flow / leak-check oxidizer plumbing before any hot fire. Begin casting test grains. Integrate tank mount + feed line on the portable stand.
 
-## **1\. Oxidizer System (N₂O)**
+**Week-by-week execution:** see [`STATIC_FIRE_WEEKLY_CHECKLIST.md`](STATIC_FIRE_WEEKLY_CHECKLIST.md).
 
-**Operating model:** Fill / prep the flight or static cylinder elsewhere, then attach it to this fixed feed plumbing for static test. No remote pad-fill loop.
+## **1. Oxidizer System (N₂O)**
 
-**Flight / static tank (locked — RFQ path):** Medical/industrial **DOT aluminum** N₂O cylinder with **CGA-326** valve, **OD ≤ 7″** — **Catalina NO15** (15 lb / ~6.8 kg N₂O).
+**Operating model:** Fill / prep the **stand-mounted** cylinder elsewhere (or at a controlled fill site), then attach it to this fixed feed plumbing on the static stand for the hot fire. No remote pad-fill loop. Tank is **not** packaged inside an airframe.
 
-* **Order this (RFQ — not add-to-cart):** Catalina **NO15** — **6.89″ OD × ~23.1″**, empty mass ~16.2 lb, DOT-3AL / TC-3ALM, neck **1.125-12 UNF**, **CGA-326** valve required. Specs: [Catalina N₂O table](https://www.catalinacylinders.com/markets/nitrous-oxide/) · [NO15](https://www.catalinacylinders.com/product/no15/) · buy path: [catalinacylinders.com/buy](https://www.catalinacylinders.com/buy) · email [sales@catalinacylinders.com](mailto:sales@catalinacylinders.com).  
-* **Parallel RFQ contacts (adult/parent buyer):**  
-  1. **Gas Cylinder Source** (online, Wyoming MN — not a local chain): **866-395-5049**, [contact](https://gascylindersource.com/contact-gas-cylinder-source/), ask for special-order **NO15 / 15 lb Al + CGA-326** empty.  
-  2. **Catalina sales** — nearest distributor + lead time for NO15 + CGA-326 (prefer removable/low-profile handle; quote siphon/dip tube as option).  
-  3. **Local filler** (e.g. Airgas Tallahassee **850-576-2192**, 945 Yulee St) — customer-owned **CGA-326** fill (industrial/specialty/food-grade preferred over USP medical Rx path).  
-* **Interim / backup only:** [GCS 10 lb Al + CGA-326](https://gascylindersource.com/shop/nitrous-oxide-cylinders/new-10-lb-aluminum-n2o-cylinder/) (~4.5 kg) if NO15 lead time blocks static-test schedule — **not** the flight oxidizer budget.  
-* **Do not buy:** NX 11151 / NOS Hi-Flo (CGA-660 / AN, not CGA-326).
+**Static tank (locked — add-to-cart path):** Medical/industrial **DOT aluminum** N₂O cylinder with **CGA-326** valve — **20 lb / ~9.1 kg N₂O**, **~8″ OD × ~27″** with handle.
+
+* **Order this:** [Amazon 20 lb Al + CGA-326 + handle](https://www.amazon.com/Aluminum-Nitrous-Cylinder-CGA326-Handle/dp/B09PFCV1QK) (ASIN **B09PFCV1QK**) — same class as [GCS 20 lb Al + CGA-326](https://gascylindersource.com/shop/nitrous-oxide-cylinders/20-lb-aluminum-n2o-cylinder-with-handle/) (**SKU 20LBALVLV-326**): ~**8″ OD × 27.25″** (with valve/handle), empty ~23–25.5 lb, DOT/TC, neck **1.125-12 UNF**, **CGA-326**, ships empty.  
+* **Fill path (adult/parent buyer):** Local filler (e.g. Airgas Tallahassee **850-576-2192**, 945 Yulee St) — customer-owned **CGA-326** fill (industrial/specialty/food-grade preferred over USP medical Rx path).  
+* **Interim / backup only if 20 lb is delayed:** [GCS 10 lb Al + CGA-326](https://gascylindersource.com/shop/nitrous-oxide-cylinders/new-10-lb-aluminum-n2o-cylinder/) (~4.5 kg) or [Amazon 10 lb B09PFDKQ9G](https://www.amazon.com/dp/B09PFDKQ9G) — shorter burns / reduced impulse only.  
+* **Do not buy:** NX 11151 / NOS Hi-Flo (CGA-660 / AN, not CGA-326).  
+* **Do not pursue Catalina NO15 for packaging** — in-airframe fit no longer matters; the **20 lb** bottle is preferred capacity for the full-scale static.
 
 Everything below is sized to that **CGA-326** outlet and a **1/4″ NPT, 316 stainless + PTFE** feed standard (≥3000 psi / ≥20 MPa working class; exceeds the project ≥10 MPa floor).
 
-### **1.0 Tank diameter survey (DOT)**
+### **1.0 Tank diameter survey (DOT) — stand-mounted**
 
-**Finding:** **20 lb Al = ~8″ OD** (won’t fit Madcow 8″ ID). **Largest CGA-326 bottle that fits Madcow 8″** is **Catalina NO15** (~6.89″ OD) via RFQ. Retail add-to-cart for CGA-326 stops at **10 lb** (GCS/Amazon) or jumps to **20 lb** (too wide).
+**Finding:** With the tank **on the stand** (not in an airframe), **8″ OD is fine**. Prefer the **20 lb** bottle for full-scale static impulse.
 
-| Part / class | N₂O capacity | OD | Buyable? | Link | Fits Madcow 8″ ID? |
+| Part / class | N₂O capacity | OD | Buyable? | Link | Stand OK? |
 | ----- | ----- | ----- | ----- | ----- | ----- |
-| **Locked — Catalina NO15 + CGA-326** | **15 lb / 6.8 kg** | **6.89″** | **OEM / distributor RFQ** | [Specs](https://www.catalinacylinders.com/markets/nitrous-oxide/) · [NO15](https://www.catalinacylinders.com/product/no15/) · [Buy via distributor](https://www.catalinacylinders.com/buy) · valve [Sherwood CGA326](https://gascylindersource.com/shop/nitrous-oxide-valves/sherwood-nitrous-oxide-valve-cga326-1-125-12-unf/) | **Yes** (~0.47″ radial clearance) |
-| GCS / Amazon 10 lb + CGA-326 | 10 lb / 4.5 kg | 7.0″ | Yes — add to cart | [GCS 10 lb](https://gascylindersource.com/shop/nitrous-oxide-cylinders/new-10-lb-aluminum-n2o-cylinder/) · [Amazon B09PFDKQ9G](https://www.amazon.com/dp/B09PFDKQ9G) | Yes — **backup / interim only** |
-| GCS 5 lb + CGA-326 | 5 lb / 2.3 kg | 5.25″ | Yes | [GCS 5 lb](https://gascylindersource.com/shop/nitrous-oxide-cylinders/new-5-lb-aluminum-n2o-cylinder/) · [Amazon B09PFG4NGL](https://www.amazon.com/dp/B09PFG4NGL) | Yes (short on ox) |
-| GCS / Amazon 20 lb + CGA-326 | 20 lb / 9.1 kg | **8.0″** | Yes | [GCS 20 lb](https://gascylindersource.com/shop/nitrous-oxide-cylinders/20-lb-aluminum-n2o-cylinder-with-handle/) | **No** |
-| Racing NX / NOS 15 lb (e.g. **11151**) | 15 lb | 6.89–7″ | Yes | [NX 11151](https://www.tickperformance.com/nitrous-express-15lb-bottle-w-standard-45-valve-6-89-dia-x-26-69-tall-with-gauge-11151/) | Body yes — **wrong valve** |
+| **Locked — Amazon/GCS 20 lb + CGA-326** | **20 lb / 9.1 kg** | **8.0″** | Yes — add to cart | [Amazon B09PFCV1QK](https://www.amazon.com/Aluminum-Nitrous-Cylinder-CGA326-Handle/dp/B09PFCV1QK) · [GCS 20 lb](https://gascylindersource.com/shop/nitrous-oxide-cylinders/20-lb-aluminum-n2o-cylinder-with-handle/) | **Yes** — cradle on stand |
+| GCS / Amazon 10 lb + CGA-326 | 10 lb / 4.5 kg | 7.0″ | Yes | [GCS 10 lb](https://gascylindersource.com/shop/nitrous-oxide-cylinders/new-10-lb-aluminum-n2o-cylinder/) · [Amazon B09PFDKQ9G](https://www.amazon.com/dp/B09PFDKQ9G) | Yes — **reduced-load backup** |
+| GCS 5 lb + CGA-326 | 5 lb / 2.3 kg | 5.25″ | Yes | [GCS 5 lb](https://gascylindersource.com/shop/nitrous-oxide-cylinders/new-5-lb-aluminum-n2o-cylinder/) | Yes (short on ox) |
+| Catalina NO15 + CGA-326 | 15 lb / 6.8 kg | 6.89″ | OEM RFQ only | [NO15](https://www.catalinacylinders.com/product/no15/) | Yes — unused; 20 lb preferred |
+| Racing NX / NOS 15 lb (e.g. **11151**) | 15 lb | 6.89–7″ | Yes | [NX 11151](https://www.tickperformance.com/nitrous-express-15lb-bottle-w-standard-45-valve-6-89-dia-x-26-69-tall-with-gauge-11151/) | Body OK — **wrong valve** |
 
 **Design rules (compatibility & safety)**
 
@@ -54,15 +54,16 @@ Everything below is sized to that **CGA-326** outlet and a **1/4″ NPT, 316 sta
 * Seals / hose liner: **PTFE** (or FEP/PCTFE). No silicone. No hydrocarbon grease — use PFPE (Krytox-type) only if lubricant is required.  
 * **CGA-326 bullet nose = metal-to-metal seal** — no PTFE tape on the CGA interface. Tape only on NPT threads; leave 1–2 male threads bare so shreds cannot enter the stream.  
 * **One remote MAIN valve** (NOS 18045NOS) opens/closes oxidizer to the chamber. **One manual bleed** on a tee vents to atmosphere after the cylinder hand valve is closed.  
-* Note: 18045NOS has a **0.125″ orifice** and **1/8″ NPT outlet** — fine for early / lower-flow static tests; with **NO15** (~50% more ox than 10 lb) expect possible flow starvation on long burns — plan to upgrade MAIN to a larger N₂O solenoid or a remote-actuated 316SS ball valve if ṁ_ox is limited.  
-* Whip-check every pressurized flex hose. Degrease / solvent-clean all wetted parts before assembly; **cap/plug open ports** when disconnected so dust and oil cannot enter the oxidizer path. Use **PFPE grease (Krytox)** only sparingly on O-rings / thread backs if a lubricant is needed — never hydrocarbon grease.
+* Note: 18045NOS has a **0.125″ orifice** and **1/8″ NPT outlet** — fine for early / lower-flow static tests; with a **full 20 lb** burn expect possible flow starvation on long burns — plan to upgrade MAIN to a larger N₂O solenoid or a remote-actuated 316SS ball valve if ṁ_ox is limited.  
+* Whip-check every pressurized flex hose. Degrease / solvent-clean all wetted parts before assembly; **cap/plug open ports** when disconnected so dust and oil cannot enter the oxidizer path. Use **PFPE grease (Krytox)** only sparingly on O-rings / thread backs if a lubricant is needed — never hydrocarbon grease.  
+* **Stand tank integration:** Secure the 20 lb bottle upright (or vendor-approved orientation) in a **non-combustible cradle** bolted to the stand frame; strain-relieve the CGA adapter and flex hose so thrust / hose kick cannot tip the cylinder; keep cylinder valve accessible for emergency shutoff from a safe approach path only after depressurization SOP.
 
 **Feed-system topology (attach filled tank → fire)**
 
 Gender key: **MNPT** = male NPT, **FNPT** = female NPT. Hex nipples join two FNPT ports.
 
 ```
-[Filled NO15 tank · CGA-326 valve]           ← Catalina NO15 (RFQ); 10 lb GCS = backup only
+[Filled 20 lb tank · CGA-326 valve]        ← Amazon/GCS 20 lb on stand cradle
         │
         │  (#1) CGA-326 → 1/4″ MNPT 316SS adapter
         │       CGA bullet nose: metal-to-metal, NO tape
@@ -109,7 +110,7 @@ Gender key: **MNPT** = male NPT, **FNPT** = female NPT. Hex nipples join two FNP
 
 | # | Role | Exact part / what to select | Qty | Est. $ | Where to order (direct link) |
 | ----- | ----- | ----- | ----- | ----- | ----- |
-| 0 | **Tank (locked)** | **Catalina NO15** — **15 lb** Al N₂O, **CGA-326**, **6.89″ OD × ~23.1″**, DOT-3AL, ships empty | 1 | RFQ | **RFQ:** [Catalina sales](mailto:sales@catalinacylinders.com) · [how to buy](https://www.catalinacylinders.com/buy) · [specs](https://www.catalinacylinders.com/markets/nitrous-oxide/) · GCS special-order **866-395-5049**. Valve: [Sherwood CGA326 1.125-12](https://gascylindersource.com/shop/nitrous-oxide-valves/sherwood-nitrous-oxide-valve-cga326-1-125-12-unf/). **Backup:** [GCS 10 lb](https://gascylindersource.com/shop/nitrous-oxide-cylinders/new-10-lb-aluminum-n2o-cylinder/). **Do not buy** NX 11151. |
+| 0 | **Tank (locked)** | **20 lb** Al N₂O, **CGA-326**, **~8″ OD × ~27″**, DOT, ships empty, with handle | 1 | Retail | **Preferred:** [Amazon B09PFCV1QK](https://www.amazon.com/Aluminum-Nitrous-Cylinder-CGA326-Handle/dp/B09PFCV1QK) · [GCS 20 lb](https://gascylindersource.com/shop/nitrous-oxide-cylinders/20-lb-aluminum-n2o-cylinder-with-handle/). **Backup:** [GCS 10 lb](https://gascylindersource.com/shop/nitrous-oxide-cylinders/new-10-lb-aluminum-n2o-cylinder/). **Do not buy** NX 11151. |
 | 1 | Cylinder adapter | **CGA-326 → 1/4″ MNPT**, **316/316L SS**, bullet-nose (not brass) | 1 | **~63** | **Preferred:** [ASG CGA326SS](https://www.asgequipment.com/stainless-steel-cga-cylinder-connection-326-cga-x-1-4-npt-male-model-cga326ss/) ($63). Budget/verify: [Amazon B0CKQTRLR4](https://www.amazon.com/CGA326-SUS316L-Stainless-Fitting-Connector/dp/B0CKQTRLR4) (confirm 316L + CGA-326→1/4 MNPT before checkout). Premium: [Ideal Vac SEQ3264SSL](https://www.idealvac.com/CGA-326-Gas-Regulator-Inlet-to-14-Male-NPT-Fitting-Stainless-Steel-Long-PN:-SEQ3264SSL/pp/P109510) (~$227). **Do not buy brass / chrome-plated brass CGA-326 kits.** |
 | 2 | Flex hose | FITOK PTFE-lined SS braid, **1/4″ nom.**, **1/4″ FNPT × 1/4″ MNPT**, **3000 psi**, ~18″ | 1 | ~80 | [Amazon B0F1XCWJKM](https://www.amazon.com/FITOK-PTFE-Lined-Connections-Chemically-Compatible/dp/B0F1XCWJKM) — select **18″** and **FNPT × MNPT** |
 | 3 | Whip check | Hose-to-hose safety cable for ~1/2–1-1/4″ OD flex | 1 | ~15 | [Becker Safety MI-178-WB1](https://beckersafety.com/products/whip-check-1-2-1-1-4-safety-cable-1-8-x-20) |
@@ -127,121 +128,99 @@ Gender key: **MNPT** = male NPT, **FNPT** = female NPT. Hex nipples join two FNP
 
 1. Verify cylinder valve is stamped **CGA-326** (not CGA-660).  
 2. Install whip check **fully extended (no slack)** across the hose ends.  
-3. Wire MAIN solenoid through a **remote pad relay** and a heavy 12 V battery at the pad (~11.5 A draw). Keep open time short; coil heats on long duty.  
+3. Wire MAIN solenoid through a **remote pad relay** and a heavy 12 V battery at the stand (~11.5 A draw). Keep open time short; coil heats on long duty.  
 4. **Safe depressurize:** close cylinder hand valve → open MAIN remotely if needed → open manual bleed to atmosphere → approach only when gauge/feel confirms lines are empty. Never walk up with the cylinder valve open.  
 5. Point bleed outlet away from people, motor, and ignition. Do not trap liquid N₂O between two closed valves without a bleed path.  
-6. Cold nitrogen or empty-system leak check before first N₂O load; first N₂O ops are remote-only.
+6. Cold nitrogen or empty-system leak check before first N₂O load; first N₂O ops are remote-only.  
+7. Confirm tank cradle bolts and whip-check before every pressurization.
 
-## **2\. Motor Hardware – 152 mm Diameter**
+## **2. Motor Hardware – 152 mm Diameter**
 
 ### **2.1 Chamber tube – custom Al (preferred) vs Contrail (backup)**
 
-**Do not use Madcow G12 as a pressure vessel.** The airframe is structural for aero loads only.
-
-**Contrail 152 mm reference (vendor-stated):** ID **5.5″ (139.7 mm)**, wall **0.25″ (6.35 mm)** → OD **6.0″ (152.4 mm)**. Convenient and overbuilt for 4 MPa; tube mass is roughly **3×** a hoop-sized custom wall. Keep as schedule backup only.
-
-**Preferred flight chamber:** seamless **6061-T6** tube, **OD ≈ 152.4 mm**, wall from `ParaffinN2O_dimensioncalc` at MEOP = **4 MPa**:
+**Preferred static chamber:** seamless **6061-T6** tube, **OD ≈ 152.4 mm**, wall from `ParaffinN2O_dimensioncalc` at MEOP = **4 MPa**:
 
 | Layer | Policy | Approx. at 152.4 mm OD / 4 MPa |
 | ----- | ----- | ----- |
 | Sutton Al minimum | Eq. 15-3 hoop: \(d = p D / (2 \sigma_\mathrm{allow})\), \(\sigma_\mathrm{allow} = 276\,\mathrm{MPa}/1.5\) (yield SF) | **~1.66 mm** metal |
 | Design Al metal | **1.50 ×** Sutton minimum (`CASE_WALL_DESIGN_MARGIN`) | **~2.5 mm** metal |
 | Thermal liner | Fixed **3.0 mm**, non-structural (radial stack only) | **3.0 mm** |
-| Design radial stack | 1.50×Al \+ liner (sets grain OD) | **~5.5 mm** → grain OD **~141 mm** |
+| Design radial stack | 1.50×Al + liner (sets grain OD) | **~5.5 mm** → grain OD **~141 mm** |
 
 **Effective hoop SF on yield** with the 1.50 metal margin ≈ **2.25** at MEOP (still hoop-only). Rough burst vs 6061-T6 UTS is on the order of **~2.5× MEOP** for a plain cylinder — closures, bolt holes, and welds often govern before the barrel does.
 
 **Custom-tube rules**
 
 * Buy tube with **material certs**; machine OD/ID for concentricity if stock is rough.  
-* Target metal **~2.5 mm** (calculator design Al); do not fly the bare Sutton 1.66 mm value.  
+* Target metal **~2.5 mm** (calculator design Al); do not hot-fire the bare Sutton 1.66 mm value.  
 * Always use a **thermal liner**; thin Al fails thermally before it yields if the liner is wrong.  
 * Analyze **forward/aft closures, bolt circles, and nozzle carrier** separately (not covered by Sutton barrel sizing).  
 * **Hydro-proof** every chamber before hot fire (typical target: proof ≥ **1.5× MEOP**; document the exact procedure in the safety plan).  
-* Stay near **6″ OD** so centering rings stay simple; larger ID than Contrail’s 5.5″ is a free grain-volume win. Shrinking below 6″ is not required for tank packaging and loses the simple mount geometry.
+* Stay near **6″ OD** so the stand cradle stays simple.
 
-***Flight Motor (\~15 kN·s budget / 4 MPa chamber pressure)***
+***Full-Scale Static Motor (~20 kN·s budget / 4 MPa chamber pressure)***
 
 | Component | Metric Spec / Notes | Est. Price (USD) | Supplier / Status | Notes |
 | ----- | ----- | ----- | ----- | ----- |
-| **Chamber tube (preferred)** | 6061-T6 extruded, **6.0″ OD × 0.125″ (3.18 mm) wall × 5.75″ ID**; cut to grain \+ prechamber \+ closures; \+ **3 mm** liner. Request **MTR / material cert**. | ~$37/ft (12″) · ~$122 (48″) | **Preferred:** [OnlineMetals 6″×0.125″ 6061-T6, pid 9559](https://www.onlinemetals.com/en/buy/aluminum/6-od-x-0-125-wall-x-5-75-id-aluminum-round-tube-6061-t6-extruded/pid/9559) (MTR available). Alt: [Speedy Metals same size](https://www.speedymetals.com/p-4648-6-od-x-0125-wall-tube-6061-t6-aluminum.aspx) | Stock wall is **~0.7 mm thicker** than calculator ~2.5 mm design Al — acceptable mass trade for COTS availability. Hydro-proof before hot fire. |
-| **Thermal liner (phenolic)** | **Non-structural** ablative sleeve inside Al chamber. Target **OD ≈ 5.75″** (slip into chamber ID), **wall ≈ 3.0 mm (0.118″)**, length = grain \+ prechamber. Prefer **convolute-wound paper phenolic (NEMA XX)** for short burns; **canvas phenolic (NEMA CE)** if burn is longer / more heat soak. | RFQ (custom) · stock CE tube varies | **Preferred (custom rocket liner):** [Franklin Fibre / Lamitex — rocket motor tubes & liners](https://www.lamitex.com/munition-rocket-tubes) — RFQ **XX or CE**, OD/ID/wall to match 5.75″ chamber ID ([propulsion blog](https://www.franklinfibre.com/blog/phenolic-tubes-for-rocket-propulsion); [info@franklinfibre.com](mailto:info@franklinfibre.com) · 800-233-9739). **Industrial stock tube:** [K-Mac Plastics CE canvas phenolic tubes](https://k-mac-plastics.net/ce-tubes.htm) · [LE linen phenolic tubes](https://kmac-plastics.net/le-tubes.htm) (machine OD/ID if needed). **Retail sheet/tube:** [McMaster Garolite / canvas phenolic](https://www.mcmaster.com/products/canvas-phenolic-laminate/) (CE tubes or sheet rolled as backup). **Hobby 152 mm sets (wrong OD for this chamber):** [Loki Research phenolic liners](https://lokiresearch.com/secure/store.asp?groupid=6112003225363) — sized for ~5.5″-ID / ¼″-wall cases (e.g. ARR ~5.47″ OD), **not** a drop-in for **5.75″ ID** custom tube. | Liner is thermal only — Al takes hoop. Do **not** use LOC/PML **airframe** phenolic as a pressure wall. Confirm slip fit + grain OD after ordering. Expect NRE/setup on Franklin custom quotes. |
-| **Chamber tube (backup)** | Contrail 152 mm: **ID 5.5″ / wall 0.25″ / OD 6.0″** | ~400 | [Contrail 152 mm 26″ chamber](https://contrailrockets.com/product/152mm-26-inch-combustion-chamber) | Heavy vs custom; will **not** fit a standard 6″ MMT. Use only if custom tube slips. With Contrail, Loki/ARR **152 mm phenolic liner sets** become size-compatible. |
-| **Airframe (preferred)** | Madcow **8″ G12**: **ID 7.825″ / OD 8.000″**, 48″ | ~602 | **[Madcow 8″ G12](https://www.madcowrocketry.com/8-g12-airframe/)** | Clears **NO15 6.89″** (and 7″ 10 lb backup) with margin. Airframe only — not a pressure vessel. Size tank bay for **~23.1″** NO15 length. |
-| **Airframe (optional / demoted)** | Wildman **9″ G12**: ID 8.78″ / OD 9.005″ | ~280 (30″) / ~560 (60″) | [Wildman G12-9.0](https://wildmanrocketry.com/products/g12-9-0) | Only if stepping up to an **8″ OD** 20 lb bottle. Extra drag — avoid while NO15 is locked. |
-| Centering rings (×2–3) | Custom: **OD = Madcow 8″ ID (7.825″)**; **ID = chamber OD (6.0″)**; **G10/FR4** 0.125″–0.187″ **or** lathe from **8″** 6061 round. Qty 2–3 | G10 ~$15–40 ea · Al slug ~$50–80 (≤1.5″ of 8″ bar) | **G10:** [SendCutSend G10/FR4](https://sendcutsend.com/materials/g10-fr4/) (DXF annulus). **Al stock (needs 8″ OD, not 6″):** [Speedy Metals 8″ 6061-T6511](https://www.speedymetals.com/p-2488-8-rd-6061-t6511-aluminum-extruded.aspx) (~$53/in). | **No stock 6″-in-8″ ring exists.** Do **not** buy Apogee 75/98 mm–in–8″ rings. **6″ solid bar is too small** for the ring OD — use **8″** bar or G10. Radial centering only — does **not** take thrust. |
-| Thrust bulkhead | Forward stop: motor/injector face bears here; load into airframe or glued coupler. Machine from **8″** 6061 round (turn OD to 7.825″; lathe pilots/O-ring grooves; mill holes). | Slug ~$30–80 (0.5–1.5″ of 8″ bar) | **Preferred stock:** [Speedy Metals 8″ 6061-T6511](https://www.speedymetals.com/p-2488-8-rd-6061-t6511-aluminum-extruded.aspx). Alt catalog: [MetalsDepot 6061 round](https://www.metalsdepot.com/aluminum-products/aluminum-round-bar). | Needs **~7.825″ OD** — buy **8″** cylinder, not 6″. Sized for **peak** thrust \+ margin. |
-| Aft motor retention | Bolted flange, screw retainer, or through-bolts into nozzle carrier / aft ring. Lathe from **6″** (chamber-side) and/or **8″** (airframe ring) 6061 round. | Slug ~$30–60 of 6″ · more if 8″ flange | **6″ chamber-class:** [Speedy Metals 6″ 6061-T6511](https://www.speedymetals.com/p-2482-6-rd-6061-t6511-aluminum-extruded.aspx) (~$30/in) · [MSP Metals 6″](https://www.mspmetals.com/product/6061-t6-aluminum-round-bar-6-dia/) (~$27/in) · [Metals4U 6″](https://www.metals4uonline.com/aluminum-round-bar-6061-6in/). **8″ airframe ring:** [Speedy 8″](https://www.speedymetals.com/p-2488-8-rd-6061-t6511-aluminum-extruded.aspx). | Prevents motor sliding aft out the boat-tail. Cut short discs; do not buy full 12″ unless making many parts. |
-| Injector Plate | ~chamber ID / flange OD, showerhead or simple impinging pattern, sized for 4 MPa. Lathe blank from **6″** 6061 round; drill orifice pattern on mill. | Slug ~$30–90 (1–3″ of 6″ bar) | **Preferred:** [Speedy Metals 6″ 6061-T6511](https://www.speedymetals.com/p-2482-6-rd-6061-t6511-aluminum-extruded.aspx). Alt: [MSP 6″](https://www.mspmetals.com/product/6061-t6-aluminum-round-bar-6-dia/) · [Metals4U 6″](https://www.metals4uonline.com/aluminum-round-bar-6061-6in/) · [MetalsDepot R36 / 6061 round](https://www.metalsdepot.com/aluminum-products/aluminum-round-bar). | Design in SolidWorks → lathe \+ mill (or 3D print prototype). One short cut of 6″ bar can yield injector \+ closure blanks. |
-| Fuel Grain (Flight) | Paraffin, length from calculator for **~1.13 kg** at O/F 6 (grain OD from wall stack) | ~72 | [Amazon AM Wax 25 lb B0DL6HLNQ4](https://www.amazon.com/dp/B0DL6HLNQ4) | Cast yourself. Run `ParaffinN2O_dimensioncalc` defaults (NO15 class). Grain OD ≈ case OD − 2×(Al \+ liner), **not** full 152 mm. |
+| **Chamber tube (preferred)** | 6061-T6 extruded, **6.0″ OD × 0.125″ (3.18 mm) wall × 5.75″ ID**; cut to grain + prechamber + closures; + **3 mm** liner. Request **MTR / material cert**. | ~$37/ft (12″) · ~$122 (48″) | **Preferred:** [OnlineMetals 6″×0.125″ 6061-T6, pid 9559](https://www.onlinemetals.com/en/buy/aluminum/6-od-x-0-125-wall-x-5-75-id-aluminum-round-tube-6061-t6-extruded/pid/9559) (MTR available). Alt: [Speedy Metals same size](https://www.speedymetals.com/p-4648-6-od-x-0125-wall-tube-6061-t6-aluminum.aspx) | Stock wall is **~0.7 mm thicker** than calculator ~2.5 mm design Al — acceptable mass trade for COTS availability. Hydro-proof before hot fire. |
+| **Thermal liner (phenolic)** | **Non-structural** ablative sleeve inside Al chamber. Target **OD ≈ 5.75″** (slip into chamber ID), **wall ≈ 3.0 mm (0.118″)**, length = grain + prechamber. Prefer **convolute-wound paper phenolic (NEMA XX)** for short burns; **canvas phenolic (NEMA CE)** if burn is longer / more heat soak. | RFQ (custom) · stock CE tube varies | **Preferred (custom rocket liner):** [Franklin Fibre / Lamitex — rocket motor tubes & liners](https://www.lamitex.com/munition-rocket-tubes) — RFQ **XX or CE**, OD/ID/wall to match 5.75″ chamber ID ([propulsion blog](https://www.franklinfibre.com/blog/phenolic-tubes-for-rocket-propulsion); [info@franklinfibre.com](mailto:info@franklinfibre.com) · 800-233-9739). **Industrial stock tube:** [K-Mac Plastics CE canvas phenolic tubes](https://k-mac-plastics.net/ce-tubes.htm) · [LE linen phenolic tubes](https://kmac-plastics.net/le-tubes.htm) (machine OD/ID if needed). **Retail sheet/tube:** [McMaster Garolite / canvas phenolic](https://www.mcmaster.com/products/canvas-phenolic-laminate/) (CE tubes or sheet rolled as backup). **Hobby 152 mm sets (wrong OD for this chamber):** [Loki Research phenolic liners](https://lokiresearch.com/secure/store.asp?groupid=6112003225363) — sized for ~5.5″-ID / ¼″-wall cases (e.g. ARR ~5.47″ OD), **not** a drop-in for **5.75″ ID** custom tube. | Liner is thermal only — Al takes hoop. Confirm slip fit + grain OD after ordering. Expect NRE/setup on Franklin custom quotes. |
+| **Chamber tube (backup)** | Contrail 152 mm: **ID 5.5″ / wall 0.25″ / OD 6.0″** | ~400 | [Contrail 152 mm 26″ chamber](https://contrailrockets.com/product/152mm-26-inch-combustion-chamber) | Heavy vs custom. Use only if custom tube slips. With Contrail, Loki/ARR **152 mm phenolic liner sets** become size-compatible. |
+| Injector Plate | ~chamber ID / flange OD, showerhead or simple impinging pattern, sized for 4 MPa. Lathe blank from **6″** 6061 round; drill orifice pattern on mill. | Slug ~$30–90 (1–3″ of 6″ bar) | **Preferred:** [Speedy Metals 6″ 6061-T6511](https://www.speedymetals.com/p-2482-6-rd-6061-t6511-aluminum-extruded.aspx). Alt: [MSP 6″](https://www.mspmetals.com/product/6061-t6-aluminum-round-bar-6-dia/) · [Metals4U 6″](https://www.metals4uonline.com/aluminum-round-bar-6061-6in/) · [MetalsDepot R36 / 6061 round](https://www.metalsdepot.com/aluminum-products/aluminum-round-bar). | Design in SolidWorks → lathe + mill (or 3D print prototype). One short cut of 6″ bar can yield injector + closure blanks. |
+| Fuel Grain (Full-scale) | Paraffin, length from calculator for **~1.5 kg** at O/F 6 (grain OD from wall stack; sized to **20 lb / 9.1 kg** ox) | ~72 | [Amazon AM Wax 25 lb B0DL6HLNQ4](https://www.amazon.com/dp/B0DL6HLNQ4) | Cast yourself. Run `ParaffinN2O_dimensioncalc` with **20 lb** ox budget. Grain OD ≈ case OD − 2×(Al + liner), **not** full 152 mm. |
+| Fuel Grain (Reduced first fire) | Shorter paraffin grain, ~0.7–1.0 kg with **partial 20 lb fill** or shorter MAIN open time | From 25 lb wax | Same wax | Optional first hot fire before full fill |
 | Nozzle Insert | Graphite blank large enough to machine throat + exit for nozzle carrier | ~95+ | [GraphiteStore 1.5″ OD × 24″ rod NC001370](https://www.graphitestore.com/fine-extruded-graphite-rod-1-5od-x-24l-nc001370) or larger OD from [fine-extruded catalog](https://www.graphitestore.com/Graphite/Plates-rods-and-tubes/Graphite-fine-extruded) | **Do not buy the $98 0.75″ OD tube** — too small. Size blank to nozzle-carrier ID. |
 | Forward & Aft Closures | Aluminum flanges with O-ring grooves / pilot steps, matched to custom tube ID/OD. Lathe from **6″** 6061-T6/T6511 solid round. | Slug ~$30–90 ea blank (1–3″ of 6″ bar) | **Preferred:** [Speedy Metals 6″ 6061-T6511](https://www.speedymetals.com/p-2482-6-rd-6061-t6511-aluminum-extruded.aspx) (~$30/in; 12″ ≈ $333). Alt: [MSP Metals 6″ @ ~$27/in](https://www.mspmetals.com/product/6061-t6-aluminum-round-bar-6-dia/) · [Metals4U 6″ cut-to-length](https://www.metals4uonline.com/aluminum-round-bar-6061-6in/) · [MetalsDepot 6061 round (R36)](https://www.metalsdepot.com/aluminum-products/aluminum-round-bar). | Confirm O-ring dash numbers after final ID. Order **short cuts** (e.g. 2–6″ total length), not a full 4 ft stick, unless sharing stock across all lathe parts. |
+| Stand motor cradle / thrust lock | Clamps or rings that hold the **6.0″** chamber on the stand rails and take forward thrust into the load cell path | Scrap Al / 3D print + plate | Leftover 6″ bar discs or printed cradle + Al plate | **Not** an airframe mount — design for static axial load + thermal soak |
 | O-rings & Seals | High-temperature Viton; size to final groove (AS568-258 is ~5.984″ ID — Contrail-class; re-pick for custom ID) | ~50 | [Marco V1000-258](https://www.marcorubber.com/product/V1000-258) | Buy after closure drawings freeze. |
 
-### **2.2 Motor mount in 8″ airframe (centering \+ axial lock)**
+### **2.2 Stand mounting (motor + tank)**
 
-**Fit check:**
-
-| Part | Typical OD | Fits Madcow 8″ (ID 7.825″)? |
-| ----- | ----- | ----- |
-| Chamber (preferred) | **6.0″** | Yes (~0.9″ radial gap) |
-| Locked N₂O bottle (**Catalina NO15**) | **6.89″** | **Yes** (~0.47″ radial clearance) |
-| Backup GCS 10 lb | **7.0″** | Yes (~0.4″ radial clearance) |
-| 20 lb Al bottle | **8.0″** | **No** — do not use in this airframe |
-
-Radial gap between **6″ chamber** and **8″** tube is intentional. Fill it with structure:
+Radial packaging against an airframe is **out of scope**. On the portable stand:
 
 ```
-[nozzle] → chamber → [aft centering ring + aft retainer]
-                  → [optional mid centering ring]
-                  → [forward centering ring]
-                  → [thrust bulkhead — takes forward thrust]
-                  → tank / avionics bay
+[20 lb N₂O tank cradle] — CGA-326 → feed hose → MAIN → injector
+                │
+[load cell] ← [thrust bulkhead / forward stop] ← chamber ← [aft clamp] ← [nozzle]
 ```
 
-* **Centering rings:** stop side-to-side motion; epoxy into airframe (or into a removable coupler bay). Size OD to **7.825″** (Madcow 8″ ID), ID to **6.0″** chamber.  
-* **Thrust bulkhead:** hard forward stop — do **not** rely on friction or epoxy on the chamber OD for thrust.  
-* **Aft retainer:** positive lock so the motor cannot fall out aft under handling or recovery loads.  
-* Tank OD drives **airframe** size; **do not** match chamber OD to the N₂O bottle.
+* **Motor cradle:** Centers the 6″ chamber; positive aft stop so the motor cannot leave the rails under thrust or hose loads.  
+* **Thrust path:** Forward stop into load cell (or load-cell inline link) — do **not** rely on friction alone.  
+* **Tank cradle:** Separate from the motor; sized for **8″ OD × ~27″** bottle; straps/bolts rated for tip-over and hose kick. Keep flex hose short enough to limit whip energy, with whip-check installed.  
+* Tank OD does **not** drive chamber OD.
 
-***First Static Test Motor (\~10–12 kN·s) – Same ~152 mm OD***
+## **3. Instrumentation & Portable Static Test Stand**
 
 | Component | Metric Spec / Notes | Est. Price (USD) | Supplier / Status | Notes |
 | ----- | ----- | ----- | ----- | ----- |
-| Chamber Tube | Same custom 6061-T6 path (shorter length OK); Contrail backup if needed | See §2.1 | Custom preferred | Prove hydro-proof \+ hot-fire on this article before flight length |
-| Fuel Grain (Test) | Shorter paraffin grain, \~0.6–0.8 kg (partial NO15 fill or shorter burn) | From 25 lb wax | Same wax | Cast shorter version for first hot fires; full **~1.13 kg** for flight article |
-| Injector Plate (Test) | Same plate as flight motor (or simpler test version) | From 6″ bar (above) | [Speedy 6″](https://www.speedymetals.com/p-2482-6-rd-6061-t6511-aluminum-extruded.aspx) / 3D print prototype | Use flight injector blank from 6″ Al round, or quick 3D printed test version |
-
-## **3\. Instrumentation & Portable Static Test Stand**
-
-| Component | Metric Spec / Notes | Est. Price (USD) | Supplier / Status | Notes |
-| ----- | ----- | ----- | ----- | ----- |
-| Load Cell | **≥500 kg** for early static; **≥1000 kg** for flight-class peaks. S-type or pancake, tension/compression | ~80–150 | Example S-type 200 kg only for cold-flow: [Amazon B0D2D5Z37T](https://www.amazon.com/Bolisila-Compression-Weighing-Transducer-Capacaity/dp/B0D2D5Z37T) — **upsell to ≥500 kg before hot fire**. Prior link [ATO 300 kg B08CKDPKZS](https://www.amazon.com/dp/B08CKDPKZS) is marginal | Spec of 150–200 kg is **undersized** for ~10–20 kN·s motors (avg thrust can exceed 250–400+ kgf; peaks higher) |
+| Load Cell | **≥500 kg** for early static; **≥1000 kg** preferred for full-scale peaks. S-type or pancake, tension/compression | ~80–150 | Example S-type 200 kg only for cold-flow: [Amazon B0D2D5Z37T](https://www.amazon.com/Bolisila-Compression-Weighing-Transducer-Capacaity/dp/B0D2D5Z37T) — **upsell to ≥500 kg before hot fire**. Prior link [ATO 300 kg B08CKDPKZS](https://www.amazon.com/dp/B08CKDPKZS) is marginal | Spec of 150–200 kg is **undersized** for ~10–20 kN·s motors (avg thrust can exceed 250–400+ kgf; peaks higher) |
 | Pressure Transducer | 0–10 MPa (0–1500 psi), **1/4″ NPT**, 0.5–4.5 V (or 0–5 V) on 5 V supply | ~79 | [DATAQ 2000500-1500H](https://www.dataq.com/products/accessories/pressure-sensor/2000361-hs-1500.html) — select **1/4-18 NPT** | 316SS wetted; 4 MPa chamber ≈ 580 psi sits mid-range. Avoid G1/4 (BSPP) Amazon sensors unless you add the correct adapter. |
-| **T-slot frame rails (locked)** | European **2020** (20×20 mm) **T-slot** extrusion, **6063-T5**, anodized black, **400 mm / 15.75″** lengths — **4 pcs/pack** | ~15–25 / pack | **[Amazon B08Y8N7FD1](https://www.amazon.com/dp/B08Y8N7FD1)** (IXGNIJ) | Order **≥2 packs** for a portable box frame; M5 T-nuts \+ corner brackets for joints. 2020 is light — use triangulation / short spans; step up to **4040** if hot-fire peaks flex the frame. |
-| Portable Test Stand Frame | Bolted **2020 T-slot** frame (above), load cell in-line, portable; motor cradle on rails | — | T-slot \+ 3D print cradle (reinforce with Al plate scrap from 6″ bar cuts if needed) | Keep lightweight and movable. Do **not** buy 6″ round bar just for the cradle — use leftover plate/disc scrap or 3D print. |
-| Sensor Mounting Hardware | Custom plates/brackets for load cell and pressure transducer (T-slot compatible) | — | 3D print / thin Al plate scrap | Mount with M5 T-nuts into 2020 slots. Flat brackets ≠ 6″ round stock. |
+| **T-slot frame rails (locked)** | European **2020** (20×20 mm) **T-slot** extrusion, **6063-T5**, anodized black, **400 mm / 15.75″** lengths — **4 pcs/pack** | ~15–25 / pack | **[Amazon B08Y8N7FD1](https://www.amazon.com/dp/B08Y8N7FD1)** (IXGNIJ) | Order **≥2 packs** for a portable box frame; M5 T-nuts + corner brackets for joints. 2020 is light — use triangulation / short spans; step up to **4040** if hot-fire peaks flex the frame. Extra rail length for **tank cradle** bay. |
+| Portable Test Stand Frame | Bolted **2020 T-slot** frame (above), load cell in-line, portable; motor cradle on rails; **separate bay for 20 lb tank** | — | T-slot + 3D print cradle (reinforce with Al plate scrap from 6″ bar cuts if needed) | Keep lightweight and movable. Integrate tank cradle so cylinder cannot tip into the plume. |
+| Sensor Mounting Hardware | Custom plates/brackets for load cell and pressure transducer (T-slot compatible) | — | 3D print / thin Al plate scrap | Mount with M5 T-nuts into 2020 slots. |
 
-## **4\. Ignition & Safety Equipment**
+## **4. Ignition & Safety Equipment**
 
 | Component | Metric Spec / Notes | Est. Price (USD) | Supplier / Status | Notes |
 | ----- | ----- | ----- | ----- | ----- |
 | Igniter | Contrail 24 V resistor igniter (Pyrodex pellet method) or Nakka KNO₃ + sugar | $1.50 ea | [Contrail 24 V igniter](https://contrailrockets.com/product/24-volt-igniter-48-inches-long-designed-for-75-mm-or-larger-motors) | Order Pyrodex pellets separately (local sporting goods / online — hazmat rules apply). Student KNO₃/sugar recipe is fine for first tests. |
-| Remote Firing System | Long wires \+ relay or wireless trigger with safety interlock | $450 | [Contrail GSE single-pad 12/24 V](https://contrailrockets.com/product/gse-ground-support-equipment-single-pad-12-24-volt-system) | Non-negotiable for safety. Extension cords not included. |
-| PPE & Fire Suppression | Face shield, FR clothing, ABC extinguisher \+ water source; chemical gloves | $100+ | Gloves: [Amazon LANON nitrile B07ZRM6SZN](https://www.amazon.com/dp/B07ZRM6SZN) (~$13). Face shield + extinguisher: local hardware. | Start collecting early |
+| Remote Firing System | Long wires + relay or wireless trigger with safety interlock | $450 | [Contrail GSE single-pad 12/24 V](https://contrailrockets.com/product/gse-ground-support-equipment-single-pad-12-24-volt-system) | Non-negotiable for safety. Extension cords not included. |
+| PPE & Fire Suppression | Face shield, FR clothing, ABC extinguisher + water source; chemical gloves | $100+ | Gloves: [Amazon LANON nitrile B07ZRM6SZN](https://www.amazon.com/dp/B07ZRM6SZN) (~$13). Face shield + extinguisher: local hardware. | Start collecting early |
+
+**Igniter deep-dive:** [`research/Igniter Sourcing/IGNITER_SOURCING.md`](research/Igniter%20Sourcing/IGNITER_SOURCING.md)  
+**N₂O / paraffin safety:** [`research/N2O_paraffin_burn_rate/SAFETY_PROCEDURES_N2O_PARAFFIN.md`](research/N2O_paraffin_burn_rate/SAFETY_PROCEDURES_N2O_PARAFFIN.md)
 
 ---
 
 ### **Review summary (Jul 2026)**
 
-* **Updated (Jul 2026):** Tank locked to **Catalina NO15** (~**6.8 kg** N₂O, **6.89″ OD**) via RFQ (GCS special-order / Catalina sales / local fill). GCS **10 lb** demoted to interim/backup. Calculator defaults: **1.13 kg** fuel, **15 kN·s**, O/F 6. NX 11151 still rejected.  
-* **Updated:** Flight airframe **[Madcow 8″ G12](https://www.madcowrocketry.com/8-g12-airframe/)**; Wildman 9″ demoted. Centering rings **7.825″ × 6.0″**.  
+* **Goal change:** Primary goal is **full-scale static fire** (not flight). Airframe / Madcow / Wildman / launch-site certification docs removed. Trajectory GUI retained for analysis only.  
+* **Tank locked:** **Amazon/GCS 20 lb Al + CGA-326** (~**9.1 kg** N₂O, **8″ OD**), **stand-mounted outside the motor**. Catalina NO15 / in-airframe packaging demoted. Calculator defaults: **~1.5 kg** fuel, **~20 kN·s** class, O/F 6. NX 11151 still rejected.  
 * **Fixed:** CGA adapter preferred to **ASG $63** (vs Ideal Vac $227). Hex nipples / bushings consolidated on **BFO** direct SKUs.  
 * **Fixed:** Graphite and load-cell links were wrong size / capacity.  
 * **Fixed:** Pressure transducer given a direct **1/4″ NPT** DATAQ product page.  
-* **Fixed:** Locked chamber diameter was incorrectly listed as 203.2 mm; motor is **152 mm** inside **8″** airframe.  
-* **Fixed:** Madcow 8″ G12 moved to **airframe**; chamber is **not** a pressure vessel.  
+* **Fixed:** Locked chamber diameter was incorrectly listed as 203.2 mm; motor is **152 mm**.  
 * **Updated:** Chamber path preference flipped to **custom 6061-T6** via **[OnlineMetals 6″×0.125″ pid 9559](https://www.onlinemetals.com/en/buy/aluminum/6-od-x-0-125-wall-x-5-75-id-aluminum-round-tube-6061-t6-extruded/pid/9559)**; Contrail demoted to heavy backup.  
-* **Updated:** Portable test-stand frame locked to **2020 T-slot** rails — **[Amazon B08Y8N7FD1](https://www.amazon.com/dp/B08Y8N7FD1)** (4× 400 mm / 15.75″, 6063-T5).  
-* **Updated:** Motor Al parts (injector, closures, retention) sourced as **6″ 6061 solid round** ([Speedy](https://www.speedymetals.com/p-2482-6-rd-6061-t6511-aluminum-extruded.aspx) / [MSP](https://www.mspmetals.com/product/6061-t6-aluminum-round-bar-6-dia/) / [Metals4U](https://www.metals4uonline.com/aluminum-round-bar-6061-6in/)); airframe discs (bulkhead / Al rings) need **[8″ Speedy](https://www.speedymetals.com/p-2488-8-rd-6061-t6511-aluminum-extruded.aspx)** — 6″ stock is undersize for Madcow ID.  
-* **Updated:** **Thermal liner** locked to phenolic — prefer custom **[Franklin Fibre / Lamitex XX or CE](https://www.lamitex.com/munition-rocket-tubes)** to **OD ≈ 5.75″ / wall ≈ 3 mm**; stock [K-Mac CE/LE tube](https://k-mac-plastics.net/ce-tubes.htm) or [McMaster Garolite](https://www.mcmaster.com/products/canvas-phenolic-laminate/) as alts. Hobby 152 mm Loki liners fit Contrail-class **5.5″ ID**, not this chamber.
+* **Updated:** Portable test-stand frame locked to **2020 T-slot** rails — **[Amazon B08Y8N7FD1](https://www.amazon.com/dp/B08Y8N7FD1)** (4× 400 mm / 15.75″, 6063-T5), with **tank cradle bay** for the 20 lb bottle.  
+* **Updated:** Motor Al parts (injector, closures, cradle discs) sourced as **6″ 6061 solid round** ([Speedy](https://www.speedymetals.com/p-2482-6-rd-6061-t6511-aluminum-extruded.aspx) / [MSP](https://www.mspmetals.com/product/6061-t6-aluminum-round-bar-6-dia/) / [Metals4U](https://www.metals4uonline.com/aluminum-round-bar-6061-6in/)).  
+* **Updated:** **Thermal liner** locked to phenolic — prefer custom **[Franklin Fibre / Lamitex XX or CE](https://www.lamitex.com/munition-rocket-tubes)** to **OD ≈ 5.75″ / wall ≈ 3 mm**; stock [K-Mac CE/LE tube](https://k-mac-plastics.net/ce-tubes.htm) or [McMaster Garolite](https://www.mcmaster.com/products/canvas-phenolic-laminate/) as alts. Hobby 152 mm Loki liners fit Contrail-class **5.5″ ID**, not this chamber.  
+* **Execution plan:** [`STATIC_FIRE_WEEKLY_CHECKLIST.md`](STATIC_FIRE_WEEKLY_CHECKLIST.md).
