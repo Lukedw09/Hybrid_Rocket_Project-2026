@@ -18,7 +18,7 @@ Check **all** before calling the campaign complete:
 - [ ] Chamber **hydro-proofed** ≥ 1.5× MEOP and documented  
 - [ ] Feed system **oxidizer-clean**, leak-checked, and remote MAIN/bleed proven  
 - [ ] **20 lb CGA-326** tank on stand cradle; whip-check installed; fill account working  
-- [ ] Instrumentation (load cell ≥500 kg, Pc transducer, video, timeline log) recording  
+- [ ] Instrumentation (**3×** load cell ≥500 kg, Pc transducer, video, timeline log) recording  
 - [ ] Ignition sequence demonstrated (igniter → heat soak → MAIN open)  
 - [ ] At least one **hot fire** with acceptable Pc / thrust traces and no uncontrolled event  
 - [ ] Prefer: one **full-fill** (or planned full-duration) fire matching the 20 lb budget  
@@ -39,7 +39,7 @@ Lock the static-only configuration, order the tank and long-lead hardware, start
 - [x] Create a project binder (paper or drive): drawings, RFQs, certs, test logs, photos  
 - [x] Order **[Amazon B09PFCV1QK](https://www.amazon.com/Aluminum-Nitrous-Cylinder-CGA326-Handle/dp/B09PFCV1QK)** or [GCS 20 lb](https://gascylindersource.com/shop/nitrous-oxide-cylinders/20-lb-aluminum-n2o-cylinder-with-handle/) (empty)  
 - [x] Call local filler (e.g. Airgas Tallahassee) — confirm **customer-owned CGA-326** fill path in adult name  
-- [x] Order **≥500 kg** load cell + **1/4″ NPT** 0–1500 psi transducer (DATAQ path in component list)  
+- [x] Order **3× ≥500 kg** load cells + **3× HX711** + Arduino DAQ + **1/4″ NPT** 0–1500 psi transducer (see [`docs/LOAD_CELL_ARDUINO.md`](docs/LOAD_CELL_ARDUINO.md))  
 - [x] Order / RFQ **6061-T6** chamber tube with MTR ([OnlineMetals pid 9559](https://www.onlinemetals.com/en/buy/aluminum/6-od-x-0-125-wall-x-5-75-id-aluminum-round-tube-6061-t6-extruded/pid/9559) or equivalent)  
 - [x] Order **2020 T-slot** packs ([Amazon B08Y8N7FD1](https://www.amazon.com/dp/B08Y8N7FD1)) × ≥2 + M5 T-nuts / brackets  
 - [x] Draft 1-page **safety plan outline**: site, standoff, PPE, abort, fire watch, emergency contacts  
@@ -138,8 +138,8 @@ Prove the chamber; get sensors talking before any propellant.
 ### Checklist
 - [ ] Hydro-proof chamber assembly per written procedure; **pass** and document pressure/time  
 - [ ] If fail: stop hot-fire planning; repair/re-machine; re-proof  
-- [ ] Install load cell; verify polarity and calibration with known weights  
-- [ ] Install Pc transducer; confirm excitation and DAQ scale (psi or MPa)  
+- [ ] Install **3** load cells + **3** HX711s per [`docs/LOAD_CELL_ARDUINO.md`](docs/LOAD_CELL_ARDUINO.md); verify polarity and calibrate each channel with known weights; confirm \(F_1+F_2+F_3\)
+- [ ] Install Pc transducer; confirm excitation and DAQ scale (psi or MPa) on Arduino `A0`
 - [ ] Sync video camera view of nozzle + stand clock / clap sync method  
 - [ ] Build remote MAIN solenoid power path (12 V battery + relay + kill switch at observer)  
 - [ ] Continuity-check igniter leads with **shunted** igniter; verify GSE arm/safe lamps  
@@ -238,7 +238,7 @@ Full dress rehearsal of the static day with everything except live N₂O burn.
 
 ### Checklist
 - [ ] Load liner + grain + igniter into chamber; torque closures to recorded values  
-- [ ] Mount motor on stand; verify thrust path into load cell  
+- [ ] Mount motor on stand; verify thrust path into all **3** load cells  
 - [ ] Connect feed to injector; whip-check on; tank empty or inert only for this week if preferred  
 - [ ] Run **full countdown** with GSE, cameras, DAQ recording (no N₂O or with empty system only)  
 - [ ] Verify data files save and are named with date/test ID  
