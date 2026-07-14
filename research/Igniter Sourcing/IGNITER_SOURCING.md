@@ -5,7 +5,7 @@
 **Companion docs.**  
 - [`../N2O_paraffin_burn_rate/SAFETY_PROCEDURES_N2O_PARAFFIN.md`](../N2O_paraffin_burn_rate/SAFETY_PROCEDURES_N2O_PARAFFIN.md)  
 - [`../../STATIC_FIRE_WEEKLY_CHECKLIST.md`](../../STATIC_FIRE_WEEKLY_CHECKLIST.md)  
-- [`../../Mach 1 Hybrid Rocket Project.md`](../../Mach%201%20Hybrid%20Rocket%20Project.md)
+- [`../../Hybrid Motor Static Fire Project.md`](../../Hybrid%20Motor%20Static%20Fire%20Project.md)
 
 **Disclaimer.** Guidance for research planning—not legal advice, not a certified motor procedure, and not a substitute for your site SOP / adult mentor / AHJ rules. Pyrotechnic work by a minor must be adult-supervised; custody of N₂O has age and account gates (adult/parent as custodian).
 
@@ -98,9 +98,25 @@ Do these in order.
    - If evaluating commercial architecture: relevant **152 mm** hardware/reload kit as a **reference motor**, not as your flight paraffin motor unless that is an explicit design choice.
 
 4. **Buy Pyrodex pellets separately** (not hazmat rocket motors; common muzzleloader product).  
-   - Sporting goods / outdoor retailers / online (Pratt notes gun stores and big-box outdoor aisles).  
-   - **Quantity and pellet size:** use **only** the count/size in the Contrail manual for the motor class you are mimicking; do **not** invent a “20 kN·s pellet count” without vendor advice + static-fire proof.  
+   - **Exact product:** Hodgdon **Pyrodex 50/50** pellets — **.50 caliber / 50 grain** (SKU **BP5050**). Center hole is what lets you stack them on a heater or thread an e-match.  
+   - **Order / buy:** [Hodgdon shop](https://shop.hodgdon.com/pyrodex-50-50-pellets/) · [Muzzle-Loaders.com](https://muzzle-loaders.com/products/hodgdon-pyrodex-50-50-pellets-black-powder-substitute-50-cal-50-grains) · [MidwayUSA](https://www.midwayusa.com/product/1009299634) · local Bass Pro / outdoor / gun shops (adult purchaser). Online powder orders often add UPS hazmat fees.  
+   - **Quantity and pellet size:** use **only** the count/size in the Contrail manual for the motor class you are mimicking; do **not** invent a “20 kN·s pellet count” without vendor advice + static-fire proof. Do **not** substitute Triple Seven or other BP substitutes without a new ignition qualification.  
    - Adult purchaser if local age rules apply to black-powder substitutes.
+
+### 3.4 If Contrail’s website is down — initiator alternatives
+
+The Contrail 24 V part is a **dual resistor heater** (~$1.50, non-hazmat) that lights Pyrodex pellets. It is **not** the only workable initiator for this static campaign.
+
+| Alternative | Replaces | Source | Notes |
+|-------------|----------|--------|-------|
+| Call / email Contrail | Web cart | (928) 208-5580 · info@ContrailRockets.com · [Pratt overview](https://pratthobbies.com/contrail.htm) | Prefer before cloning |
+| **E-match or AeroTech FirstFire** + Pyrodex 50/50 | Resistor | HPR dealers; [Apogee igniter overview](http://www.apogeerockets.com/Peak-of-Flight/Newsletter527); [AeroTech FirstFire](https://aerotech-rocketry.com/) | Thread through pellet hole; dual preferred; all-fire test at cable length |
+| **DIY nichrome / power resistor** + Pyrodex | Resistor | Electronics suppliers | Closest clone of Contrail method; qualify heat on a dry pellet stack |
+| **Sugar–KNO₃ puck** + nichrome | Pellets + heater | [UCLA HyPE PDF](https://www.soundingrocket.org/uploads/9/0/6/4/9064598/technical_paper_ucla.pdf) | Path B Lane 2 |
+| **Short APCP slug** + e-match | Pellets | Commercial 18–29 mm grain segment; mentor/range rules | Common when pellets are unavailable ([TRF thread](https://www.rocketryforum.com/threads/contrail-hybrid-alternatives-to-pyrodex-pellets-for-ignition.159470/)) |
+| HyperTEK GOX + HV spark | Entire ignition stack | [HyperTEK](http://www.hypertekhybrids.com/mainpage.html) | Different architecture — not a drop-in |
+
+**Do not** expect a bare Estes / low-current starter alone to heat a large paraffin grain. You still need a **preheater** (pellets or puck).
 
 5. **Buy / verify GSE electrical capability**  
    - Battery and cable sized for the **heater current** at pad distance (voltage drop matters at 1000 ft).  
@@ -279,8 +295,8 @@ Instrument every N₂O stage: chamber pressure, fire-command time stamp, valve-o
 
 ## 7. Recommended project plan (this repo)
 
-1. **Week 0–1:** Email Contrail RFQ (§3.2) with your 152 mm section drawing; order 24 V igniters + pellets + long-range GSE.  
-2. **Week 1–2:** V0–V2 on the bench; measure heater current and pellet burn time.  
+1. **Week 0–1:** Try Contrail RFQ (§3.2); if the site is down, call/email or use §3.4 initiator alts. Order heaters/initiators + **Pyrodex 50/50** + DIY remote fire (not the $450 GSE unless needed).  
+2. **Week 1–2:** V0–V2 on the bench; measure heater/e-match current and pellet burn time.  
 3. **Week 2–4:** V3 on a subscale paraffin/N₂O motor or shortened grain (same injector family if possible).  
 4. **Decision gate:** If ignition is marginal → design Lane 2/3 puck (Path B Steps 3–5) under mentor; do **not** only “add more pellets” without pressure/grain inspection data.  
 5. **Week 4+:** V4–V5 on the 20 kN·s article at an approved static site; freeze the ignition kit lot used for the successful full-scale fire. Follow [`STATIC_FIRE_WEEKLY_CHECKLIST.md`](../../STATIC_FIRE_WEEKLY_CHECKLIST.md) for the calendar.
@@ -297,7 +313,11 @@ Instrument every N₂O stage: chamber pressure, fire-command time stamp, valve-o
 | Contrail 12 V ignition notes | https://contrailrockets.com/12-volt-ignition |
 | Contrail long-range GSE | https://contrailrockets.com/product/gse-ground-support-equipment-single-pad-12-24-volt-system |
 | Contrail large fill manifold | https://contrailrockets.com/product/nitrous-oxide-fill-manifold-system-3-8-inch-fill-valve-and-1-4-inch-purge-solenoid-valves |
+| Pratt Contrail overview | https://pratthobbies.com/contrail.htm |
 | Pratt Contrail overview PDF | https://pratt-hobbies.com/wpdpratt/wp-content/uploads/2025/09/Contrail-Rockets-Hybrid-Motors.pdf |
+| **Pyrodex 50/50 pellets (Hodgdon BP5050)** | https://shop.hodgdon.com/pyrodex-50-50-pellets/ |
+| Pyrodex 50/50 (Muzzle-Loaders.com) | https://muzzle-loaders.com/products/hodgdon-pyrodex-50-50-pellets-black-powder-substitute-50-cal-50-grains |
+| Pyrodex 50/50 (MidwayUSA) | https://www.midwayusa.com/product/1009299634 |
 | HyperTEK | http://www.hypertekhybrids.com/mainpage.html |
 | Cesaroni igniter FAQ | https://cesaroni-aerospace.com/frequently-asked-questions/ |
 | Apogee igniter types | http://www.apogeerockets.com/Peak-of-Flight/Newsletter527 |

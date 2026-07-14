@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import math
 
-# Preferred chamber (Mach 1 Hybrid Rocket Project.md)
+# Preferred chamber (Hybrid Motor Static Fire Project.md)
 DI_IN, DO_IN, T_IN = 5.75, 6.0, 0.125
 DI, DO, T = (x * 0.0254 for x in (DI_IN, DO_IN, T_IN))
 

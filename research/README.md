@@ -10,4 +10,4 @@ Topic folders under `research/` (open each folder’s `README.md`):
 | **Igniter Sourcing** | [`Igniter Sourcing/`](Igniter%20Sourcing/) | How to **order** or **develop** igniters for the full-scale paraffin/N₂O static motor |
 | **Chamber stress / radial bolts** | [`Chamber_Stress_Radial_Bolts/`](Chamber_Stress_Radial_Bolts/) | Barrel hoop + **radial bolt count** for bulkhead/nozzle at **45 bar** hydroproof |
 
-**Project execution (static fire):** [`../STATIC_FIRE_WEEKLY_CHECKLIST.md`](../STATIC_FIRE_WEEKLY_CHECKLIST.md) · component list [`../Mach 1 Hybrid Rocket Project.md`](../Mach%201%20Hybrid%20Rocket%20Project.md)
+**Project execution (static fire):** [`../STATIC_FIRE_WEEKLY_CHECKLIST.md`](../STATIC_FIRE_WEEKLY_CHECKLIST.md) · component list [`../Hybrid Motor Static Fire Project.md`](../Hybrid%20Motor%20Static%20Fire%20Project.md)

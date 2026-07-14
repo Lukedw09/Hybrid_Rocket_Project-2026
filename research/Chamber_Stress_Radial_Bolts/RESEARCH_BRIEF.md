@@ -7,7 +7,7 @@
 **Notation (plain text).**  
 `P` = internal pressure · `MEOP` = maximum expected operating pressure · `Di`, `Do` = casing inside / outside diameter · `t` = casing wall thickness · `N` = number of radial bolts **per end** · `d_maj`, `d_min` = bolt major / minor diameter · `E` = edge distance (case end → hole center) · `Emin` = `E − d_maj/2` · `F` = axial closure force · `FS` = factor of safety = strength / stress · `YTS`, `UTS` = yield / ultimate tensile strength · `BYS` = bearing yield strength.
 
-**Geometry locked to project hardware** [`Mach 1 Hybrid Rocket Project.md`]:
+**Geometry locked to project hardware** [`Hybrid Motor Static Fire Project.md`](../../Hybrid%20Motor%20Static%20Fire%20Project.md):
 
 | Parameter | Value |
 |-----------|--------|

@@ -32,7 +32,7 @@ from ParaffinN2O_dimensioncalc.model import MotorInputs, run_motor
 # ---------------------------------------------------------------------------
 # Field definitions: (internal key, label shown in UI, default text)
 # Keys must match what format_summary expects and what _collect_inputs uses.
-# Defaults match Mach 1 Hybrid Rocket Project.md locked targets:
+# Defaults match Hybrid Motor Static Fire Project.md locked targets:
 #   152.4 mm case, Amazon/GCS 20 lb (~9.1 kg N2O) at O/F 6 → ~1.5 kg fuel,
 #   4 MPa (40 bar), ~20 kN·s impulse class (Isp ≈ 194 s budget).
 # Wall thickness and G_ox are intentionally absent — the solver computes them.

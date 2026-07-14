@@ -13,6 +13,6 @@ This folder holds a curated literature set on **combustion-chamber stress analys
 Start with **RESEARCH_BRIEF.md**, then use **INDEX.md** for DOIs and local files.
 
 **Related:**  
-- [`../../Mach 1 Hybrid Rocket Project.md`](../../Mach%201%20Hybrid%20Rocket%20Project.md) — chamber OD, wall, MEOP = 4 MPa, hydro-proof policy  
+- [`../../Hybrid Motor Static Fire Project.md`](../../Hybrid%20Motor%20Static%20Fire%20Project.md) — chamber OD, wall, MEOP = 4 MPa, hydro-proof policy  
 - [`../../STATIC_FIRE_WEEKLY_CHECKLIST.md`](../../STATIC_FIRE_WEEKLY_CHECKLIST.md) — Week 5 hydro-proof gate  
 - [`../N2O_paraffin_burn_rate/SAFETY_PROCEDURES_N2O_PARAFFIN.md`](../N2O_paraffin_burn_rate/SAFETY_PROCEDURES_N2O_PARAFFIN.md) — pressurization / exclusion practice  

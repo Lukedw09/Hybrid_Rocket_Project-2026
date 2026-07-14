@@ -3,7 +3,7 @@
 **Project.** Full-scale **152 mm paraffin / N₂O** hybrid motor on an instrumented portable stand.  
 **Final goal.** One **safe, documented, full-scale static fire** using the stand-mounted **Amazon / GCS 20 lb Al + CGA-326** tank (~9.1 kg N₂O). No flight attempt in this plan.  
 **Roles.** Adult/parent = N₂O custodian, fill account, final go/no-go, pad supervision. Builder = design, fabrication, procedures, data. Never solo N₂O or hot-fire work.  
-**Companions.** [`Mach 1 Hybrid Rocket Project.md`](Mach%201%20Hybrid%20Rocket%20Project.md) · [`research/N2O_paraffin_burn_rate/SAFETY_PROCEDURES_N2O_PARAFFIN.md`](research/N2O_paraffin_burn_rate/SAFETY_PROCEDURES_N2O_PARAFFIN.md) · [`research/Igniter Sourcing/IGNITER_SOURCING.md`](research/Igniter%20Sourcing/IGNITER_SOURCING.md)
+**Companions.** [`Hybrid Motor Static Fire Project.md`](Hybrid%20Motor%20Static%20Fire%20Project.md) · [`research/N2O_paraffin_burn_rate/SAFETY_PROCEDURES_N2O_PARAFFIN.md`](research/N2O_paraffin_burn_rate/SAFETY_PROCEDURES_N2O_PARAFFIN.md) · [`research/Igniter Sourcing/IGNITER_SOURCING.md`](research/Igniter%20Sourcing/IGNITER_SOURCING.md)
 
 **Assumption.** Work starts **mid-July 2026**. Target full-scale static in **late October / early November 2026** (adjust only with written gate slips). Weeks are Monday-start.
 
@@ -34,14 +34,14 @@ If any safety gate fails, **scrub and fix** — do not “push through” to hit
 Lock the static-only configuration, order the tank and long-lead hardware, start the written safety plan.
 
 ### Checklist
-- [x] Read `Mach 1 Hybrid Rocket Project.md` end-to-end; confirm **20 lb Amazon/GCS + CGA-326** on stand (not in an airframe)  
+- [x] Read `Hybrid Motor Static Fire Project.md` end-to-end; confirm **20 lb Amazon/GCS + CGA-326** on stand (not in an airframe)  
 - [x] Read `SAFETY_PROCEDURES_N2O_PARAFFIN.md`; list open questions for adult mentor  
 - [x] Create a project binder (paper or drive): drawings, RFQs, certs, test logs, photos  
 - [x] Order **[Amazon B09PFCV1QK](https://www.amazon.com/Aluminum-Nitrous-Cylinder-CGA326-Handle/dp/B09PFCV1QK)** or [GCS 20 lb](https://gascylindersource.com/shop/nitrous-oxide-cylinders/20-lb-aluminum-n2o-cylinder-with-handle/) (empty)  
-- [ ] Call local filler (e.g. Airgas Tallahassee) — confirm **customer-owned CGA-326** fill path in adult name  
-- [ ] Order **≥500 kg** load cell + **1/4″ NPT** 0–1500 psi transducer (DATAQ path in component list)  
-- [ ] Order / RFQ **6061-T6** chamber tube with MTR ([OnlineMetals pid 9559](https://www.onlinemetals.com/en/buy/aluminum/6-od-x-0-125-wall-x-5-75-id-aluminum-round-tube-6061-t6-extruded/pid/9559) or equivalent)  
-- [ ] Order **2020 T-slot** packs ([Amazon B08Y8N7FD1](https://www.amazon.com/dp/B08Y8N7FD1)) × ≥2 + M5 T-nuts / brackets  
+- [x] Call local filler (e.g. Airgas Tallahassee) — confirm **customer-owned CGA-326** fill path in adult name  
+- [x] Order **≥500 kg** load cell + **1/4″ NPT** 0–1500 psi transducer (DATAQ path in component list)  
+- [x] Order / RFQ **6061-T6** chamber tube with MTR ([OnlineMetals pid 9559](https://www.onlinemetals.com/en/buy/aluminum/6-od-x-0-125-wall-x-5-75-id-aluminum-round-tube-6061-t6-extruded/pid/9559) or equivalent)  
+- [x] Order **2020 T-slot** packs ([Amazon B08Y8N7FD1](https://www.amazon.com/dp/B08Y8N7FD1)) × ≥2 + M5 T-nuts / brackets  
 - [x] Draft 1-page **safety plan outline**: site, standoff, PPE, abort, fire watch, emergency contacts  
 - [x] Run `ParaffinN2O_dimensioncalc` with **~9.1 kg N₂O / O/F ~6** → freeze grain mass (~1.5 kg) and chamber length sketch  
 
@@ -56,15 +56,15 @@ Orders placed (or documented RFQ dates) for tank, chamber tube, load cell, trans
 Freeze injector and closure drawings; order all CGA-326 feed parts as one batch; start tank-cradle concept.
 
 ### Checklist
-- [ ] SolidWorks: injector plate (showerhead or simple pattern) for **4 MPa**, matched to chamber ID  
-- [ ] SolidWorks: forward + aft closures with O-ring grooves / pilots  
-- [ ] Order **6″ 6061** short cuts for injector + closures ([Speedy / MSP / Metals4U](https://www.speedymetals.com/p-2482-6-rd-6061-t6511-aluminum-extruded.aspx))  
+- [x] SolidWorks: injector plate (showerhead or simple pattern) for **4 MPa**, matched to chamber ID  
+- [x] SolidWorks: forward + aft closures with O-ring grooves / pilots  
+- [x] Order **6″ 6061** short cuts for injector + closures ([Speedy / MSP / Metals4U](https://www.speedymetals.com/p-2482-6-rd-6061-t6511-aluminum-extruded.aspx))  
 - [ ] Place **feed-system cart** from Section 1.1 of the component list (CGA adapter, hose, whip-check, tee, NOS 18045NOS, bleed, nipples, Krytox, caps)  
 - [ ] Sketch **stand layout**: motor rails + separate **8″ tank cradle** bay + load-cell thrust line  
-- [ ] RFQ phenolic liner (Franklin / Lamitex XX or CE to ~5.75″ OD × 3 mm wall) or identify stock CE tube  
+- [ ] Quote/order phenolic liner from **Plastic-Craft** ([CE tube](https://plastic-craft.com/product/phenolic-ce-round-tube/) — **5.75″ OD × ~0.125″ wall**; call **(845) 358-3010** or quote form; sells to individuals). Fallback: Contrail chamber + [ARR 152 mm liner](https://alwaysreadyrocketry.com/product/standard-casting-tubes/)  
 - [ ] Order graphite nozzle blank sized to carrier ID  
 - [ ] Collect PPE: face shield, FR layer, gloves, ABC extinguisher, water source plan  
-- [ ] Decide remote GSE path (Contrail GSE vs relay + long leads) and order if known  
+- [ ] Decide remote firing path (**preferred:** DIY dual-channel pad relays ~$50–150 or Half Cat RC ~$50–120; Contrail $450 GSE optional/overkill) and order parts  
 
 ### Gate to Week 2
 Injector/closure drawings frozen enough to machine; feed-system parts ordered; stand layout sketched.
@@ -349,7 +349,7 @@ If Week 13 scrubbed or data were incomplete, re-fire once. Otherwise close the b
 
 | Item | Link / path |
 |------|-------------|
-| Component list | `Mach 1 Hybrid Rocket Project.md` |
+| Component list | `Hybrid Motor Static Fire Project.md` |
 | 20 lb tank (Amazon) | https://www.amazon.com/Aluminum-Nitrous-Cylinder-CGA326-Handle/dp/B09PFCV1QK |
 | 20 lb tank (GCS) | https://gascylindersource.com/shop/nitrous-oxide-cylinders/20-lb-aluminum-n2o-cylinder-with-handle/ |
 | Safety procedures | `research/N2O_paraffin_burn_rate/SAFETY_PROCEDURES_N2O_PARAFFIN.md` |
