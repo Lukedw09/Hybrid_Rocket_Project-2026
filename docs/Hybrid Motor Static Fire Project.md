@@ -15,7 +15,7 @@ Luke de Wet  •  Phase 0 – July 2026  •  Experimental Hybrid Rocket Project
 
 ## **Prioritized Ordering & Research Sequence**
 
-1. **Now – July 15:** **Order Amazon/GCS 20 lb Al + CGA-326** (Section 1). Price **3× ≥500 kg** load cells (not 150–200 kg) + **3× HX711** + Arduino + pressure transducer. **Source custom 6061-T6 chamber tube** (material certs); keep Contrail only if custom lead time slips. Start safety plan draft. Confirm local **fill** account for customer-owned CGA-326 cylinder (parent/adult).  
+1. **Now – July 15:** **20 lb Al + CGA-326 tank is in hand** (Section 1). Price **3× ≥500 kg** load cells (not 150–200 kg) + **3× HX711** + Arduino + pressure transducer. **Source custom 6061-T6 chamber tube** (material certs); keep Contrail only if custom lead time slips. Start safety plan draft. Confirm local **fill** account for customer-owned CGA-326 cylinder (parent/adult).  
 2. **By July 20:** Finalize injector concept and lathe drawings for injector plate + closures. **RFQ/order short cuts of 6″ 6061 round bar** (Section 2.1). Order long-lead items (load cells, HX711s, transducer). Order oxidizer feed-system kit (Section 1) as one batch (plumbing unchanged — still CGA-326). Design **stand tank cradle** for the 8″ × ~27″ bottle.  
 3. **By July 25:** Design nozzle and **stand motor cradle / thrust path** in SolidWorks. Order graphite nozzle blank for the nozzle carrier. Plan chamber hydro-proof.  
 4. **Late July – August:** Order igniter materials; cold-flow / leak-check oxidizer plumbing before any hot fire. Begin casting test grains. Integrate tank mount + feed line on the portable stand.
@@ -26,27 +26,12 @@ Luke de Wet  •  Phase 0 – July 2026  •  Experimental Hybrid Rocket Project
 
 **Operating model:** Fill / prep the **stand-mounted** cylinder elsewhere (or at a controlled fill site), then attach it to this fixed feed plumbing on the static stand for the hot fire. No remote pad-fill loop. Tank is **not** packaged inside an airframe.
 
-**Static tank (locked — add-to-cart path):** Medical/industrial **DOT aluminum** N₂O cylinder with **CGA-326** valve — **20 lb / ~9.1 kg N₂O**, **~8″ OD × ~27″** with handle.
+**Static tank (locked — owned):** Medical/industrial **DOT aluminum** N₂O cylinder with **CGA-326** valve — **20 lb / ~9.1 kg N₂O**, **~8″ OD × ~27″** with handle.
 
-* **Order this:** [Amazon 20 lb Al + CGA-326 + handle](https://www.amazon.com/Aluminum-Nitrous-Cylinder-CGA326-Handle/dp/B09PFCV1QK) (ASIN **B09PFCV1QK**) — same class as [GCS 20 lb Al + CGA-326](https://gascylindersource.com/shop/nitrous-oxide-cylinders/20-lb-aluminum-n2o-cylinder-with-handle/) (**SKU 20LBALVLV-326**): ~**8″ OD × 27.25″** (with valve/handle), empty ~23–25.5 lb, DOT/TC, neck **1.125-12 UNF**, **CGA-326**, ships empty.  
-* **Fill path (adult/parent buyer):** Local filler (e.g. Airgas Tallahassee **850-576-2192**, 945 Yulee St) — customer-owned **CGA-326** fill (industrial/specialty/food-grade preferred over USP medical Rx path).  
-* **Interim / backup only if 20 lb is delayed:** [GCS 10 lb Al + CGA-326](https://gascylindersource.com/shop/nitrous-oxide-cylinders/new-10-lb-aluminum-n2o-cylinder/) (~4.5 kg) or [Amazon 10 lb B09PFDKQ9G](https://www.amazon.com/dp/B09PFDKQ9G) — shorter burns / reduced impulse only.  
-* **Do not buy:** NX 11151 / NOS Hi-Flo (CGA-660 / AN, not CGA-326).  
-* **Do not pursue Catalina NO15 for packaging** — in-airframe fit no longer matters; the **20 lb** bottle is preferred capacity for the full-scale static.
+* **Owned / in hand:** [Amazon 20 lb Al + CGA-326 + handle](https://www.amazon.com/Aluminum-Nitrous-Cylinder-CGA326-Handle/dp/B09PFCV1QK) (ASIN **B09PFCV1QK**) — same class as [GCS 20 lb Al + CGA-326](https://gascylindersource.com/shop/nitrous-oxide-cylinders/20-lb-aluminum-n2o-cylinder-with-handle/) (**SKU 20LBALVLV-326**): ~**8″ OD × 27.25″** (with valve/handle), empty ~23–25.5 lb, DOT/TC, neck **1.125-12 UNF**, **CGA-326**.  
+* **Fill path (adult/parent buyer):** Local filler (e.g. Airgas Tallahassee **850-576-2192**, 945 Yulee St) — customer-owned **CGA-326** fill (industrial/specialty/food-grade preferred over USP medical Rx path).
 
 Everything below is sized to that **CGA-326** outlet and a **1/4″ NPT, 316 stainless + PTFE** feed standard (≥3000 psi / ≥20 MPa working class; exceeds the project ≥10 MPa floor).
-
-### **1.0 Tank diameter survey (DOT) — stand-mounted**
-
-**Finding:** With the tank **on the stand** (not in an airframe), **8″ OD is fine**. Prefer the **20 lb** bottle for full-scale static impulse.
-
-| Part / class | N₂O capacity | OD | Buyable? | Link | Stand OK? |
-| ----- | ----- | ----- | ----- | ----- | ----- |
-| **Locked — Amazon/GCS 20 lb + CGA-326** | **20 lb / 9.1 kg** | **8.0″** | Yes — add to cart | [Amazon B09PFCV1QK](https://www.amazon.com/Aluminum-Nitrous-Cylinder-CGA326-Handle/dp/B09PFCV1QK) · [GCS 20 lb](https://gascylindersource.com/shop/nitrous-oxide-cylinders/20-lb-aluminum-n2o-cylinder-with-handle/) | **Yes** — cradle on stand |
-| GCS / Amazon 10 lb + CGA-326 | 10 lb / 4.5 kg | 7.0″ | Yes | [GCS 10 lb](https://gascylindersource.com/shop/nitrous-oxide-cylinders/new-10-lb-aluminum-n2o-cylinder/) · [Amazon B09PFDKQ9G](https://www.amazon.com/dp/B09PFDKQ9G) | Yes — **reduced-load backup** |
-| GCS 5 lb + CGA-326 | 5 lb / 2.3 kg | 5.25″ | Yes | [GCS 5 lb](https://gascylindersource.com/shop/nitrous-oxide-cylinders/new-5-lb-aluminum-n2o-cylinder/) | Yes (short on ox) |
-| Catalina NO15 + CGA-326 | 15 lb / 6.8 kg | 6.89″ | OEM RFQ only | [NO15](https://www.catalinacylinders.com/product/no15/) | Yes — unused; 20 lb preferred |
-| Racing NX / NOS 15 lb (e.g. **11151**) | 15 lb | 6.89–7″ | Yes | [NX 11151](https://www.tickperformance.com/nitrous-express-15lb-bottle-w-standard-45-valve-6-89-dia-x-26-69-tall-with-gauge-11151/) | Body OK — **wrong valve** |
 
 **Design rules (compatibility & safety)**
 
@@ -110,7 +95,7 @@ Gender key: **MNPT** = male NPT, **FNPT** = female NPT. Hex nipples join two FNP
 
 | # | Role | Exact part / what to select | Qty | Est. $ | Where to order (direct link) |
 | ----- | ----- | ----- | ----- | ----- | ----- |
-| 0 | **Tank (locked)** | **20 lb** Al N₂O, **CGA-326**, **~8″ OD × ~27″**, DOT, ships empty, with handle | 1 | Retail | **Preferred:** [Amazon B09PFCV1QK](https://www.amazon.com/Aluminum-Nitrous-Cylinder-CGA326-Handle/dp/B09PFCV1QK) · [GCS 20 lb](https://gascylindersource.com/shop/nitrous-oxide-cylinders/20-lb-aluminum-n2o-cylinder-with-handle/). **Backup:** [GCS 10 lb](https://gascylindersource.com/shop/nitrous-oxide-cylinders/new-10-lb-aluminum-n2o-cylinder/). **Do not buy** NX 11151. |
+| 0 | **Tank (owned)** | **20 lb** Al N₂O, **CGA-326**, **~8″ OD × ~27″**, DOT, with handle | 1 | Owned | [Amazon B09PFCV1QK](https://www.amazon.com/Aluminum-Nitrous-Cylinder-CGA326-Handle/dp/B09PFCV1QK) · [GCS 20 lb](https://gascylindersource.com/shop/nitrous-oxide-cylinders/20-lb-aluminum-n2o-cylinder-with-handle/) — already purchased. |
 | 1 | Cylinder adapter | **CGA-326 → 1/4″ MNPT**, **316/316L SS**, bullet-nose (not brass) | 1 | **~63** | **Preferred:** [ASG CGA326SS](https://www.asgequipment.com/stainless-steel-cga-cylinder-connection-326-cga-x-1-4-npt-male-model-cga326ss/) ($63). Budget/verify: [Amazon B0CKQTRLR4](https://www.amazon.com/CGA326-SUS316L-Stainless-Fitting-Connector/dp/B0CKQTRLR4) (confirm 316L + CGA-326→1/4 MNPT before checkout). Premium: [Ideal Vac SEQ3264SSL](https://www.idealvac.com/CGA-326-Gas-Regulator-Inlet-to-14-Male-NPT-Fitting-Stainless-Steel-Long-PN:-SEQ3264SSL/pp/P109510) (~$227). **Do not buy brass / chrome-plated brass CGA-326 kits.** |
 | 2 | Flex hose | FITOK PTFE-lined SS braid, **1/4″ nom.**, **1/4″ FNPT × 1/4″ MNPT**, **3000 psi**, ~18″ | 1 | ~80 | [Amazon B0F1XCWJKM](https://www.amazon.com/FITOK-PTFE-Lined-Connections-Chemically-Compatible/dp/B0F1XCWJKM) — select **18″** and **FNPT × MNPT** |
 | 3 | Whip check | Hose-to-hose safety cable for ~1/2–1-1/4″ OD flex | 1 | ~15 | [Becker Safety MI-178-WB1](https://beckersafety.com/products/whip-check-1-2-1-1-4-safety-cable-1-8-x-20) |
@@ -169,9 +154,9 @@ Gender key: **MNPT** = male NPT, **FNPT** = female NPT. Hex nipples join two FNP
 | Fuel Grain (Full-scale) | Paraffin, length from calculator for **~1.5 kg** at O/F 6 (grain OD from wall stack; sized to **20 lb / 9.1 kg** ox) | ~72 | [Amazon AM Wax 25 lb B0DL6HLNQ4](https://www.amazon.com/dp/B0DL6HLNQ4) | Cast yourself. Run `ParaffinN2O_dimensioncalc` with **20 lb** ox budget. Grain OD ≈ case OD − 2×(Al + liner), **not** full 152 mm. |
 | Fuel Grain (Reduced first fire) | Shorter paraffin grain, ~0.7–1.0 kg with **partial 20 lb fill** or shorter MAIN open time | From 25 lb wax | Same wax | Optional first hot fire before full fill |
 | Nozzle Insert | Graphite blank large enough to machine throat + exit for nozzle carrier | ~95+ | [GraphiteStore 1.5″ OD × 24″ rod NC001370](https://www.graphitestore.com/fine-extruded-graphite-rod-1-5od-x-24l-nc001370) or larger OD from [fine-extruded catalog](https://www.graphitestore.com/Graphite/Plates-rods-and-tubes/Graphite-fine-extruded) | **Do not buy the $98 0.75″ OD tube** — too small. Size blank to nozzle-carrier ID. |
-| Forward & Aft Closures | Aluminum flanges with O-ring grooves / pilot steps, matched to custom tube ID/OD. Lathe from **6″** 6061-T6/T6511 solid round. | Slug ~$30–90 ea blank (1–3″ of 6″ bar) | **Preferred:** [Speedy Metals 6″ 6061-T6511](https://www.speedymetals.com/p-2482-6-rd-6061-t6511-aluminum-extruded.aspx) (~$30/in; 12″ ≈ $333). Alt: [MSP Metals 6″ @ ~$27/in](https://www.mspmetals.com/product/6061-t6-aluminum-round-bar-6-dia/) · [Metals4U 6″ cut-to-length](https://www.metals4uonline.com/aluminum-round-bar-6061-6in/) · [MetalsDepot 6061 round (R36)](https://www.metalsdepot.com/aluminum-products/aluminum-round-bar). | Confirm O-ring dash numbers after final ID. Order **short cuts** (e.g. 2–6″ total length), not a full 4 ft stick, unless sharing stock across all lathe parts. |
+| Forward & Aft Closures | Aluminum flanges with O-ring grooves / pilot steps, matched to custom tube ID/OD. Lathe from **6″** 6061-T6/T6511 solid round. | Slug ~$30–90 ea blank (1–3″ of 6″ bar) | **Preferred:** [Speedy Metals 6″ 6061-T6511](https://www.speedymetals.com/p-2482-6-rd-6061-t6511-aluminum-extruded.aspx) (~$30/in; 12″ ≈ $333). Alt: [MSP Metals 6″ @ ~$27/in](https://www.mspmetals.com/product/6061-t6-aluminum-round-bar-6-dia/) · [Metals4U 6″ cut-to-length](https://www.metals4uonline.com/aluminum-round-bar-6061-6in/) · [MetalsDepot 6061 round (R36)](https://www.metalsdepot.com/aluminum-products/aluminum-round-bar). | Groove for **metric 136×2** Viton (OD ≈ **140.06 mm**, CS **2 mm**). Order **short cuts** (e.g. 2–6″ total length), not a full 4 ft stick, unless sharing stock across all lathe parts. |
 | Stand motor cradle / thrust lock | Clamps or rings that hold the **6.0″** chamber on the stand rails and take forward thrust into the load cell path | Scrap Al / 3D print + plate | Leftover 6″ bar discs or printed cradle + Al plate | **Not** an airframe mount — design for static axial load + thermal soak |
-| O-rings & Seals | High-temperature Viton; size to final groove (AS568-258 is ~5.984″ ID — Contrail-class; re-pick for custom ID) | ~50 | [Marco V1000-258](https://www.marcorubber.com/product/V1000-258) | Buy after closure drawings freeze. |
+| O-rings & Seals | High-temperature Viton (FKM); **metric 136×2** — **ID 136 mm**, **CS 2 mm**, **OD ≈ 140.06 mm** (standard metric OD 140 mm) | ~5–15 | **Preferred:** [123Bearing OR-136X2-FPM80](https://www.123bearing.com/seals/seal/o-ring-seal/or-136x2-fpm80) (FPM/Viton 80 Shore). Alt: [Aire 136×2 Viton](https://www.airebearings.co.uk/product/136-x-2-viton-fkm-o-ring-136mm-id-x-2mm-c-s/) · Marco/custom metric Viton if needed | Small CS — groove depth/width per ISO 3601 / Parker metric gland charts. Buy extras for hydro + hot-fire spares. |
 
 ### **2.2 Stand mounting (motor + tank)**
 

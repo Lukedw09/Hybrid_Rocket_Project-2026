@@ -59,9 +59,9 @@ Freeze injector and closure drawings; order all CGA-326 feed parts as one batch;
 - [x] SolidWorks: injector plate (showerhead or simple pattern) for **4 MPa**, matched to chamber ID  
 - [x] SolidWorks: forward + aft closures with O-ring grooves / pilots  
 - [x] Order **6″ 6061** short cuts for injector + closures ([Speedy / MSP / Metals4U](https://www.speedymetals.com/p-2482-6-rd-6061-t6511-aluminum-extruded.aspx))  
-- [ ] Place **feed-system cart** from Section 1.1 of the component list (CGA adapter, hose, whip-check, tee, NOS 18045NOS, bleed, nipples, Krytox, caps)  
+- [x] Place **feed-system cart** from Section 1.1 of the component list (CGA adapter, hose, whip-check, tee, NOS 18045NOS, bleed, nipples, Krytox, caps)  
 - [ ] Sketch **stand layout**: motor rails + separate **8″ tank cradle** bay + load-cell thrust line  
-- [ ] Quote/order phenolic liner from **Plastic-Craft** ([CE tube](https://plastic-craft.com/product/phenolic-ce-round-tube/) — **5.75″ OD × ~0.125″ wall**; call **(845) 358-3010** or quote form; sells to individuals). Fallback: Contrail chamber + [ARR 152 mm liner](https://alwaysreadyrocketry.com/product/standard-casting-tubes/)  
+- [x] Quote/order phenolic liner from **Plastic-Craft** ([CE tube](https://plastic-craft.com/product/phenolic-ce-round-tube/) — **5.75″ OD × ~0.125″ wall**; call **(845) 358-3010** or quote form; sells to individuals). Fallback: Contrail chamber + [ARR 152 mm liner](https://alwaysreadyrocketry.com/product/standard-casting-tubes/)  
 - [ ] Order graphite nozzle blank sized to carrier ID  
 - [ ] Collect PPE: face shield, FR layer, gloves, ABC extinguisher, water source plan  
 - [ ] Decide remote firing path (**preferred:** DIY dual-channel pad relays ~$50–150 or Half Cat RC ~$50–120; Contrail $450 GSE optional/overkill) and order parts  
